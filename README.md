@@ -26,7 +26,7 @@ A single page application for creating multi-dimensional audio tracks.
 
 * React - render the components on the page.
 
-* Cyprus and Jest testing frameworks.
+* Cypress and Jest testing frameworks.
 
 * Heroku hosted
 
