@@ -1,17 +1,18 @@
-import Nexus from 'nexusui'
 import React from 'react'
+import { Sequencer } from 'react-nexusui'
 import ReactDOM from 'react-dom'
-// import { Sequencer } from 'react-nexusui'
 
 
-class OurSequencer extends React.Component {
+export default class OurSequencer extends React.Component {
 
   render() {
     return (
-     'hello'
+      <Sequencer
+      rows={5}
+      columns={10}
+      size={[400, 200]}
+    />
     )
   }
 
 }
-
-export default OurSequencer
