@@ -12,9 +12,12 @@ class NavbarMain extends Component {
         width="80"
         height="80"
         className="d-inline-block align-top"
+        id='logo'
       />{' '}
-      Synesthesia
       </Navbar.Brand>
+      <Navbar.Text class='Nav-title'>
+        Synesthesia
+      </Navbar.Text>
       </Navbar>
     )
   }

@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Quantico&display=swap');
+
 .App {
   text-align: center;
+  font-family: 'Quantico', sans-serif;
 }
 
 .App-logo {
@@ -19,4 +22,15 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+#logo{
+  border-radius: 20px;
+  border: 2px solid white;
+}
+
+.Nav-title {
+  color: white;
+  font-size: 30px;
+  padding-left: 20px;
 }
