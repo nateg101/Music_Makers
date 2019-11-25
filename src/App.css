@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Quantico&display=swap');
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css");
+
 
 .App {
   text-align: center;
@@ -50,4 +52,13 @@
   background-color: #343A40;
   border-radius: 15px;
 
+}
+
+.play-button {
+  font-size: 40px;
+
+}
+
+#playback-button {
+  float: left;
 }
