@@ -1,12 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Sequencer from './components/Sequencer/Sequencer'
+import SequencerContainer from './components/SequencerContainer/SequencerContainer'
 
 function App() {
   return (
     <div className="App">
-      <Sequencer />
+      <SequencerContainer />
     </div>
   );
 }
