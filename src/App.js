@@ -9,7 +9,7 @@ function App() {
     <div className="App">
 
     <NavbarMain/>
-    <SequencerContainer />
+      <SequencerContainer />
     <div className='options d-flex justify-content-center'>
       <OptionsBar/>
     </div>
