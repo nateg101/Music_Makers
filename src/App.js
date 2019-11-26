@@ -6,7 +6,6 @@ import NavbarMain from './components/navbar/navbar.jsx';
 import OptionsBar from './components/options/optionsBar.jsx';
 import SequencerContainer from './components/SequencerContainer/SequencerComponent/SequencerComponent';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -17,11 +16,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-      <NavbarMain/>
-      <SequencerContainer storedSequencers={this.storedSequencers}/>
-      <div className='options d-flex justify-content-center'>
-        <OptionsBar storedSequencers={this.storedSequencers}/>
-      </div>
+        <NavbarMain/>
+        <SequencerContainer storedSequencers={this.storedSequencers}/>
+        <div className='options d-flex justify-content-center'>
+          <OptionsBar storedSequencers={this.storedSequencers}/>
+        </div>
       </div>
     );
   }

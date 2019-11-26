@@ -526,7 +526,7 @@ const Select = React.memo(function Select({ size = [120, 25], options = ["defaul
     return React.createElement("div", { id: elementId.current });
 });
 
-const Sequencer = React.memo(function Sequencer({ size = [400, 200], mode = "toggle", rows = 5, columns = 10, color = '#000', onChange = () => { }, onStep = () => { }, onReady = () => { } }, ref) {
+const Sequencer = React.memo(function Sequencer({ size = [400, 200], mode = "toggle", rows = 5, columns = 10, color = '#000', note = 60, onChange = () => { }, onStep = () => { }, onReady = () => { } }, ref) {
     let sequencer = React.useRef(null);
     let elementId = React.useRef(`nexus-ui-sequencer-${getId()}`);
     React.useEffect(() => {
@@ -543,7 +543,7 @@ const Sequencer = React.memo(function Sequencer({ size = [400, 200], mode = "tog
             onChange(newState);
         });
         sequencer.current.on("step", (newState) => {
-            onStep(newState);
+            onStep(newState, note);
         });
         return () => {
             sequencer.current.destroy();

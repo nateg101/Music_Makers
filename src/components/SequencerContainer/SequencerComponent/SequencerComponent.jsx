@@ -2,7 +2,7 @@ import React from 'react'
 import { Sequencer } from '../../Nexus'
 import { Container, Row, Card } from 'react-bootstrap'
 import './SequencerComponent.css'
-import MIDISounds from 'midi-sounds-react';
+import MIDISounds from 'midi-sounds-react'
 
 export default class SequencerContainer extends React.Component {
   constructor(props) {
@@ -27,8 +27,11 @@ export default class SequencerContainer extends React.Component {
     this.setState({ width: this.myInput.current.offsetWidth, height: this.myInput.current.offsetWidth });
   };
 
-  playNote(note) {
-    this.midiSounds.playChordNow(3,[note], 2.5);
+  playNote(on, note) {
+    console.log('here')
+    if(on[0] === 1){
+      this.midiSounds.playChordNow(3,[note], 1);
+    }
   }
 
   checkMatrix(num) {
@@ -47,8 +50,10 @@ export default class SequencerContainer extends React.Component {
     let noteC = 60
 
     return (
-
       <div >
+         <div hidden>
+          <MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} />
+        </div>
         <Container className='sequencer-container' id="notes" ref={this.myInput}>
           <Row>
             <Card className='note-card justify-content-center border-0'>
@@ -59,10 +64,10 @@ export default class SequencerContainer extends React.Component {
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
                 color='#ffff00'
+                note={noteHighB}
                 onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={this.playNote.bind(this, noteHighB)}
-                onStep={(num)=>{if(num === 1) {this.playNote(noteHighB)}}}/>
-                <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
+                onChange={this.playNote([1], noteHighB)}
+                onStep={this.playNote}/>
           </Row>
           <Row>
             <Card className='note-card justify-content-center border-0'>
@@ -73,10 +78,10 @@ export default class SequencerContainer extends React.Component {
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
                 color='#ee82ee'
+                note={noteHighA}
                 onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={this.playNote.bind(this, noteHighA)}
-                onStep={(num)=>{if(num === 1) {this.playNote(noteHighA)}}}/>
-                <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
+                onChange={this.playNote([1], noteHighA)}
+                onStep={this.playNote}/>
           </Row>
           <Row>
             <Card className='note-card justify-content-center border-0'>
@@ -87,11 +92,10 @@ export default class SequencerContainer extends React.Component {
               columns={16}
               size={[this.state.width*0.9412,this.state.height*0.07]}
               color='#ffa500'
+              note={noteMidG}
               onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-              onChange={this.playNote.bind(this, noteMidG)}
-              onStep={(num)=>{if(num === 1) {this.playNote(noteMidG)}}}
-              />
-              <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
+              onChange={this.playNote([1], noteMidG)}
+              onStep={this.playNote}/>
           </Row>
           <Row>
             <Card className='note-card justify-content-center border-0'>
@@ -102,10 +106,10 @@ export default class SequencerContainer extends React.Component {
               columns={16}
               size={[this.state.width*0.9412,this.state.height*0.07]}
               color='#008000'
+              note={noteMidF}
               onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-              onChange={this.playNote.bind(this, noteMidF)}
-              onStep={(num)=>{if(num === 1) {this.playNote(noteMidF)}}}/>
-              <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
+              onChange={this.playNote([1], noteMidF)}
+              onStep={this.playNote}/>
           </Row>
           <Row>
             <Card className='note-card justify-content-center border-0'>
@@ -116,10 +120,10 @@ export default class SequencerContainer extends React.Component {
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
                 color='#0000ff'
+                note={noteMidE}
                 onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={this.playNote.bind(this, noteMidE)}
-                onStep={(num)=>{if(num === 1) {this.playNote(noteMidE)}}}/>
-                <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
+                onChange={this.playNote([1], noteMidE)}
+                onStep={this.playNote}/>
           </Row>
           <Row>
             <Card className='note-card justify-content-center border-0'>
@@ -130,10 +134,10 @@ export default class SequencerContainer extends React.Component {
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
                 color='#4b0082'
+                note={noteLowD}
                 onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={this.playNote.bind(this, noteLowD)}
-                onStep={(num)=>{if(num === 1) {this.playNote(noteLowD)}}}/>
-                <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
+                onChange={this.playNote([1], noteLowD)}
+                onStep={this.playNote}/>
           </Row>
           <Row>
             <Card className='note-card justify-content-center border-0'>
@@ -144,10 +148,10 @@ export default class SequencerContainer extends React.Component {
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
                 color='#ff0000'
+                note={noteC}
                 onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={this.playNote.bind(this, noteC)}
-                onStep={(num)=>{if(num === 1) {this.playNote(noteC)}}}/>
-                <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
+                onChange={this.playNote([1], noteC)}
+                onStep={this.playNote}/>
           </Row>
         </Container>
       </div>

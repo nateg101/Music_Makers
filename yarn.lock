@@ -8650,6 +8650,11 @@ react-modal@^3.1.10:
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
 
+react-nexusui@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/react-nexusui/-/react-nexusui-0.1.7.tgz#74772e5d56ac4a0a1bb05c10e784bf39a6bb8f1c"
+  integrity sha512-QsRetAK7I5CrDqbDockWriNO/AwIM3SDWTamOPH4cRYWrxuaX6pjB1/VSE7DSwoUACmafza5Y2/cGzN/0saIcQ==
+
 react-overlays@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-2.1.0.tgz#3671cadab085a519c90a51b9b1402a70281e31d4"

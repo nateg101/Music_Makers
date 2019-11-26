@@ -143,8 +143,9 @@ export declare type SequencerProps = {
     rows?: number;
     columns?: number;
     color?: string;
+    note?: number;
     onChange?: (change: SequencerChange) => any;
-    onStep?: (change: boolean[]) => any;
+    onStep?: (change: boolean[], note: number) => any;
     onReady?: (select: Nexus.Sequencer) => any;
 };
 export declare type SequencerChange = {
