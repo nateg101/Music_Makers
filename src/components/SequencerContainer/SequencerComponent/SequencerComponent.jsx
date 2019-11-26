@@ -13,6 +13,8 @@ export default class SequencerContainer extends React.Component {
       height: 0
     }
     this.myInput = React.createRef()
+    this.storedSequencers = []
+    this.startSequencer = this.startSequencer.bind(this)
   }
   componentDidMount() {
     this.updateWindowDimensions();
@@ -24,13 +26,19 @@ export default class SequencerContainer extends React.Component {
   }
 
   updateWindowDimensions = () => {
-    console.log(this.myInput.current.offsetWidth)
     this.setState({ width: this.myInput.current.offsetWidth, height: this.myInput.current.offsetWidth });
   };
+
+  startSequencer() {
+    this.storedSequencers.forEach((sequencer)=>{
+      sequencer.start(500)
+    })
+  }
   
   render() {
     return (
       <div >
+        <button onClick={this.startSequencer}></button>
         <Container className='sequencer-container' id="notes" ref={this.myInput}>
           <Row>
             <Card className='note-card justify-content-center border-0'>
@@ -40,7 +48,8 @@ export default class SequencerContainer extends React.Component {
                 rows={1} 
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#ffff00'/>
+                color='#ffff00'
+                onReady={(sequencer)=>{this.storedSequencers.push(sequencer)}}/>
           </Row>
           <Row>
             <Card className='note-card justify-content-center border-0'>
@@ -50,7 +59,8 @@ export default class SequencerContainer extends React.Component {
                 rows={1} 
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#ee82ee'/>
+                color='#ee82ee'
+                onReady={(sequencer)=>{this.storedSequencers.push(sequencer)}}/>
           </Row>
           <Row>
             <Card className='note-card justify-content-center border-0'>
@@ -60,7 +70,8 @@ export default class SequencerContainer extends React.Component {
               rows={1} 
               columns={16}
               size={[this.state.width*0.9412,this.state.height*0.07]}
-              color='#ffa500'/>
+              color='#ffa500'
+              onReady={(sequencer)=>{this.storedSequencers.push(sequencer)}}/>
           </Row>
           <Row>
             <Card className='note-card justify-content-center border-0'>
@@ -70,7 +81,8 @@ export default class SequencerContainer extends React.Component {
               rows={1} 
               columns={16}
               size={[this.state.width*0.9412,this.state.height*0.07]}
-              color='#008000'/>
+              color='#008000'
+              onReady={(sequencer)=>{this.storedSequencers.push(sequencer)}}/>
           </Row>
           <Row>
             <Card className='note-card justify-content-center border-0'>
@@ -80,7 +92,8 @@ export default class SequencerContainer extends React.Component {
                 rows={1} 
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#0000ff'/>
+                color='#0000ff'
+                onReady={(sequencer)=>{this.storedSequencers.push(sequencer)}}/>
           </Row>
           <Row>
             <Card className='note-card justify-content-center border-0'>
@@ -90,7 +103,8 @@ export default class SequencerContainer extends React.Component {
                 rows={1} 
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#4b0082'/>
+                color='#4b0082'
+                onReady={(sequencer)=>{this.storedSequencers.push(sequencer)}}/>
           </Row>
           <Row>
             <Card className='note-card justify-content-center border-0'>
@@ -100,7 +114,8 @@ export default class SequencerContainer extends React.Component {
                 rows={1} 
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#ff0000'/>
+                color='#ff0000'
+                onReady={(sequencer)=>{this.storedSequencers.push(sequencer)}}/>
           </Row>
         </Container>
       </div>
