@@ -23,15 +23,19 @@ export default class SequencerContainer extends React.Component {
     window.removeEventListener("resize", this.updateWindowDimensions);
   }
 
-  updateWindowDimensions() {
-    console.log(this.myInput)
+  updateWindowDimensions = () => {
     this.setState({ width: this.myInput.current.offsetWidth });
   }
 
+  componentDidUpdate() {
+    this.playNoteCallCount = 0
+    console.log('here', this.playNoteCallCount)
+  }
+
   playNote(on, note) {
-    if(on[0] === 1){
-      // this.midiSounds.playChordNow(3,[note], 1);
-    }
+    if(on[0] === 1) {
+      this.midiSounds.playChordNow(3,[note], 1);
+    } 
   }
 
   render() {
@@ -43,14 +47,6 @@ export default class SequencerContainer extends React.Component {
     let noteLowD = 62
     let noteC = 60
 
-    if (this.state.width < 0) {
-      return (
-        <div>
-          Loading...
-          {this.updateWindowDimensions()}
-        </div>
-      )
-    } else {
       return (
         <div >
           <div hidden>
@@ -62,28 +58,28 @@ export default class SequencerContainer extends React.Component {
                 B
               </Card>
               <Sequencer
-                  rows={1}
-                  columns={16}
-                  size={[this.state.width*0.9412,this.state.width*0.07]}
-                  color='#ffff00'
-                  note={noteHighB}
-                  onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                  onChange={this.playNote([1], noteHighB)}
-                  onStep={this.playNote}/>
+                rows={1}
+                columns={16}
+                size={[this.state.width*0.9412,this.state.width*0.07]}
+                color='#ffff00'
+                note={noteHighB}
+                onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
+                onChange={this.playNote([1], noteHighB)}
+                onStep={this.playNote}/>
             </Row>
             <Row>
               <Card className='note-card justify-content-center border-0'>
                 A
               </Card>
               <Sequencer
-                  rows={1}
-                  columns={16}
-                  size={[this.state.width*0.9412,this.state.width*0.07]}
-                  color='#ee82ee'
-                  note={noteHighA}
-                  onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                  onChange={this.playNote([1], noteHighA)}
-                  onStep={this.playNote}/>
+                rows={1}
+                columns={16}
+                size={[this.state.width*0.9412,this.state.width*0.07]}
+                color='#ee82ee'
+                note={noteHighA}
+                onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
+                onChange={this.playNote([1], noteHighA)}
+                onStep={this.playNote}/>
             </Row>
             <Row>
               <Card className='note-card justify-content-center border-0'>
@@ -118,46 +114,45 @@ export default class SequencerContainer extends React.Component {
                 E
               </Card>
               <Sequencer
-                  rows={1}
-                  columns={16}
-                  size={[this.state.width*0.9412,this.state.width*0.07]}
-                  color='#0000ff'
-                  note={noteMidE}
-                  onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                  onChange={this.playNote([1], noteMidE)}
-                  onStep={this.playNote}/>
+                rows={1}
+                columns={16}
+                size={[this.state.width*0.9412,this.state.width*0.07]}
+                color='#0000ff'
+                note={noteMidE}
+                onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
+                onChange={this.playNote([1], noteMidE)}
+                onStep={this.playNote}/>
             </Row>
             <Row>
               <Card className='note-card justify-content-center border-0'>
                 D
               </Card>
               <Sequencer
-                  rows={1}
-                  columns={16}
-                  size={[this.state.width*0.9412,this.state.width*0.07]}
-                  color='#4b0082'
-                  note={noteLowD}
-                  onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                  onChange={this.playNote([1], noteLowD)}
-                  onStep={this.playNote}/>
+                rows={1}
+                columns={16}
+                size={[this.state.width*0.9412,this.state.width*0.07]}
+                color='#4b0082'
+                note={noteLowD}
+                onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
+                onChange={this.playNote([1], noteLowD)}
+                onStep={this.playNote}/>
             </Row>
             <Row>
               <Card className='note-card justify-content-center border-0'>
                 C
               </Card>
               <Sequencer
-                  rows={1}
-                  columns={16}
-                  size={[this.state.width*0.9412,this.state.width*0.07]}
-                  color='#ff0000'
-                  note={noteC}
-                  onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                  onChange={this.playNote([1], noteC)}
-                  onStep={this.playNote}/>
+                rows={1}
+                columns={16}
+                size={[this.state.width*0.9412,this.state.width*0.07]}
+                color='#ff0000'
+                note={noteC}
+                onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
+                onChange={this.playNote([1], noteC)}
+                onStep={this.playNote}/>
             </Row>
           </Container>
         </div>
       )
-    }
   }
 }
