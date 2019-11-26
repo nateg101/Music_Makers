@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom'
 import './SequencerComponent.css'
 import MIDISounds from 'midi-sounds-react';
 
-
 export default class SequencerContainer extends React.Component {
   constructor(props) {
     super(props)
@@ -29,32 +28,8 @@ export default class SequencerContainer extends React.Component {
     this.setState({ width: this.myInput.current.offsetWidth, height: this.myInput.current.offsetWidth });
   };
 
-  playHighB() {
-    this.midiSounds.playChordNow(3, [71], 2.5);
-  }
-
-  playHighA() {
-    this.midiSounds.playChordNow(3, [69], 2.5);
-  }
-
-  playMiddleG() {
-    this.midiSounds.playChordNow(3, [67], 2.5);
-  }
-
-  playMiddleF() {
-    this.midiSounds.playChordNow(3, [65], 2.5);
-  }
-
-  playMiddleE() {
-    this.midiSounds.playChordNow(3, [64], 2.5);
-  }
-
-  playMiddleD() {
-    this.midiSounds.playChordNow(3, [62], 2.5);
-  }
-
-  playMiddleC() {
-    this.midiSounds.playChordNow(3, [60], 2.5);
+  playNote(note) {
+    this.midiSounds.playChordNow(3,[note], 2.5);
   }
 
   render() {
@@ -69,7 +44,7 @@ export default class SequencerContainer extends React.Component {
                 rows={1}
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#ffff00' onChange={this.playHighB.bind(this)}/>
+                color='#ffff00' onChange={this.playNote.bind(this, 71)}/>
                 <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
           </Row>
           <Row>
@@ -80,7 +55,7 @@ export default class SequencerContainer extends React.Component {
                 rows={1}
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#ee82ee' onChange={this.playHighA.bind(this)}/>
+                color='#ee82ee' onChange={this.playNote.bind(this, 69)}/>
                 <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
           </Row>
           <Row>
@@ -91,7 +66,7 @@ export default class SequencerContainer extends React.Component {
               rows={1}
               columns={16}
               size={[this.state.width*0.9412,this.state.height*0.07]}
-              color='#ffa500' onChange={this.playMiddleG.bind(this)}/>
+              color='#ffa500' onChange={this.playNote.bind(this, 67)}/>
               <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
           </Row>
           <Row>
@@ -102,7 +77,7 @@ export default class SequencerContainer extends React.Component {
               rows={1}
               columns={16}
               size={[this.state.width*0.9412,this.state.height*0.07]}
-              color='#008000' onChange={this.playMiddleF.bind(this)}/>
+              color='#008000' onChange={this.playNote.bind(this, 65)}/>
               <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
           </Row>
           <Row>
@@ -113,7 +88,7 @@ export default class SequencerContainer extends React.Component {
                 rows={1}
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#0000ff' onChange={this.playMiddleE.bind(this)}/>
+                color='#0000ff' onChange={this.playNote.bind(this, 64)}/>
                 <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
           </Row>
           <Row>
@@ -124,7 +99,7 @@ export default class SequencerContainer extends React.Component {
                 rows={1}
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#4b0082' onChange={this.playMiddleD.bind(this)}/>
+                color='#4b0082' onChange={this.playNote.bind(this, 62)}/>
                 <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
           </Row>
           <Row>
@@ -135,7 +110,7 @@ export default class SequencerContainer extends React.Component {
                 rows={1}
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#ff0000' onChange={this.playMiddleC.bind(this)}/>
+                color='#ff0000' onChange={this.playNote.bind(this, 60)}/>
                 <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
           </Row>
         </Container>
