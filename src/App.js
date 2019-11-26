@@ -7,13 +7,9 @@ import SequencerContainer from './components/SequencerContainer/SequencerContain
 function App() {
   return (
     <div className="App">
-
-    <NavbarMain/>
+      <NavbarMain/>
       <SequencerContainer />
-    <div className='options d-flex justify-content-center'>
       <OptionsBar/>
-    </div>
-
     </div>
   );
 }
