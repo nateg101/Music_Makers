@@ -11,6 +11,9 @@ class PlayButton extends Component {
   }
 
   handleClick = () => {
+    this.props.storedSequencers.forEach((sequencer)=>{
+      sequencer.start(500)
+    })
     console.log("Button clicked...")
     let buttonText = this.state.buttonText == "▶" ? "◼" : "▶"
 

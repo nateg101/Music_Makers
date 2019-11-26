@@ -8,6 +8,12 @@ import SequencerContainer from './components/SequencerContainer/SequencerCompone
 
 
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+    }
+    this.storedSequencers = []
+  }
   render() {
     // window.Nexus = Nexus
     // var element = React.createElement('a')
@@ -15,9 +21,9 @@ class App extends React.Component {
     return (
       <div className="App">
       <NavbarMain/>
-      <SequencerContainer/>
+      <SequencerContainer storedSequencers={this.storedSequencers}/>
       <div className='options d-flex justify-content-center'>
-        <OptionsBar />
+        <OptionsBar storedSequencers={this.storedSequencers}/>
       </div>
       </div>
     );

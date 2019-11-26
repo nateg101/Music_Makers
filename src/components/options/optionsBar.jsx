@@ -6,7 +6,7 @@ class OptionsBar extends Component {
   render() {
     return (
       <Card body>
-      <PlayButton/>
+      <PlayButton storedSequencers={this.props.storedSequencers}/>
       </Card>
     )
   }
