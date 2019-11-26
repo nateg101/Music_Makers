@@ -15,9 +15,6 @@ class App extends React.Component {
     this.storedSequencers = []
   }
   render() {
-    // window.Nexus = Nexus
-    // var element = React.createElement('a')
-    // const sequencer = new Nexus.Sequencer(element)
     return (
       <div className="App">
       <NavbarMain/>
