@@ -5,12 +5,13 @@
   background-color: #343A40;
   border-radius: 15px;
   opacity: 0.75;
+  position: absolute;
 }
 
 .options {
-  position: absolute;
+  align: auto;
+  position: relative;
   right: 0;
   bottom: 0;
   left: 0;
-  margin-bottom: 40px;
 }
