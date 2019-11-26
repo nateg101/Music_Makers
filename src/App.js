@@ -3,7 +3,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarMain from './components/navbar/navbar.jsx';
 import OptionsBar from './components/options/optionsBar.jsx';
-import Audio from './components/buttons/audio.jsx'
 import SequencerContainer from './components/SequencerContainer/SequencerComponent/SequencerComponent.jsx'
 
 function App() {
