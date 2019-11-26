@@ -56,9 +56,19 @@
 
 .play-button {
   font-size: 40px;
+}
 
+.stop-button {
+  font-size: 40px;
 }
 
 #playback-button {
   float: left;
+  width: 65px;
+  height: 65px;
+  border-radius: 15px;
+}
+
+.btn:focus {
+  outline: none;
 }
