@@ -30,8 +30,6 @@ export default class SequencerContainer extends React.Component {
     this.midiSounds.playChordNow(3,[note], 2.5);
   }
 
-
-
   render() {
     let noteHighB = 71
     let noteHighA = 69
@@ -53,7 +51,9 @@ export default class SequencerContainer extends React.Component {
                 rows={1}
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#ffff00' onChange={this.playNote.bind(this, noteHighB)}/>
+                color='#ffff00'
+                onChange={this.playNote.bind(this, noteHighB)}
+                onStep={this.playNote.bind(this, noteHighB)}/>
                 <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
           </Row>
           <Row>
@@ -64,7 +64,9 @@ export default class SequencerContainer extends React.Component {
                 rows={1}
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#ee82ee' onChange={this.playNote.bind(this, noteHighA)}/>
+                color='#ee82ee'
+                onChange={this.playNote.bind(this, noteHighA)}
+                onStep={this.playNote.bind(this, noteHighA)}/>
                 <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
           </Row>
           <Row>
@@ -75,7 +77,10 @@ export default class SequencerContainer extends React.Component {
               rows={1}
               columns={16}
               size={[this.state.width*0.9412,this.state.height*0.07]}
-              color='#ffa500' onChange={this.playNote.bind(this, noteMidG)}/>
+              color='#ffa500'
+              onChange={this.playNote.bind(this, noteMidG)}
+              onStep={this.playNote.bind(this, noteMidG)}
+              />
               <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
           </Row>
           <Row>
@@ -86,7 +91,9 @@ export default class SequencerContainer extends React.Component {
               rows={1}
               columns={16}
               size={[this.state.width*0.9412,this.state.height*0.07]}
-              color='#008000' onChange={this.playNote.bind(this, noteMidF)}/>
+              color='#008000'
+              onChange={this.playNote.bind(this, noteMidF)}
+              onStep={this.playNote.bind(this, noteMidF)}/>
               <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
           </Row>
           <Row>
@@ -97,7 +104,9 @@ export default class SequencerContainer extends React.Component {
                 rows={1}
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#0000ff' onChange={this.playNote.bind(this, noteMidE)}/>
+                color='#0000ff'
+                onChange={this.playNote.bind(this, noteMidE)}
+                onStep={this.playNote.bind(this, noteMidE)}/>
                 <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
           </Row>
           <Row>
@@ -108,7 +117,9 @@ export default class SequencerContainer extends React.Component {
                 rows={1}
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#4b0082' onChange={this.playNote.bind(this, noteLowD)}/>
+                color='#4b0082'
+                onChange={this.playNote.bind(this, noteLowD)}
+                onStep={this.playNote.bind(this, noteLowD)}/>
                 <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
           </Row>
           <Row>
@@ -119,7 +130,9 @@ export default class SequencerContainer extends React.Component {
                 rows={1}
                 columns={16}
                 size={[this.state.width*0.9412,this.state.height*0.07]}
-                color='#ff0000' onChange={this.playNote.bind(this, noteC)}/>
+                color='#ff0000'
+                onChange={this.playNote.bind(this, noteC)}
+                onStep={this.playNote.bind(this, noteC)}/>
                 <div hidden><MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} /></div>
           </Row>
         </Container>
