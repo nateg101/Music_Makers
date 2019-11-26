@@ -13,7 +13,7 @@ class PlayButton extends Component {
 
   handleClick = () => {
     console.log("Button clicked...")
-    let buttonText = this.state.buttonText == "▶" ? "◼" : "▶"
+    let buttonText = this.state.buttonText === "▶" ? "◼" : "▶"
 
     this.setState({
       buttonText: buttonText,
