@@ -22,7 +22,7 @@ class PlayButton extends Component {
 
   render() {
     return (
-      <Button variant="outline-light" id="playback-button" onClick={this.handleClick}><span class={this.state.isButtonActive ? 'stop-button' : "play-button"}>{this.state.buttonText}</span></Button>
+      <Button variant="outline-light" id="playback-button" onClick={this.handleClick}><span className={this.state.isButtonActive ? 'stop-button' : "play-button"}>{this.state.buttonText}</span></Button>
     )
   }
 }

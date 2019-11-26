@@ -15,7 +15,7 @@ class NavbarMain extends Component {
         id='logo'
       />{' '}
       </Navbar.Brand>
-      <Navbar.Text class='Nav-title'>
+      <Navbar.Text className='Nav-title'>
         Synesthesia
       </Navbar.Text>
       </Navbar>
