@@ -3,7 +3,7 @@ node_js:
   - 13.1.0
 before_script:
   - yarn
+  - yarn start --silent &
 script:
-  - yarn start
   - yarn test
   - npx cypress run
