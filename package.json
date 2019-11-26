@@ -34,6 +34,11 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^3.6.1"
+    "@typescript-eslint/eslint-plugin": "^2.8.0",
+    "@typescript-eslint/parser": "^2.8.0",
+    "cypress": "^3.6.1",
+    "eslint": "^6.7.1",
+    "eslint-plugin-react": "^7.16.0",
+    "typescript-eslint": "^0.0.1-alpha.0"
   }
 }

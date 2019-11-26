@@ -1,4 +1,12 @@
 .sequencer-container {
   border-bottom: black;
   border-bottom-style: solid;
+  width: 70vw;
+}
+.sequence-container {
+  margin: auto;
+}
+#nexus-ui-sequencer-1 {
+   margin:auto;
+   align: center;
 }
