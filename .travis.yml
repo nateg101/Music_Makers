@@ -2,8 +2,7 @@ language: node_js
 node_js:
   - 13.1.0
 before_script:
-  - yarn
-  - yarn start --silent &
+  - npm install
+  - npm start --silent &
 script:
-  - yarn test
-  - yarn cypress run
+  - npm test
