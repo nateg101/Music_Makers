@@ -1,0 +1,4 @@
+.sequencer-wrapper {
+  height: 70vh;
+  overflow-y: scroll;
+}
