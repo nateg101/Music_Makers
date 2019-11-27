@@ -11,4 +11,4 @@ before_script:
   - yarn start --silent &
 script:
   - yarn test
-  - mpx cypress run
+  - npx cypress run
