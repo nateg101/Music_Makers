@@ -20,8 +20,7 @@ describe("playButton", function () {
     cy.get('.play-button').click()
     cy.wait(100)
     cy.get('.stop-button').click()
-    cy.get('rect').each((Rect, index)=> {
-      cy.wrap(Rect).should('have.css', "stroke='none'")
-    })
+    cy.get('rect').eq(1).should('have.css','stroke', 'none')
+    cy.get('rect').first().should('have.css', 'stroke', 'rgb(204, 204, 204)')
   })
 })
