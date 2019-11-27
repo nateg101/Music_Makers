@@ -1,5 +1,5 @@
 import React from 'react'
-import { Sequencer } from '../../Nexus'
+import { Sequencer } from 'react-nexusui'
 import { Container, Row, Card } from 'react-bootstrap'
 import './SequencerComponent.css'
 import MIDISounds from 'midi-sounds-react'
@@ -27,13 +27,10 @@ export default class SequencerContainer extends React.Component {
     this.setState({ width: this.myInput.current.offsetWidth });
   }
 
-  componentDidUpdate() {
-    this.playNoteCallCount = 0
-    console.log('here', this.playNoteCallCount)
-  }
-
   playNote(on, note) {
-    if(on[0] === 1) {
+    console.log('here')
+    console.log(on, note)
+    if(on.state || on[0] === 1) {
       this.midiSounds.playChordNow(3,[note], 1);
     } 
   }
@@ -64,7 +61,7 @@ export default class SequencerContainer extends React.Component {
                 color='#ffff00'
                 note={noteHighB}
                 onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={this.playNote([1], noteHighB)}
+                onChange={this.playNote}
                 onStep={this.playNote}/>
             </Row>
             <Row>
@@ -78,7 +75,7 @@ export default class SequencerContainer extends React.Component {
                 color='#ee82ee'
                 note={noteHighA}
                 onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={this.playNote([1], noteHighA)}
+                onChange={this.playNote}
                 onStep={this.playNote}/>
             </Row>
             <Row>
@@ -92,7 +89,7 @@ export default class SequencerContainer extends React.Component {
                 color='#ffa500'
                 note={noteMidG}
                 onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={this.playNote([1], noteMidG)}
+                onChange={this.playNote}
                 onStep={this.playNote}/>
             </Row>
             <Row>
@@ -106,7 +103,7 @@ export default class SequencerContainer extends React.Component {
                 color='#008000'
                 note={noteMidF}
                 onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={this.playNote([1], noteMidF)}
+                onChange={this.playNote}
                 onStep={this.playNote}/>
             </Row>
             <Row>
@@ -120,7 +117,7 @@ export default class SequencerContainer extends React.Component {
                 color='#0000ff'
                 note={noteMidE}
                 onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={this.playNote([1], noteMidE)}
+                onChange={this.playNote}
                 onStep={this.playNote}/>
             </Row>
             <Row>
@@ -134,7 +131,7 @@ export default class SequencerContainer extends React.Component {
                 color='#4b0082'
                 note={noteLowD}
                 onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={this.playNote([1], noteLowD)}
+                onChange={this.playNote}
                 onStep={this.playNote}/>
             </Row>
             <Row>
@@ -148,7 +145,7 @@ export default class SequencerContainer extends React.Component {
                 color='#ff0000'
                 note={noteC}
                 onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={this.playNote([1], noteC)}
+                onChange={this.playNote}
                 onStep={this.playNote}/>
             </Row>
           </Container>
