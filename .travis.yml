@@ -3,6 +3,7 @@ node_js:
   - 13.1.0
 before_script:
   - yarn
+  - npm install
   - yarn start --silent &
 script:
   - yarn test
