@@ -2,9 +2,9 @@ language: node_js
 node_js:
   - 13.1.0
 cache:
-  yarn: true
   directories:
     - ~/.cache
+  yarn: true
 before_script:
   - yarn
   - yarn start --silent &
