@@ -1,5 +1,4 @@
 import React from 'react';
-import Nexus from 'nexusui'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarMain from './components/navbar/navbar.jsx';

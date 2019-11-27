@@ -2,9 +2,8 @@ language: node_js
 node_js:
   - 13.1.0
 before_script:
-  - yarn
   - npm install
-  - yarn start --silent &
+  - npm start --silent &
 script:
-  - yarn test
-  - npx cypress run
+  - npm test
+  - npm run lint
