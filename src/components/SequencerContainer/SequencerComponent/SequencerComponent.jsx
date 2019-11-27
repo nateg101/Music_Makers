@@ -13,6 +13,7 @@ export default class SequencerContainer extends React.Component {
     }
     this.myInput = React.createRef()
     this.playNote = this.playNote.bind(this)
+    this.render = this.render.bind(this)
   }
   componentDidMount() {
     this.updateWindowDimensions()
@@ -36,51 +37,44 @@ export default class SequencerContainer extends React.Component {
   }
 
   render() {
-    let noteHighB = 71
-    let noteHighA = 69
-    let noteMidG = 67
-    let noteMidF = 65
-    let noteMidE = 64
-    let noteLowD = 62
-    let noteC = 60
-
+    let colors = [
+      '#ffff00',
+      '#ee82ee',
+      '#ffa500',
+      '#008000',
+      '#0000ff',
+      '#4b0082',
+      '#ff0000'
+    ]
+    let self = this
       return (
         <div >
           <div hidden>
             <MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} />
           </div>
           <Container className='sequencer-container' id="notes" ref={this.myInput}>
-            <Row>
+              {this.props.scale.map(function(note, i) {
+                    return (
+                      <Row key={i + self.props.octave}>
+                        <Card key={i + 1 + self.props.octave} className='note-card justify-content-center border-0'>
+                          {note.letter + self.props.octave}
+                        </Card>
+                        <Sequencer
+                          key={i + 2 + self.props.octave}
+                          rows={1}
+                          columns={16}
+                          size={[self.state.width*0.9412,self.state.width*0.07]}
+                          color={colors[i]}
+                          note={note.value + (self.props.octave * 12)}
+                          onReady={(sequencer)=>{self.props.storedSequencers.push(sequencer)}}
+                          onChange={self.playNote}
+                          onStep={self.playNote}/>
+                      </Row>
+                    )
+              })}
+            {/* <Row>
               <Card className='note-card justify-content-center border-0'>
-                B
-              </Card>
-              <Sequencer
-                rows={1}
-                columns={16}
-                size={[this.state.width*0.9412,this.state.width*0.07]}
-                color='#ffff00'
-                note={noteHighB}
-                onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={this.playNote}
-                onStep={this.playNote}/>
-            </Row>
-            <Row>
-              <Card className='note-card justify-content-center border-0'>
-                A
-              </Card>
-              <Sequencer
-                rows={1}
-                columns={16}
-                size={[this.state.width*0.9412,this.state.width*0.07]}
-                color='#ee82ee'
-                note={noteHighA}
-                onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={this.playNote}
-                onStep={this.playNote}/>
-            </Row>
-            <Row>
-              <Card className='note-card justify-content-center border-0'>
-                G
+                G4
               </Card>
               <Sequencer
                 rows={1}
@@ -94,7 +88,7 @@ export default class SequencerContainer extends React.Component {
             </Row>
             <Row>
               <Card className='note-card justify-content-center border-0'>
-                F
+                F4
               </Card>
               <Sequencer
                 rows={1}
@@ -108,7 +102,7 @@ export default class SequencerContainer extends React.Component {
             </Row>
             <Row>
               <Card className='note-card justify-content-center border-0'>
-                E
+                E4
               </Card>
               <Sequencer
                 rows={1}
@@ -122,7 +116,7 @@ export default class SequencerContainer extends React.Component {
             </Row>
             <Row>
               <Card className='note-card justify-content-center border-0'>
-                D
+                D4
               </Card>
               <Sequencer
                 rows={1}
@@ -136,7 +130,7 @@ export default class SequencerContainer extends React.Component {
             </Row>
             <Row>
               <Card className='note-card justify-content-center border-0'>
-                C
+                C4
               </Card>
               <Sequencer
                 rows={1}
@@ -148,6 +142,34 @@ export default class SequencerContainer extends React.Component {
                 onChange={this.playNote}
                 onStep={this.playNote}/>
             </Row>
+            <Row>
+              <Card className='note-card justify-content-center border-0'>
+                B4
+              </Card>
+              <Sequencer
+                rows={1}
+                columns={16}
+                size={[this.state.width*0.9412,this.state.width*0.07]}
+                color='#ffff00'
+                note={noteHighB}
+                onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
+                onChange={this.playNote}
+                onStep={this.playNote}/>
+            </Row>
+            <Row>
+              <Card className='note-card justify-content-center border-0'>
+                A4
+              </Card>
+              <Sequencer
+                rows={1}
+                columns={16}
+                size={[this.state.width*0.9412,this.state.width*0.07]}
+                color='#ee82ee'
+                note={noteHighA}
+                onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
+                onChange={this.playNote}
+                onStep={this.playNote}/>
+            </Row> */}
           </Container>
         </div>
       )
