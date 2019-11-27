@@ -1,6 +1,13 @@
 language: node_js
 node_js:
   - 13.1.0
+cache:
+  npm: true
+  yarn: true
+  directories:
+    - ~/.cache
+install:
+  - npm ci
 before_script:
   - yarn
   - yarn start --silent &
