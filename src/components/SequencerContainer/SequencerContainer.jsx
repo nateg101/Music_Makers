@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import SequencerComponent from './SequencerComponent/SequencerComponent'
 import './SequencerContainer.css'
 
-
 export default class SequencerContainer extends React.Component {
   constructor(props) {
     super(props)
@@ -15,9 +14,11 @@ export default class SequencerContainer extends React.Component {
 
   render() {
     return (
-      <div className='sequencer-wrapper'>
-       <SequencerComponent />
-       <SequencerComponent />
+      <div className="sequencer-wrapper">
+        <SequencerComponent
+        storedSequencers={this.props.storedSequencers}/>
+        <SequencerComponent
+        storedSequencers={this.props.storedSequencers}/>
       </div>
     )
   }
