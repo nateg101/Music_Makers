@@ -18,9 +18,7 @@ class App extends React.Component {
       <div className="App">
         <NavbarMain/>
         <SequencerContainer storedSequencers={this.storedSequencers}/>
-        <div className='options d-flex justify-content-center'>
-          <OptionsBar storedSequencers={this.storedSequencers}/>
-        </div>
+        <OptionsBar storedSequencers={this.storedSequencers}/>
       </div>
     );
   }

@@ -8,7 +8,7 @@ describe('SequencerContainer', function() {
     }
   })
 
-  it('dsiplays the notes of an octave in the correct order', function() {
+  it('displays the notes of an octave in the correct order', function() {
     cy.visit('/')
     let noteArray = ['B','A','G','F','E','D','C']
     cy.get('.sequencer-container').first( function() {

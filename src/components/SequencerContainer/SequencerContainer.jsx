@@ -11,11 +11,11 @@ export default class SequencerContainer extends React.Component {
       height: 0
     }
   }
-  
+
   render() {
     return (
       <div>
-        <SequencerComponent 
+        <SequencerComponent
         storedSequencers={this.props.storedSequencers}/>
       </div>
     )

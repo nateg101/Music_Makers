@@ -4,7 +4,7 @@
 
 .App {
   text-align: center;
-  font-family: 'Quantico', sans-serif;
+  font-family: 'Quantico', sans-serif
 }
 
 .App-logo {
@@ -29,46 +29,4 @@
 #logo{
   border-radius: 20px;
   border: 2px solid white;
-}
-
-.Nav-title {
-  color: white;
-  font-size: 30px;
-  padding-left: 20px;
-}
-
-.options {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin-bottom: 40px;
-}
-
-.card {
-  width: 80%;
-  height: 90px;
-  vertical-align: baseline;
-  background-color: #343A40;
-  border-radius: 15px;
-
-}
-
-.play-button {
-  font-size: 40px;
-}
-
-.stop-button {
-  font-size: 40px;
-}
-
-#playback-button {
-  float: left;
-  width: 65px;
-  height: 65px;
-  border-radius: 15px;
-}
-
-.btn:focus {
-  outline: none;
 }

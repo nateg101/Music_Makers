@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Button} from "react-bootstrap";
+import './playButton.css'
 
 class PlayButton extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class PlayButton extends Component {
       sequencer.start(500)
     })
     console.log("Button clicked...")
-    let buttonText = this.state.buttonText == "▶" ? "◼" : "▶"
+    let buttonText = this.state.buttonText === "▶" ? "◼" : "▶"
 
     this.setState({
       buttonText: buttonText,
