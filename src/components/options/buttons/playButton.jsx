@@ -12,9 +12,9 @@ class PlayButton extends Component {
   }
 
   handleClick = () => {
-    this.props.storedSequencers.forEach((sequencer)=>{
-      sequencer.start(500)
-    })
+
+
+
     console.log("Button clicked...")
     let buttonText = this.state.buttonText === "▶" ? "◼" : "▶"
 
@@ -22,6 +22,17 @@ class PlayButton extends Component {
       buttonText: buttonText,
       isButtonActive: !this.state.isButtonActive
     })
+
+    if(this.state.isButtonActive === false){
+      this.props.storedSequencers.forEach((sequencer)=>{
+        sequencer.start(500)
+      })
+    } else {
+      this.props.storedSequencers.forEach((sequencer)=>{
+        sequencer.stop()
+        sequencer.stepper.value = -1 
+      })
+    }
   }
 
   render() {
