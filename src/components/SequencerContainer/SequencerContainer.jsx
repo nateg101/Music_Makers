@@ -14,7 +14,9 @@ export default class SequencerContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="sequencer-wrapper">
+        <SequencerComponent
+        storedSequencers={this.props.storedSequencers}/>
         <SequencerComponent
         storedSequencers={this.props.storedSequencers}/>
       </div>

@@ -7,7 +7,7 @@ class OptionsBar extends Component {
   render() {
     return (
     <div className='options d-flex justify-content-center'>
-      <Card body>
+      <Card className="option-bar" body>
       <PlayButton storedSequencers={this.props.storedSequencers}/>
       </Card>
     </div>
