@@ -10,11 +10,9 @@ describe('SequencerContainer', function() {
 
   it('displays the notes of an octave in the correct order', function() {
     cy.visit('/')
-    let noteArray = ['B','A','G','F','E','D','C']
-    cy.get('.sequencer-container').first( function() {
-      cy.get('.card').each((Card, index)=> {
-        cy.wrap(Card).should('contain', noteArray[index])
-      })
+    let noteArray = ['B5','A5', 'G5','F5','E5','D5','C5','B4','A4','G4','F4','E4','D4','C4','B3','A3','G3','F3','E3','D3','C3']
+    cy.get('.note-card').each((Card, index)=> {
+    cy.wrap(Card).should('contain', noteArray[index])
     })
   })
 })
