@@ -5,9 +5,10 @@ cache:
   yarn: true
   directories:
     - ~/.cache
-    -~/@cypress
+    -~/.npm
 before_script:
   - yarn
+  - cypress install
   - yarn start --silent &
 script:
   - yarn test
