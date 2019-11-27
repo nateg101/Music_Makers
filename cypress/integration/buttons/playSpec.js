@@ -14,4 +14,13 @@ describe("playButton", function () {
     cy.get('.play-button').should('not.visible')
     cy.get('.stop-button').contains("◼")
   })
+
+  it("returns the stepper to the start of the sequencer on click", function () {
+    cy.visit('/')
+    cy.get('.play-button').click()
+    cy.wait(100)
+    cy.get('.stop-button').click()
+    cy.get('rect').eq(1).should('have.css','stroke', 'none')
+    cy.get('rect').first().should('have.css', 'stroke', 'rgb(204, 204, 204)')
+  })
 })
