@@ -11,10 +11,12 @@ class OptionsBar extends Component {
       <Card className="option-bar" body>
         <Row>
           <Col>
-            <PlayButton storedSequencers={this.props.storedSequencers}/>
+            <PlayButton
+            storedSequencers={this.props.storedSequencers}/>
           </Col>
           <Col>
-            <OctaveSelector />
+            <OctaveSelector
+            setOctaves={this.props.setOctaves}/>
           </Col>
         </Row>
       </Card>

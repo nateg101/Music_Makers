@@ -20,4 +20,10 @@ describe('octaveSelector', function() {
 
     cy.get('.sequencer-container').should('have.length', 3)
   })
+
+  it('changes the number of sequencers', function() {
+    cy.get('select').select('1')
+
+    cy.get('.sequencer-container').should('have.length', 1)
+  })
 })

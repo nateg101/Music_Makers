@@ -9,15 +9,28 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      octaves: 3
     }
     this.storedSequencers = []
+    this.setOctaves = this.setOctaves.bind(this)
   }
+
+  setOctaves(event) {
+    this.setState({
+      octaves: event.target.value
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <NavbarMain/>
-        <SequencerContainer storedSequencers={this.storedSequencers}/>
-        <OptionsBar storedSequencers={this.storedSequencers}/>
+        <NavbarMain />
+        <SequencerContainer
+        storedSequencers={this.storedSequencers}
+        octaves={this.state.octaves}/>
+        <OptionsBar
+        storedSequencers={this.storedSequencers}
+        setOctaves={this.setOctaves}/>
       </div>
     );
   }
