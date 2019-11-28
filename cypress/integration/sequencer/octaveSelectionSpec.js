@@ -14,10 +14,7 @@ describe('octaveSelector', function() {
     cy.get('select').select('7')
   })
 
-  it('defaults to 3 sequencers', function() {
-    let value = Cypress.$('select').val();
-    expect(value).to.equal('3')
-
+  it('Page defaults to 3 sequencers', function() {
     cy.get('.sequencer-container').should('have.length', 3)
   })
 

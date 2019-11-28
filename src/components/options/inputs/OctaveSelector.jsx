@@ -13,11 +13,10 @@ class OctaveSelector extends Component {
         <Form 
         className='octaves'>
           <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Octaves</Form.Label>
             <Form.Control 
             as="select" 
-            value={this.props.octaves}
             onChange={this.props.setOctaves}>
+              <option value="" disabled selected>Octaves</option>
               <option>1</option>
               <option>3</option>
               <option>5</option>

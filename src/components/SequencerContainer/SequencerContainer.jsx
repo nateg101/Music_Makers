@@ -5,7 +5,7 @@ import './SequencerContainer.css'
 
 export default class SequencerContainer extends React.Component {
 
-  renderSequencers() {
+  renderSequencers = () => {
     let scale = [
       {letter: 'B', value: 23},
       {letter: 'A', value: 21},
@@ -25,12 +25,13 @@ export default class SequencerContainer extends React.Component {
     octaveArray[this.props.octaves].forEach((octave, i) => {
       sequencers.push(
         <SequencerComponent
-          key={i}
+          key={i + 100 * octave}
+          parent={this.props.parent}
           octave={octave}
           scale={scale}
           storedSequencers={this.props.storedSequencers}/>
-          )
-        })
+        )
+      })
     return sequencers
   }
 
