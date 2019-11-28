@@ -30,6 +30,7 @@ class App extends React.Component {
         octaves={this.state.octaves}/>
         <OptionsBar
         storedSequencers={this.storedSequencers}
+        octaves={this.state.octaves}
         setOctaves={this.setOctaves}/>
       </div>
     );

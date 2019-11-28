@@ -7,15 +7,17 @@ class OctaveSelector extends Component {
     super(props)
   }
 
-
-
   render() {
     return (
       <div className='octaves-container'>
-        <Form className='octaves' onChange={this.props.setOctaves}>
+        <Form 
+        className='octaves'>
           <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label>Octaves</Form.Label>
-            <Form.Control as="select">
+            <Form.Control 
+            as="select" 
+            value={this.props.octaves}
+            onChange={this.props.setOctaves}>
               <option>1</option>
               <option>3</option>
               <option>5</option>

@@ -4,15 +4,8 @@ import SequencerComponent from './SequencerComponent/SequencerComponent'
 import './SequencerContainer.css'
 
 export default class SequencerContainer extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      octaves: this.props.octaves
-    }
-  }
-
-  render() {
-    console.log(this.state.octaves)
+  
+  renderSequencers() {
     let scale = [
       {letter: 'B', value: 23},
       {letter: 'A', value: 21},
@@ -22,20 +15,23 @@ export default class SequencerContainer extends React.Component {
       {letter: 'D', value: 14},
       {letter: 'C', value: 12}
     ]
+    let sequencers = []
+    for (let i = 1; i <= this.props.octaves; i++) {
+      sequencers.push(
+        <SequencerComponent
+          key={i}
+          octave={i}
+          scale={scale}
+          storedSequencers={this.props.storedSequencers}/>
+      )
+    }
+    return sequencers
+  }
+
+  render() {
     return (
       <div className="sequencer-wrapper">
-        <SequencerComponent
-        octave={5}
-        scale={scale}
-        storedSequencers={this.props.storedSequencers}/>
-        <SequencerComponent
-        octave={4}
-        scale={scale}
-        storedSequencers={this.props.storedSequencers}/>
-        <SequencerComponent
-        octave={3}
-        scale={scale}
-        storedSequencers={this.props.storedSequencers}/>
+        {this.renderSequencers()}
       </div>
     )
   }

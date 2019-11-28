@@ -16,6 +16,7 @@ class OptionsBar extends Component {
           </Col>
           <Col>
             <OctaveSelector
+            octaves={this.props.octaves}
             setOctaves={this.props.setOctaves}/>
           </Col>
         </Row>
