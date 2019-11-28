@@ -31,6 +31,7 @@ class PlayButton extends Component {
         sequencer.stop()
         sequencer.stepper.value = 0
         sequencer.render()
+        sequencer.stepper.value = -1
       })
     } else {
       this.props.storedSequencers.forEach((sequencer)=>{
