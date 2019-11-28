@@ -7,8 +7,12 @@ class PlayButton extends Component {
     super(props)
     this.state = {
       buttonText: '▶',
-      isButtonActive: false
+      isButtonActive: false,
     }
+  }
+
+  convertBPM = () => {
+    return 60000/this.props.tempo
   }
 
   handleClick = () => {
@@ -35,8 +39,10 @@ class PlayButton extends Component {
       })
     } else {
       this.props.storedSequencers.forEach((sequencer)=>{
-        let tempo = 500
+        let tempo = this.convertBPM()
+        console.log(tempo)
         sequencer.start(tempo)
+        console.log("hi", sequencer.stepper)
       })
     }
   }
