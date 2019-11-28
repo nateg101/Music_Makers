@@ -33,7 +33,7 @@ export default class SequencerContainer extends React.Component {
     console.log(on, note)
     if(on.state || on[0] === 1) {
       this.midiSounds.playChordNow(3,[note], 1);
-    } 
+    }
   }
 
   render() {

@@ -8,7 +8,7 @@ function OctaveSelector() {
       <Form className='octaves'>
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Octaves</Form.Label>
-          <Form.Control as="select">
+          <Form.Control as="select" value='3'>
             <option>1</option>
             <option>3</option>
             <option>5</option>
