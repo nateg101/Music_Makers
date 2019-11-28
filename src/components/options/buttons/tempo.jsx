@@ -15,6 +15,7 @@ class Tempo extends Component {
         minValue={50}
         value={this.props.tempo}
         onChange={this.props.updateTempo} />
+      <label className='tempo-label'>Tempo</label>
         </div>
         </form>
     );

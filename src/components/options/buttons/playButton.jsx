@@ -40,9 +40,7 @@ class PlayButton extends Component {
     } else {
       this.props.storedSequencers.forEach((sequencer)=>{
         let tempo = this.convertBPM()
-        console.log(tempo)
         sequencer.start(tempo)
-        console.log("hi", sequencer.stepper)
       })
     }
   }
