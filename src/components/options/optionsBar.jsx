@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import PlayButton from "./buttons/playButton.jsx";
+import InstrumentSelect from "./buttons/instrumentSelect.jsx";
 
 import Tempo from "./buttons/tempo.jsx";
 import './optionsBar.css'
@@ -25,6 +26,7 @@ class OptionsBar extends Component {
       <Card className="option-bar" body>
       <PlayButton tempo={this.state.tempo} storedSequencers={this.props.storedSequencers}/>
       <Tempo tempo={this.state.tempo} updateTempo={this.updateTempo}/>
+      <InstrumentSelect/>
       </Card>
     </div>
     )

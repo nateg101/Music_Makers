@@ -30,7 +30,8 @@ export default class SequencerContainer extends React.Component {
 
   playNote(on, note) {
     if(on.state || on[0] === 1) {
-      this.midiSounds.playChordNow(3,[note], 1);
+      this.midiSounds.playChordNow(244,[note], 2.5);
+      console.log("hi", this.midiSounds.player.loader.instrumentInfo(244));
     }
   }
 
@@ -48,7 +49,7 @@ export default class SequencerContainer extends React.Component {
       return (
         <div >
           <div hidden>
-            <MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} />
+            <MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[244]} />
           </div>
           <Container className='sequencer-container' id="notes" ref={this.myInput}>
               {this.props.scale.map(function(note, i) {
