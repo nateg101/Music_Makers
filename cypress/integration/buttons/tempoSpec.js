@@ -8,7 +8,7 @@ describe("tempoChange", function () {
 
   it('slides', function () {
   cy.get('.tempo-range').contains(120)
-  cy.get('.tempo-range')
+  cy.get('.input-range')
     .trigger('mouseover')
     .trigger('mousedown')
     .trigger('mousemove',  0, 0)

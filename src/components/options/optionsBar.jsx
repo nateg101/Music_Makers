@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import PlayButton from "./buttons/playButton.jsx";
+
 import Tempo from "./buttons/tempo.jsx";
 import './optionsBar.css'
 
