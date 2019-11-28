@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import PlayButton from "./buttons/playButton.jsx";
+import OctaveSelector from "./inputs/OctaveSelector";
 import './optionsBar.css'
 
 class OptionsBar extends Component {
@@ -10,6 +11,7 @@ class OptionsBar extends Component {
       <Card className="option-bar" body>
       <PlayButton storedSequencers={this.props.storedSequencers}/>
       </Card>
+      <OctaveSelector />
     </div>
     )
   }
