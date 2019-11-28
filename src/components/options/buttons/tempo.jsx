@@ -8,13 +8,14 @@ class Tempo extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: 120
+      tempo: 120
     }
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    this.setState({tempoBPM: event.target.value})
+    this.setState({defaultTempo: event})
+    console.log("default", this.state.tempo)
   }
 
   render() {
@@ -22,16 +23,14 @@ class Tempo extends Component {
       <form className='tempo-slider'>
       <div className="tempo-range">
       <InputRange
+        type="tempo"
         maxValue={200}
         minValue={50}
-        value={this.state.value}
-        onChange={value => this.setState({ value })} />
+        value={this.state.tempo}
+        onChange={this.handleChange} />
         </div>
         </form>
     );
   }
-        // <Button variant="outline-light" id="tempo-down">{"<"}</Button>
-        // <input className="tempo-input" type="number" min="50" max="200" name="tempo" value={this.state.tempoBPM} onChange={this.handleChange}/>
-        // <Button variant="outline-light" id="tempo-up">{">"}</Button>
 }
 export default Tempo;

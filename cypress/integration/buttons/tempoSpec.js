@@ -5,4 +5,13 @@ describe("tempoChange", function () {
       cy.get('.tempo-slider').should('visible')
       cy.get('.tempo-range').contains(120)
   })
+
+  it('slides', function () {
+  cy.get('.tempo-range').contains(120)
+  cy.get('.tempo-range')
+    .trigger('mouseover')
+    .trigger('mousedown')
+    .trigger('mousemove',  0, 0)
+    .contains(125)
+  })
 })
