@@ -14,7 +14,7 @@ class Tempo extends Component {
   }
 
   handleChange(event) {
-    this.setState({defaultTempo: event})
+    this.setState({tempo: event})
     console.log("default", this.state.tempo)
   }
 
