@@ -1,0 +1,32 @@
+.tempo-slider {
+  width: 25% !important;
+}
+
+.tempo-range {
+  position: relative;
+  left: 127px;
+}
+
+.input-range {
+  height: 5rem !important;
+  position: sticky !important;
+}
+
+.input-range__label {
+  font-family: 'Quantico' !important;
+  font-size: 1.6rem !important;
+  color: white !important;
+
+}
+
+.input-range__label-container {
+  bottom: 8px;
+}
+
+.tempo-label {
+  color: white;
+  font-size: 1.3rem;
+  position: relative;
+  right: 45px;
+  bottom: 16px;
+}

@@ -28,7 +28,6 @@ export default class SequencerComponent extends React.Component {
 
   playNote(on, note) {
     if(on.state || on[0] === 1) {
-      console.log(note)
       this.props.parent.midiSounds.playChordNow(3,[note], 1);
     }
   }
