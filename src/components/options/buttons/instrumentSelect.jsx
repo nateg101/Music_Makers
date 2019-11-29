@@ -14,7 +14,7 @@ class InstrumentSelect extends Component {
     return (
       <div className="instrument-selector">
       <Form>
-        <Form.Control as="select">
+        <Form.Control as="select" className="instruments">
           <option>Piano</option>
           <option>Glockenspiel</option>
           <option>3</option>
