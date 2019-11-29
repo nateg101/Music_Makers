@@ -41,10 +41,6 @@ class PlayButton extends Component {
       this.props.storedSequencers.forEach((sequencer)=>{
         let tempo = this.convertBPM()
         sequencer.start(tempo)
-        console.log('counter', sequencer.stepper)
-        console.log('matrix', sequencer.matrix.pattern)
-        console.log('tempo',sequencer.interval.rate)
-        console.log('cells', sequencer.cells)
       })
     }
   }
@@ -52,7 +48,14 @@ class PlayButton extends Component {
 
   render() {
     return (
-      <Button variant="outline-light" id="playback-button" onClick={this.handleClick}><span className={this.state.isButtonActive ? 'stop-button' : "play-button"}>{this.state.buttonText}</span></Button>
+      <Button 
+        variant="outline-light" 
+        id="playback-button" 
+        onClick={this.handleClick}>
+        <span className={this.state.isButtonActive ? 'stop-button' : "play-button"}>
+          {this.state.buttonText}
+        </span>
+      </Button>
     )
   }
 }
