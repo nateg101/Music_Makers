@@ -22,8 +22,10 @@ export default class SequencerContainer extends React.Component {
       {letter: 'D', value: 14},
       {letter: 'C', value: 12}
     ]
+    console.log('rendering sequencers')
     return (
       <div className="sequencer-wrapper">
+      <button onClick={()=>{this.props.midiStorage.MIDIPlugin.noteOn(0,60,127,0)}}>Farts</button>
         <SequencerComponent
         octave={5}
         scale={scale}

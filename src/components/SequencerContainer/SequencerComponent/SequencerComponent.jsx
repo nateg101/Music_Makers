@@ -45,11 +45,9 @@ export default class SequencerContainer extends React.Component {
       '#ff0000'
     ]
     let self = this
+    console.log(this.props)
       return (
         <div >
-          <div hidden>
-            <MIDISounds ref={(ref) => (this.midiSounds = ref)} instruments={[3]} />
-          </div>
           <Container className='sequencer-container' id="notes" ref={this.myInput}>
               {this.props.scale.map(function(note, i) {
                     return (
