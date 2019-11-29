@@ -25,7 +25,7 @@ class OptionsBar extends Component {
     <div className='options d-flex justify-content-center'>
       <Card className="option-bar" body>
         <Row>
-          <Col>
+          <Col sm={1}>
             <PlayButton 
               tempo={this.state.tempo} 
               storedSequencers={this.props.storedSequencers}/>
@@ -35,7 +35,7 @@ class OptionsBar extends Component {
               tempo={this.state.tempo} 
               updateTempo={this.updateTempo}/>
           </Col>
-          <Col>
+          <Col sm={3}>
             <OctaveSelector
             octaves={this.props.octaves}
             setOctaves={this.props.setOctaves}/>
