@@ -19,27 +19,17 @@ class PlayButton extends Component {
   handleClick = () => {
     this.toggleSequencer()
     this.updateButtonState()
-    var stringo=LZString.decompressFromUTF16('Ʀ弹⤤㎜ᣇዉ檮㘌篟瞰')
+    let stringo = LZString.decompressFromUTF16('Ʀ弹⤤㎜ᣇዉ檮㘌篟瞰')
     stringo = stringo.split('')
-    var aryStringo = []
-    var seqLength = stringo.length/16
-    var i=0
-    console.log(stringo.length)
-    for (i = 0;i < seqLength; i++) {
-      aryStringo.push(stringo.split(i, i+16))
+    let noSeqs = stringo.length / 16
+    let seqState = []
+    for(let i = 0; i < noSeqs; i++) {
+      seqState.push([stringo.slice(i * 16, i * 16 + 16).map(Number)])
     }
-
-    console.log(aryStringo)
-
-
-    // for (i; i< noSeqs; i++) {
-    //   var slicer = stringo.slice(i, i+16)
-    //   console.log(stringo.length)
-    //   // console.log(slicer)
-    //   // console.log(slicer[0][7])
-    //   // console.log(slicer)
-    //   aryStringo.push(slicer)
-    }
+    this.props.storedSequencers.forEach((seq, i)=>{
+      seq.matrix.set.all(seqState[i])
+    })
+  }
 
 
 
