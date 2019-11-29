@@ -5,6 +5,7 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
+    "lz-string": "^1.4.4",
     "midi-sounds-react": "^1.2.54",
     "nexusui": "^2.0.10",
     "node": "^13.1.0",

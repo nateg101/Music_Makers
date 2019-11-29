@@ -12,6 +12,8 @@ class App extends React.Component {
     }
     this.storedSequencers = []
   }
+
+
   render() {
     return (
       <div className="App">
