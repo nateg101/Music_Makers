@@ -4,15 +4,8 @@ import SequencerComponent from './SequencerComponent/SequencerComponent'
 import './SequencerContainer.css'
 
 export default class SequencerContainer extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      width: 0,
-      height: 0
-    }
-  }
 
-  render() {
+  renderSequencers = () => {
     let scale = [
       {letter: 'B', value: 23},
       {letter: 'A', value: 21},
@@ -22,22 +15,30 @@ export default class SequencerContainer extends React.Component {
       {letter: 'D', value: 14},
       {letter: 'C', value: 12}
     ]
-    console.log('rendering sequencers')
+    let sequencers = []
+    let octaveArray = {
+      1: [4],
+      3: [5,4,3],
+      5: [6,5,4,3,2],
+      7: [7,6,5,4,3,2,1]
+    }
+    octaveArray[this.props.octaves].forEach((octave, i) => {
+      sequencers.push(
+        <SequencerComponent
+          key={i + 100 * octave}
+          midiStorage={this.props.midiStorage}
+          octave={octave}
+          scale={scale}
+          storedSequencers={this.props.storedSequencers}/>
+        )
+      })
+    return sequencers
+  }
+
+  render() {
     return (
       <div className="sequencer-wrapper">
-      <button onClick={()=>{this.props.midiStorage.MIDIPlugin.noteOn(0,60,127,0)}}>Farts</button>
-        <SequencerComponent
-        octave={5}
-        scale={scale}
-        storedSequencers={this.props.storedSequencers}/>
-        <SequencerComponent
-        octave={4}
-        scale={scale}
-        storedSequencers={this.props.storedSequencers}/>
-        <SequencerComponent
-        octave={3}
-        scale={scale}
-        storedSequencers={this.props.storedSequencers}/>
+        {this.renderSequencers()}
       </div>
     )
   }

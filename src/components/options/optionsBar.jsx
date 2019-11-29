@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import Card from "react-bootstrap/Card";
+import { Card, Row, Col } from "react-bootstrap";
 import PlayButton from "./buttons/playButton.jsx";
-
+import OctaveSelector from "./inputs/OctaveSelector";
 import Tempo from "./buttons/tempo.jsx";
+
 import './optionsBar.css'
 
 class OptionsBar extends Component {
@@ -23,8 +24,23 @@ class OptionsBar extends Component {
     return (
     <div className='options d-flex justify-content-center'>
       <Card className="option-bar" body>
-      <PlayButton tempo={this.state.tempo} storedSequencers={this.props.storedSequencers}/>
-      <Tempo tempo={this.state.tempo} updateTempo={this.updateTempo}/>
+        <Row>
+          <Col sm={1}>
+            <PlayButton 
+              tempo={this.state.tempo} 
+              storedSequencers={this.props.storedSequencers}/>
+          </Col>
+          <Col>
+            <Tempo 
+              tempo={this.state.tempo} 
+              updateTempo={this.updateTempo}/>
+          </Col>
+          <Col sm={3}>
+            <OctaveSelector
+            octaves={this.props.octaves}
+            setOctaves={this.props.setOctaves}/>
+          </Col>
+        </Row>
       </Card>
     </div>
     )

@@ -10,11 +10,12 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      octaves: 3,
       loading: true
     }
     this.storedSequencers = []
     this.midiStorage = {}
-    this.midi = null
+    this.setOctaves = this.setOctaves.bind(this)
   }
 
   componentDidMount() {
@@ -30,10 +31,12 @@ class App extends React.Component {
         console.log('setting loading to false - MIDI SHOULD EXIST')
       }
     })
-    // callback: function() {
-    //   self.MIDIPlugin.programChange(0, 56);
-    //   self.setState({loading: false});
-    // });
+  }
+
+  setOctaves(event) {
+    this.setState({
+      octaves: event.target.value
+    })
   }
 
   render() {
@@ -47,9 +50,13 @@ class App extends React.Component {
           :
           <SequencerContainer
           midiStorage={this.midiStorage}
-          storedSequencers={this.storedSequencers}/>
+          storedSequencers={this.storedSequencers}
+        octaves={this.state.octaves}/>
           }
-        <OptionsBar storedSequencers={this.storedSequencers}/>
+          <OptionsBar
+          storedSequencers={this.storedSequencers}
+          octaves={this.state.octaves}
+          setOctaves={this.setOctaves}/>
       </div>
     );
   }
