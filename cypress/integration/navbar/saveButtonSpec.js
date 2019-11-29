@@ -9,5 +9,6 @@ describe('playButton', function() {
   it('opens the Save Link overlay', function() {
     cy.get('.save-button').click()
     cy.get('.save-link-overlay')
+    cy.contains('Save your song!')
   })
 })
