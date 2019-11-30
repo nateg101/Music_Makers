@@ -24,9 +24,9 @@ class App extends React.Component {
     console.log(this.midiStorage.MIDIPlugin)
     this.midiStorage.MIDIPlugin.loadPlugin({
   		soundfontUrl: "./soundfont/",
-  		instruments: [ "trumpet" ],
+  		instruments: [ "acoustic_grand_piano" ],
       callback: function() {
-        self.midiStorage.MIDIPlugin.programChange(0, 56);
+        self.midiStorage.MIDIPlugin.programChange(0, 0);
         self.setState({loading: false});
         console.log('setting loading to false - MIDI SHOULD EXIST')
       }
