@@ -21,6 +21,7 @@
     "build": "react-scripts build",
     "test": "npx cypress run",
     "jest": "react-scripts test",
+    "jest:coverage": "react-scripts test '--coverage' '--watchAll=false'",
     "eject": "react-scripts eject",
     "lint": "npx eslint ."
   },
@@ -51,5 +52,8 @@
     "mocha": "^6.2.2",
     "sinon": "^7.5.0",
     "typescript-eslint": "^0.0.1-alpha.0"
+  },
+  "jest": {
+    "collectCoverageFrom": ["src/**/*.{js,jsx}"]
   }
 }
