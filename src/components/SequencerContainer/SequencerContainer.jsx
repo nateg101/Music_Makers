@@ -40,7 +40,7 @@ export default class SequencerContainer extends React.Component {
     const { expand, onClick } = this.props;
     return (
       <div className="sequencer-wrapper card" >
-        <Card.Header className={expand ? 'title is-expanded' : 'title'} onClick={onClick}>Featured</Card.Header>
+        <Card.Header className={expand ? 'title is-expanded' : 'title'} onClick={onClick}>Instrument 1</Card.Header>
         <div className={expand ? 'content is-expanded' : 'content'}>
         {this.renderSequencers()}
         </div>

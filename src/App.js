@@ -11,7 +11,8 @@ class App extends React.Component {
     super(props)
     this.state = {
       octaves: 3,
-      loading: true
+      loading: true,
+      instrument1: true
     }
     this.storedSequencers = []
     this.midiStorage = {}
@@ -25,10 +26,10 @@ class App extends React.Component {
     this.midiStorage.MIDIPlugin.loadPlugin({
   		soundfontUrl: "./soundfont/",
   		instruments: [ "acoustic_grand_piano" ],
-      callback: function() {
-        self.midiStorage.MIDIPlugin.programChange(0, 0);
-        self.setState({loading: false});
-        console.log('setting loading to false - MIDI SHOULD EXIST')
+    callback: function() {
+      self.midiStorage.MIDIPlugin.programChange(0, 0);
+      self.setState({loading: false});
+      console.log('setting loading to false - MIDI SHOULD EXIST')
       }
     })
   }
@@ -37,6 +38,10 @@ class App extends React.Component {
     this.setState({
       octaves: event.target.value
     })
+  }
+
+  toggle = () => () => {
+    this.setState({ instrument1: !this.state.instrument1 });
   }
 
   render() {
@@ -51,7 +56,9 @@ class App extends React.Component {
           <SequencerContainer
           midiStorage={this.midiStorage}
           storedSequencers={this.storedSequencers}
-        octaves={this.state.octaves}/>
+          octaves={this.state.octaves}
+          onClick={this.toggle()}
+          expand={this.state.instrument1}/>
           }
           <OptionsBar
           storedSequencers={this.storedSequencers}
