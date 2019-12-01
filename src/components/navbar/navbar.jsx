@@ -21,7 +21,9 @@ class NavbarMain extends Component {
           Synesthesia
         </Navbar.Text>
         <Navbar.Collapse id="basic-navbar-nav">
-            <SaveButton className="save-button">Save</SaveButton>
+            <SaveButton className="save-button"
+            storedSequencers={this.storedSequencers}>
+            Save</SaveButton>
         </Navbar.Collapse>
       </Navbar>
     )

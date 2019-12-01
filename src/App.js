@@ -17,7 +17,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <NavbarMain/>
+        <NavbarMain storedSequencers={this.storedSequencers}/>
         <SequencerContainer storedSequencers={this.storedSequencers}/>
         <OptionsBar storedSequencers={this.storedSequencers}/>
       </div>
