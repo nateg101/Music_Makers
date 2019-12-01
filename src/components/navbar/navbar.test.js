@@ -1,6 +1,6 @@
+import React from "react";
 import NavbarMain from './navbar'
-import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow } from 'enzyme'
 
 describe('app component testing', function() {
   it('renders successfully', function() {
