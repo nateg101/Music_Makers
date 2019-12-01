@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import SequencerComponent from './SequencerComponent/SequencerComponent'
-import './SequencerContainer.css'
+import { Card } from 'react-bootstrap'
+import './SequencerContainer.scss'
 
 export default class SequencerContainer extends React.Component {
 
@@ -36,9 +37,13 @@ export default class SequencerContainer extends React.Component {
   }
 
   render() {
+    const { expand, onClick } = this.props;
     return (
-      <div className="sequencer-wrapper">
+      <div className="sequencer-wrapper card" >
+        <Card.Header className={expand ? 'title is-expanded' : 'title'} onClick={onClick}>Featured</Card.Header>
+        <div className={expand ? 'content is-expanded' : 'content'}>
         {this.renderSequencers()}
+        </div>
       </div>
     )
   }

@@ -1,0 +1,25 @@
+.sequencer-wrapper {
+  height: 70vh;
+  margin: 0 auto;
+  overflow-y: scroll;
+  width: 90%;
+}
+
+.title {
+  cursor: pointer;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  &::after {
+    content: "+";
+    transition: transform .5s ease-in-out;
+    position: absolute;
+    right: 30px;
+  }
+  &.is-expanded {
+
+  }
+}
+
+.content {
+  overflow-y: scroll;
+}
