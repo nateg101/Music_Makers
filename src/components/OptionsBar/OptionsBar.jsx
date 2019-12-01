@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Card, Row, Col } from "react-bootstrap";
-import PlayButton from "./buttons/playButton.jsx";
-import OctaveSelector from "./inputs/OctaveSelector";
-import Tempo from "./buttons/tempo.jsx";
-
-import './optionsBar.css'
+import PlayButton from "./buttons/PlayButton/PlayButton";
+import OctaveSelector from "./inputs/OctaveSelector/OctaveSelector";
+import Tempo from "./inputs/Tempo/Tempo";
+import './OptionsBar.css'
 
 class OptionsBar extends Component {
 

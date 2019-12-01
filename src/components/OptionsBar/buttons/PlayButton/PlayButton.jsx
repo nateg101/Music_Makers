@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Button} from "react-bootstrap";
-import './playButton.css'
+import './PlayButton.css'
 
 class PlayButton extends Component {
   constructor(props) {
