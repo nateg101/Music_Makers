@@ -1,7 +1,22 @@
-.sequencer-container {
+/* .sequencer-container {
   border-bottom: black;
   border-bottom-style: solid;
+  width: 80vw;
+} */
+
+hr {
+  display: block;
+  margin-left: auto;
+  margin: 0;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+  width: 100%;
 }
 .note-card {
-  width: 5.88%; 
+  font-size: 1.5em;
+  height: 14.29%;
+}
+
+.no-gutters {
 }

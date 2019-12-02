@@ -6,4 +6,5 @@ before_script:
   - npm start --silent &
 script:
   - npm test
+  - npm run jest:coverage
   - npm run lint

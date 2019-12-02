@@ -19,7 +19,7 @@ class NavbarMain extends Component {
       <Navbar.Text className='Nav-title'>
         Synesthesia
       </Navbar.Text>
-      </Navbar>
+    </Navbar>
     )
   }
 }

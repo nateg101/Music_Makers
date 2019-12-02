@@ -5,7 +5,7 @@ env:
 extends:
   - 'eslint:recommended'
   - 'plugin:react/recommended'
-  # - 'plugin:@typescript-eslint/eslint-recommended'
+  - 'plugin:jest/recommended'
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
@@ -17,8 +17,11 @@ parserOptions:
   sourceType: module
 plugins:
   - react
-  # - '@typescript-eslint'
+  - jest
 settings:
   react:
     version: 6.12.1
-rules: {}
+rules: {
+  "jest/no-mocks-import": 0,
+  "jest/valid-expect": 0
+}
