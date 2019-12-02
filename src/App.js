@@ -37,19 +37,35 @@ class App extends React.Component {
       self.setState({ loading: false });
     }
     })
-    self.getUrlVars()
+    self.extractUrl()
   }
 
-
-  getUrlVars() {
+  extractUrl() {
     let params = new URLSearchParams(window.location.search)
-    let piano = params.get(0)
-    let percussion = params.get(1)
-    if (piano) {
-      this.convertPiano(piano)
-    } else {
-      return this.setState({ octaves: 3 })
+    let pianoParam = params.get(0)
+    let percussionParam = params.get(1)
+    if (percussionParam) {
+      var drums = this.convertDrums(percussionParam)
     }
+    if (pianoParam) {
+      var [piano, octaves] = this.convertPiano(pianoParam)
+    } 
+    return this.setState({ 
+      octaves: octaves || 3,
+      piano: piano,
+      drums: drums
+    })
+  }
+
+  convertDrums = (compString) => {
+    let drumString = this.decompress(compString)
+    console.log(drumString.length)
+    let drums = []
+    for(let i = 0; i < 10; i++) {
+      let startIndex = i * 16
+      drums.push(drumString.slice(startIndex, startIndex + 16))
+    }
+    return drums
   }
 
   convertPiano(compString) {
@@ -65,7 +81,7 @@ class App extends React.Component {
       }
       piano.push(octave)
     }
-    this.setState({ octaves: octaves, piano: piano })
+    return [piano, octaves]
   }
 
   decompress(string) {
@@ -84,9 +100,10 @@ class App extends React.Component {
 
   render() {
     return (
-
       <div className="App">
-        <NavbarMain storedSequencers={this.storedSequencers}/>
+        <NavbarMain 
+          storedPercussion={this.storedPercussion}
+          storedSequencers={this.storedSequencers}/>
         {
           this.state.loading ?
           <div>Loading....</div>
@@ -98,15 +115,16 @@ class App extends React.Component {
             octaves={this.state.octaves}
             onClick={this.toggle}
             expand={this.state.instrument1}
+            drums={this.state.drums}
             piano={this.state.piano}/>
-          }
-          <OptionsBar
-            storedPercussion={this.storedPercussion}
-            storedSequencers={this.storedSequencers}
-            octaves={this.state.octaves}
-            setOctaves={this.setOctaves}/>
+        }
+        <OptionsBar
+          storedPercussion={this.storedPercussion}
+          storedSequencers={this.storedSequencers}
+          octaves={this.state.octaves}
+          setOctaves={this.setOctaves}/>
       </div>
-    );
+    )
   }
 }
 

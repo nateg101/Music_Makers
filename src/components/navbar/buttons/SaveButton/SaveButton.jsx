@@ -29,10 +29,9 @@ class SaveButton extends Component {
     this.setState({show: false})
   }
 
-  setSeqState = () => {
+  seqState = (sequencers) => {
     let state = []
-    console.log(this.props.storedSequencers.length)
-    this.props.storedSequencers.forEach((sequencer)=>{
+    sequencers.forEach((sequencer)=>{
       state.push(sequencer.matrix.pattern)
     })
     state = this.stringify(state)
@@ -40,11 +39,11 @@ class SaveButton extends Component {
   }
 
   stringify(array) {
-  return array.flat()  
-              .join('')  
-              .replaceAll('false', '0')  
-              .replaceAll('true', '1')
-              .replaceAll(',','')
+    return array.flat()  
+                .join('')
+                .replaceAll('false', '0')  
+                .replaceAll('true', '1')
+                .replaceAll(',','')
   }
 
   compress(string) {
@@ -54,17 +53,24 @@ class SaveButton extends Component {
                    .replace(/=/g, `~`);
   }
 
+  constructUrl = () => {
+    let pianoState = this.seqState(this.props.storedSequencers)
+    let drumState = this.seqState(this.props.storedPercussion)
+    return window.location.href + `?0=${pianoState}&1=${drumState}`
+  }
+
   render() {
+    let self = this
     return (
       <div className = 'save-wrapper'>
         <Button variant='outline-light' className = 'save-button pull-right' onClick={this.show}>Save</Button>
         <Modal
-          className="Modal-wrapper" //this will completely overwrite the default css completely
+          className="Modal-wrapper"
           containerClassName="Modal"
           closeOnOuterClick={true}
           show={this.state.show}>
           <a style={closeStyle} onClick={this.close}>X</a>
-          {this.state.show ? <div className='url'>{window.location.href + `?0=${this.setSeqState()}`}</div> : null }
+          {this.state.show ? <div className='url'>{self.constructUrl()}</div> : null }
         </Modal>
       </div>
     );

@@ -79,6 +79,7 @@ export default class SequencerContainer extends React.Component {
           <div className={this.state.instrument1 ? 'content is-expanded' : 'content'}>
           <SequencerComponent
             key={10 + 1000}
+            matrix={this.props.drums}
             rows={drumNotes.length}
             midiStorage={this.props.midiStorage}
             instrument={1}
