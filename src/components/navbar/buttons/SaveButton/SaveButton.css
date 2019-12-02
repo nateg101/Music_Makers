@@ -13,8 +13,8 @@
 }
 
 .url {
-  width:70%; /* 70% of the parent*/
-  margin:50px auto;
+  width:70%;
+  margin: 200px auto;
   text-align: center;
   opacity: 1 !important;
   background-color: white;

@@ -35,13 +35,16 @@ class SaveButton extends Component {
      state = state.replaceAll('true', '1')
      state = state.replaceAll(',','')
      var compressState = LZString.compressToUTF16(state)
+     return compressState
    }
+
+
 
 
   render() {
     return (
       <div className = 'save-wrapper'>
-        <Button className = 'save-button' onClick={this.show.bind(this)}>Open Modal</Button>
+        <Button variant='outline-light' className = 'save-button pull-right' onClick={this.show.bind(this)}>Save</Button>
         <Modal
         className="Modal-wrapper" //this will completely overwrite the default css completely
         containerClassName="Modal"
@@ -49,7 +52,7 @@ class SaveButton extends Component {
         show={this.state.show}
         onClose={this.close.bind(this)}>
         <a style={closeStyle} onClick={this.close.bind(this)}>X</a>
-        <div className='url'>This is where the url will go</div>
+        <div className='url'>{window.location.href + `${this.setSeqState()}`}</div>
         </Modal>
         </div>
     );

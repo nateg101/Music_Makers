@@ -22,7 +22,7 @@ class NavbarMain extends Component {
         </Navbar.Text>
         <Navbar.Collapse id="basic-navbar-nav">
             <SaveButton className="save-button"
-            storedSequencers={this.storedSequencers}>
+            storedSequencers={this.props.storedSequencers}>
             Save</SaveButton>
         </Navbar.Collapse>
       </Navbar>
