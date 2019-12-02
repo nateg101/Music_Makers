@@ -8,6 +8,7 @@ hr {
   display: block;
   margin-left: auto;
   margin: 0;
+  border-color: grey;
   margin-right: auto;
   border-style: inset;
   border-width: 1px;

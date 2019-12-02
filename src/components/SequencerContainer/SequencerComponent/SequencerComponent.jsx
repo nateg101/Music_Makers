@@ -28,14 +28,10 @@ export default class SequencerComponent extends React.Component {
 
   playNote(triggers, note) {
     let key = [
-      this.props.scale[0].value + (this.props.octave * 12),
-      this.props.scale[1].value + (this.props.octave * 12),
-      this.props.scale[2].value + (this.props.octave * 12),
-      this.props.scale[3].value + (this.props.octave * 12),
-      this.props.scale[4].value + (this.props.octave * 12),
-      this.props.scale[5].value + (this.props.octave * 12),
-      this.props.scale[6].value + (this.props.octave * 12),
     ]
+    for(let i = 0; i < this.props.scale.length; i++){
+      key.unshift(this.props.scale[i].value + (this.props.octave * 12))
+    }
     let notes = []
     triggers.forEach((note, i)=>{
       if (note) {
@@ -43,7 +39,8 @@ export default class SequencerComponent extends React.Component {
       }
     })
     if (notes.length > 0){
-      this.props.midiStorage.MIDIPlugin.chordOn(0, notes, 127, 0);
+      console.log(notes)
+      this.props.midiStorage.MIDIPlugin.chordOn(this.props.instrument, notes, 127, 0);
     }
   }
 
@@ -52,7 +49,7 @@ export default class SequencerComponent extends React.Component {
     for(let i = 0; i < 7; i++){
       noteNames.push(
         <Card key={i + 15 * this.props.octave} className='note-card justify-content-center border-0'>
-          {"" + this.props.scale[i].letter + this.props.octave}
+          {"" + this.props.scale[i].letter + (this.props.octave || "") }
         </Card>
       )
     }
@@ -67,10 +64,10 @@ export default class SequencerComponent extends React.Component {
               {this.renderNoteNames()}
           </Col>
           <Col sm={11} className='no-gutters'>
-            <Container className='sequencer-container' id="notes" ref={this.myInput}>
+            <Container className='sequencer-component' id="notes" ref={this.myInput}>
               <Sequencer
                 key={this.props.octave + 12}
-                rows={7}
+                rows={this.props.rows || 7}
                 columns={16}
                 size={[this.state.width*0.9412, this.state.width*0.27]}
                 onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}

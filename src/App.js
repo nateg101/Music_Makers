@@ -23,9 +23,10 @@ class App extends React.Component {
     this.midiStorage.MIDIPlugin = window.MIDI
     this.midiStorage.MIDIPlugin.loadPlugin({
       soundfontUrl: "./soundfont/",
-      instruments: [ "acoustic_grand_piano" ],
+      instruments: [ "acoustic_grand_piano", "gunshot" ],
     callback: function() {
       self.midiStorage.MIDIPlugin.programChange(0, 0);
+      self.midiStorage.MIDIPlugin.programChange(1, 127);
       self.setState({loading: false});
       }
     })
