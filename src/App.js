@@ -4,41 +4,63 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarMain from './components/navbar/navbar';
 import OptionsBar from './components/OptionsBar/OptionsBar';
 import SequencerContainer from './components/SequencerContainer/SequencerContainer';
-import MIDISounds from 'midi-sounds-react'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       octaves: 3,
+      loading: true,
+      instrument1: true
     }
     this.storedSequencers = []
+    this.midiStorage = {}
     this.setOctaves = this.setOctaves.bind(this)
-    this.midiStorage = {} 
   }
-  
+
+  componentDidMount() {
+    let self = this
+    this.midiStorage.MIDIPlugin = window.MIDI
+    this.midiStorage.MIDIPlugin.loadPlugin({
+      soundfontUrl: "./soundfont/",
+      instruments: [ "acoustic_grand_piano" ],
+    callback: function() {
+      self.midiStorage.MIDIPlugin.programChange(0, 0);
+      self.setState({loading: false});
+      }
+    })
+  }
+
   setOctaves(event) {
     this.setState({
       octaves: event.target.value
     })
   }
 
+  toggle = () => {
+    this.setState({ instrument1: !this.state.instrument1 });
+  }
+
   render() {
     return (
-      <div className="App">
-        <div hidden>
-          <MIDISounds ref={(ref) => (this.midiStorage.midiSounds = ref)} instruments={[3]} />
-        </div>
-        <NavbarMain />
-        <SequencerContainer
-          parent={this.midiStorage}
-          storedSequencers={this.storedSequencers}
-          octaves={this.state.octaves}/>
 
-        <OptionsBar
-        storedSequencers={this.storedSequencers}
-        octaves={this.state.octaves}
-        setOctaves={this.setOctaves}/>
+      <div className="App">
+        <NavbarMain/>
+        {
+          this.state.loading ?
+          <div>Loading....</div>
+          :
+          <SequencerContainer
+          midiStorage={this.midiStorage}
+          storedSequencers={this.storedSequencers}
+          octaves={this.state.octaves}
+          onClick={this.toggle}
+          expand={this.state.instrument1}/>
+          }
+          <OptionsBar
+          storedSequencers={this.storedSequencers}
+          octaves={this.state.octaves}
+          setOctaves={this.setOctaves}/>
       </div>
     );
   }

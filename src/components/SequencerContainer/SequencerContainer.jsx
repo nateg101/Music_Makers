@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import SequencerComponent from './SequencerComponent/SequencerComponent'
-import './SequencerContainer.css'
+import { Card } from 'react-bootstrap'
+import './SequencerContainer.scss'
 
 export default class SequencerContainer extends React.Component {
 
@@ -26,7 +27,7 @@ export default class SequencerContainer extends React.Component {
       sequencers.push(
         <SequencerComponent
           key={i + 100 * octave}
-          parent={this.props.parent}
+          midiStorage={this.props.midiStorage}
           octave={octave}
           scale={scale}
           storedSequencers={this.props.storedSequencers}/>
@@ -36,9 +37,13 @@ export default class SequencerContainer extends React.Component {
   }
 
   render() {
+    const { expand, onClick } = this.props;
     return (
-      <div className="sequencer-wrapper">
+      <div className="sequencer-wrapper card" >
+        <Card.Header className={expand ? 'title is-expanded' : 'title'} onClick={onClick}>Instrument 1</Card.Header>
+        <div className={expand ? 'content is-expanded' : 'content'}>
         {this.renderSequencers()}
+        </div>
       </div>
     )
   }

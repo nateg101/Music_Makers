@@ -42,9 +42,8 @@ export default class SequencerComponent extends React.Component {
         notes.push(key[i])
       }
     })
-    console.log(notes)
     if (notes.length > 0){
-      this.props.parent.midiSounds.playChordNow(3,[notes], 1);
+      this.props.midiStorage.MIDIPlugin.chordOn(0, notes, 127, 0);
     }
   }
 
@@ -61,7 +60,6 @@ export default class SequencerComponent extends React.Component {
   }
 
   render() {
-    console.log(this.props.scale[0])
     return (
       <Container>
         <Row key={this.props.octave + 10}>

@@ -10,7 +10,7 @@
 /cypress/integration/examples
 
 # production
-/build
+
 
 # misc
 .DS_Store
