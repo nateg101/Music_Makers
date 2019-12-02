@@ -7,14 +7,16 @@
     "jquery": "^3.4.1",
     "lz-string": "^1.4.4",
     "midi-sounds-react": "^1.2.54",
-    "nexusui": "^2.0.10",
+    "nexusui": "https://github.com/kevindhanna/nexus-ui",
     "node": "^13.1.0",
+    "node-sass": "^4.13.0",
     "popper.js": "^1.16.0",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.12.0",
     "react-input-range": "^1.3.0",
+    "react-load-script": "0.0.6",
     "react-nexusui": "git+https://github.com/kevindhanna/react-nexusui",
     "react-scripts": "3.2.0",
     "simple-react-modal": "^0.5.1"
@@ -23,6 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "npx cypress run",
+    "jest": "react-scripts test",
+    "jest:coverage": "react-scripts test '--coverage' '--watchAll=false'",
     "eject": "react-scripts eject",
     "lint": "npx eslint ."
   },
@@ -42,11 +46,20 @@
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.8.0",
-    "@typescript-eslint/parser": "^2.8.0",
+    "babel-eslint": "^10.0.3",
     "cypress": "^3.6.1",
-    "eslint": "^6.7.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "eslint": "^6.7.2",
+    "eslint-plugin-jest": "^23.1.1",
     "eslint-plugin-react": "^7.16.0",
+    "mocha": "^6.2.2",
+    "sinon": "^7.5.0",
     "typescript-eslint": "^0.0.1-alpha.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ]
   }
 }

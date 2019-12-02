@@ -12,6 +12,6 @@ describe("tempoChange", function () {
     .trigger('mouseover')
     .trigger('mousedown')
     .trigger('mousemove',  0, 0)
-    .contains(125)
+    .contains(120).should('not.exist')
   })
 })

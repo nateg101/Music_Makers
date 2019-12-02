@@ -1,4 +1,0 @@
-{
-  "presets": ["babel-preset-react-app"]--transformIgnorePatterns \"node_modules/(?!react-nexusui)/\""
-
-}
