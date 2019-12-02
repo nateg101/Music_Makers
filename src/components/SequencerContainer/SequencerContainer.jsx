@@ -24,12 +24,17 @@ export default class SequencerContainer extends React.Component {
       7: [7,6,5,4,3,2,1]
     }
     octaveArray[this.props.octaves].forEach((octave, i) => {
+      let matrix
+      if(this.props.song) {
+        matrix = this.props.song[i]
+      }
       sequencers.push(
         <SequencerComponent
           key={i + 100 * octave}
           midiStorage={this.props.midiStorage}
           octave={octave}
           scale={scale}
+          matrix={matrix || null}
           storedSequencers={this.props.storedSequencers}/>
         )
       })

@@ -38,7 +38,11 @@ class SaveButton extends Component {
      state = state.replaceAll('false', '0')
      state = state.replaceAll('true', '1')
      state = state.replaceAll(',','')
+     console.log(state)
      var compressState = LZString.compressToBase64(state)
+                                    .replace(/\+/g, `-`) // Convert '+' to '-'
+                                    .replace(/\//g, `_`) // Convert '/' to '_'
+                                    .replace(/\=/g, `~`); // Remove ending '='
      return compressState
    }
 
@@ -56,7 +60,7 @@ class SaveButton extends Component {
         show={this.state.show}
         onClose={this.close.bind(this)}>
         <a style={closeStyle} onClick={this.close.bind(this)}>X</a>
-        <div className='url'>{window.location.href + `${this.setSeqState()}`}</div>
+        <div className='url'>{window.location.href + `?0=${this.setSeqState()}`}</div>
         </Modal>
         </div>
     );

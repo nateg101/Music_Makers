@@ -18,20 +18,7 @@ class PlayButton extends Component {
   handleClick = () => {
     this.toggleSequencer()
     this.updateButtonState()
-    // let stringo = LZString.decompressFromUTF16('Ʀ弹⤤㎜ᣇዉ檮㘌篟瞰')
-    // stringo = stringo.split('')
-    // let noSeqs = stringo.length / 16
-    // let seqState = []
-    // for(let i = 0; i < noSeqs; i++) {
-    //   seqState.push([stringo.slice(i * 16, i * 16 + 16).map(Number)])
-    // }
-    // this.props.storedSequencers.forEach((seq, i)=>{
-    //   seq.matrix.set.all(seqState[i])
-    // })
   }
-
-
-
 
   updateButtonState = () => {
     let buttonText = this.state.buttonText === "▶" ? "◼" : "▶"
@@ -51,9 +38,10 @@ class PlayButton extends Component {
         sequencer.stepper.value = -1
       })
     } else {
+      let tempo = this.convertBPM()
       this.props.storedSequencers.forEach((sequencer)=>{
-        let tempo = this.convertBPM()
         sequencer.start(tempo)
+        console.log(sequencer.matrix.pattern)
       })
     }
   }
@@ -63,9 +51,9 @@ class PlayButton extends Component {
 
   render() {
     return (
-      <Button 
-        variant="outline-light" 
-        id="playback-button" 
+      <Button
+        variant="outline-light"
+        id="playback-button"
         onClick={this.handleClick}>
         <span className={this.state.isButtonActive ? 'stop-button' : "play-button"}>
           {this.state.buttonText}

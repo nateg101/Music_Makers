@@ -24,6 +24,9 @@ export default class SequencerComponent extends React.Component {
 
   updateWindowDimensions = () => {
     this.setState({ width: this.myInput.current.offsetWidth });
+    if (this.sequencer){
+      setTimeout(this.sequencer.colorInterface(), 0)
+    }
   }
 
   playNote(triggers, note) {
@@ -59,6 +62,16 @@ export default class SequencerComponent extends React.Component {
     return noteNames
   }
 
+  handleOnReady = (sequencer) => {
+    this.props.storedSequencers.push(sequencer)
+    this.sequencer = sequencer
+    if (this.props.matrix){
+      sequencer.matrix.set.all(this.props.matrix)
+      sequencer.colorInterface()
+      console.log(sequencer.cells.length)
+    }
+  }
+
   render() {
     return (
       <Container>
@@ -73,7 +86,7 @@ export default class SequencerComponent extends React.Component {
                 rows={7}
                 columns={16}
                 size={[this.state.width*0.9412, this.state.width*0.27]}
-                onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
+                onReady={this.handleOnReady}
                 onChange={function() {}}
                 onStep={this.playNote}/>
             </Container>
