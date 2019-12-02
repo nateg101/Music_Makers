@@ -17,6 +17,7 @@ describe("playButton", function () {
 
   it("returns the stepper to the start of the sequencer on click", function () {
     cy.visit('/')
+    cy.wait(100)
     cy.get('.play-button').click()
     cy.wait(100)
     cy.get('.stop-button').click()

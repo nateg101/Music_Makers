@@ -32,6 +32,7 @@ class PlayButton extends Component {
   toggleSequencer = () => {
     if(this.state.isButtonActive){
       this.props.storedSequencers.forEach((sequencer)=>{
+        console.log(sequencer.interval.interval)
         sequencer.stop()
         sequencer.stepper.value = 0
         sequencer.render()
