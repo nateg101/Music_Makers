@@ -3,7 +3,7 @@ describe('SequencerContainer', function() {
     cy.visit('/')
     cy.get('.sequencer-container')
     let i = 1
-    for (i; i < 8; ++i) {
+    for (i; i < 3; ++i) {
       cy.get(`#nexus-ui-sequencer-${i}`)
     }
   })
