@@ -1,7 +1,8 @@
 import React, {Component} from "react"
 import Button from "react-bootstrap/Button";
-import './SaveButton.css'
-import Modal, {closeStyle} from 'simple-react-modal'
+// import {CopyToClipboard} from 'react-copy-to-clipboard';
+import './SaveButton.css';
+import Modal, {closeStyle} from 'simple-react-modal';
 import LZString from "lz-string";
 
 
@@ -9,7 +10,10 @@ import LZString from "lz-string";
 class SaveButton extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      value: '',
+      copied: false,
+    }
   };
 
   show() {
@@ -34,7 +38,7 @@ class SaveButton extends Component {
      state = state.replaceAll('false', '0')
      state = state.replaceAll('true', '1')
      state = state.replaceAll(',','')
-     var compressState = LZString.compressToUTF16(state)
+     var compressState = LZString.compressToBase64(state)
      return compressState
    }
 

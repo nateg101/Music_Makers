@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Button} from "react-bootstrap";
-import LZString from "lz-string";
 import './playButton.css'
 
 class PlayButton extends Component {
@@ -51,7 +50,6 @@ class PlayButton extends Component {
         sequencer.render()
         sequencer.stepper.value = -1
       })
-      this.setSeqState()
     } else {
       this.props.storedSequencers.forEach((sequencer)=>{
         let tempo = this.convertBPM()
@@ -61,9 +59,6 @@ class PlayButton extends Component {
   }
 
 
-  changeSeqState = () => {
-
-  }
 
 
   render() {
