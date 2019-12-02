@@ -35,8 +35,8 @@ export default class SequencerContainer extends React.Component {
     }
     octaveArray[this.props.octaves].forEach((octave, i) => {
       let matrix
-      if(this.props.song) {
-        matrix = this.props.song[i]
+      if(this.props.piano) {
+        matrix = this.props.piano[i]
       }
       sequencers.push(
         <SequencerComponent
@@ -66,7 +66,6 @@ export default class SequencerContainer extends React.Component {
       {letter: 'snare', value: 38},
       {letter: 'kick', value: 36},
     ]
-    const { expand, onClick } = this.props;
     return (
       <div className='instruments'>
         <div className="piano-sequencer-wrapper card" >
@@ -86,7 +85,7 @@ export default class SequencerContainer extends React.Component {
             octave={0}
             scale={drumNotes}
             noteNameClass={'drums'}
-            storedSequencers={this.props.storedSequencers}/>
+            storedSequencers={this.props.storedPercussion}/>
           </div>
         </div>
       </div>

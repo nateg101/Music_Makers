@@ -12,8 +12,12 @@ export default class SequencerComponent extends React.Component {
     this.myInput = React.createRef()
     this.playNote = this.playNote.bind(this)
     this.render = this.render.bind(this)
-    this.key = []
+    this.setKey()
+  }
+
+  setKey() {
     for(let i = 0; i < this.props.scale.length; i++){
+      this.key = []
       this.key.unshift(this.props.scale[i].value + (this.props.octave * 12))
     }
   }
@@ -52,7 +56,6 @@ export default class SequencerComponent extends React.Component {
       }
     })
     if (notes.length > 0){
-      console.log(notes)
       this.props.midiStorage.MIDIPlugin.chordOn(this.props.instrument, notes, 100, 0);
     }
   }
@@ -61,7 +64,9 @@ export default class SequencerComponent extends React.Component {
     let noteNames = []
     for(let i = 0; i < this.props.scale.length; i++){
       noteNames.push(
-        <Card key={i + 15 * this.props.octave} className={`note-card ${this.props.noteNameClass}-notes justify-content-center border-0`}>
+        <Card 
+          key={i + 15 * this.props.octave}
+          className={`note-card ${this.props.noteNameClass}-notes justify-content-center border-0`}>
           {"" + this.props.scale[i].letter + (this.props.octave || "") }
         </Card>
       )
@@ -70,16 +75,16 @@ export default class SequencerComponent extends React.Component {
   }
 
   handleOnReady = (sequencer) => {
-    if (!this.props.storedSequencers.includes(sequencer)) {
+    if (this.props.midiStorage.MIDIPlugin) {
       this.props.storedSequencers.push(sequencer)
     }
-    this.sequencer = sequencer
-    if (this.props.matrix){
+    if (this.props.matrix) {
       sequencer.matrix.set.all(this.props.matrix)
       setTimeout(function() {
         sequencer.colorInterface()
       }, 0)
     }
+    this.sequencer = sequencer
   }
 
   render() {

@@ -10,16 +10,16 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      octaves: 3,
       loading: true,
     }
     this.storedSequencers = []
+    this.storedPercussion = []
     this.midiStorage = {}
-    this.setOctaves = this.setOctaves.bind(this)
   }
 
   componentDidUpdate() {
     this.storedSequencers = []
+    this.storedPercussion = []
     this.storedSequencers.forEach((sequencer) => {
       sequencer.colorInterface()
     })
@@ -34,40 +34,49 @@ class App extends React.Component {
     callback: function() {
       self.midiStorage.MIDIPlugin.programChange(0, 0);
       self.midiStorage.MIDIPlugin.programChange(1, 127);
-      self.setState({loading: false});
-      }
+      self.setState({ loading: false });
+    }
     })
     self.getUrlVars()
   }
 
 
   getUrlVars() {
-    let urlParams = new URLSearchParams(window.location.search).get('0')
-
-    if (urlParams) {
-      urlParams = urlParams.replace(/\-/g, `+`) // Convert '+' to '-'
-               .replace(/\_/g, '/') // Convert '/' to '_'
-               .replace(/\~/g, `=`); // Remove ending '='
-      let stringo = LZString.decompressFromBase64(urlParams)
-      stringo = stringo.split('').map(function(t){return parseInt(t)})
-      let matrixSize = 112
-      let noSeqs = stringo.length / matrixSize
-      let seqState = []
-      for (let i = 0; i < noSeqs; i++) {
-        let matrix = []
-        for(let j = 0; j < 7; j++) {
-          let startIndex = (j * 16) + (i * matrixSize)
-          matrix.push(stringo.slice(startIndex, startIndex + 16))
-        }
-        seqState.push(matrix)
-      }
-      this.setState({ octaves: noSeqs, song: seqState })
-    }else{
-      return
+    let params = new URLSearchParams(window.location.search)
+    let piano = params.get(0)
+    let percussion = params.get(1)
+    if (piano) {
+      this.convertPiano(piano)
+    } else {
+      return this.setState({ octaves: 3 })
     }
   }
 
-  setOctaves(event) {
+  convertPiano(compString) {
+    let pianoString = this.decompress(compString)
+    let matrixSize = 112
+    let octaves = pianoString.length / matrixSize
+    let piano = []
+    for (let i = 0; i < octaves; i++) {
+      let octave = []
+      for (let j = 0; j < 7; j++) {
+        let startIndex = (j * 16) + (i * matrixSize)
+        octave.push(pianoString.slice(startIndex, startIndex + 16))
+      }
+      piano.push(octave)
+    }
+    this.setState({ octaves: octaves, piano: piano })
+  }
+
+  decompress(string) {
+    string = string.replace(/-/g, `+`)
+                                .replace(/_/g, '/')
+                                .replace(/~/g, `=`)
+    return LZString.decompressFromBase64(string)
+                   .split('').map(function(t){return parseInt(t)})
+  }
+
+  setOctaves = (event) => {
     this.setState({
       octaves: event.target.value
     })
@@ -83,17 +92,19 @@ class App extends React.Component {
           <div>Loading....</div>
           :
           <SequencerContainer
-          midiStorage={this.midiStorage}
-          storedSequencers={this.storedSequencers}
-          octaves={this.state.octaves}
-          onClick={this.toggle}
-          expand={this.state.instrument1}
-          song={this.state.song}/>
+            midiStorage={this.midiStorage}
+            storedSequencers={this.storedSequencers}
+            storedPercussion={this.storedPercussion}
+            octaves={this.state.octaves}
+            onClick={this.toggle}
+            expand={this.state.instrument1}
+            piano={this.state.piano}/>
           }
           <OptionsBar
-          storedSequencers={this.storedSequencers}
-          octaves={this.state.octaves}
-          setOctaves={this.setOctaves}/>
+            storedPercussion={this.storedPercussion}
+            storedSequencers={this.storedSequencers}
+            octaves={this.state.octaves}
+            setOctaves={this.setOctaves}/>
       </div>
     );
   }

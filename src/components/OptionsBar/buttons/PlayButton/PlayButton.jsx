@@ -30,24 +30,34 @@ class PlayButton extends Component {
   }
 
   toggleSequencer = () => {
+    let sequencers = [
+      this.props.storedSequencers,
+      this.props.storedPercussion
+    ].flat()
     if(this.state.isButtonActive){
-      this.props.storedSequencers.forEach((sequencer)=>{
-        sequencer.stop()
-        sequencer.stepper.value = 0
-        sequencer.render()
-        sequencer.stepper.value = -1
-      })
+      this.sequencersOn(sequencers)
     } else {
-      let tempo = this.convertBPM()
-      this.props.storedSequencers.forEach((sequencer)=>{
-        sequencer.start(tempo)
-        console.log(sequencer.matrix.pattern)
-      })
+      this.sequencersOff(sequencers)
     }
   }
 
+  sequencersOn(sequencers){
+    sequencers.forEach((sequencer)=>{
+      sequencer.stop()
+      sequencer.stepper.value = 0
+      sequencer.render()
+      sequencer.stepper.value = -1
+    })
+  }
 
-
+  sequencersOff(sequencers) {
+    let tempo = this.convertBPM()
+    sequencers.forEach((sequencer)=>{
+      setTimeout(function() {
+        sequencer.start(tempo)
+      }, 1)
+    })
+  }
 
   render() {
     return (
