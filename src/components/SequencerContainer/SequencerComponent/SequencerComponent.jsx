@@ -7,7 +7,7 @@ export default class SequencerComponent extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      width: 0,
+      width: 0
     }
     this.myInput = React.createRef()
     this.playNote = this.playNote.bind(this)
@@ -16,11 +16,12 @@ export default class SequencerComponent extends React.Component {
   }
 
   setKey() {
+    this.key = []
     for(let i = 0; i < this.props.scale.length; i++){
-      this.key = []
       this.key.unshift(this.props.scale[i].value + (this.props.octave * 12))
     }
   }
+
   componentDidMount() {
     this.updateWindowDimensions()
     window.addEventListener("resize", this.updateWindowDimensions);
@@ -88,27 +89,27 @@ export default class SequencerComponent extends React.Component {
   }
 
   render() {
-    return (
-      <Container>
-        <Row key={this.props.octave + 10}>
-          <Col sm={1} className='no-gutters'>
+      return (
+        <Container>
+          <Row key={this.props.octave + 10}>
+            <Col sm={1} className='no-gutters'>
               {this.renderNoteNames()}
-          </Col>
-          <Col sm={11} className='no-gutters'>
-            <Container className='sequencer-component' id="notes" ref={this.myInput}>
-              <Sequencer
-                key={this.props.octave + 12}
-                rows={this.props.rows || 7}
-                columns={16}
-                size={[this.state.width*0.9412, this.state.width*0.27]}
-                onReady={this.handleOnReady}
-                onChange={function() {}}
-                onStep={this.playNote}/>
-            </Container>
-          </Col>
-          <hr></hr>
-        </Row>
-    </Container>
+            </Col>
+            <Col sm={11} className='no-gutters'>
+              <Container className='sequencer-component' id="notes" ref={this.myInput}>
+                {this.state.width ? <Sequencer
+                  key={this.props.octave + 12}
+                  rows={this.props.rows || 7}
+                  columns={16}
+                  size={[this.state.width*0.9412, this.state.width*0.27]}
+                  onReady={this.handleOnReady}
+                  onChange={function() {}}
+                  onStep={this.playNote}/> : <div>Loading....</div>}
+              </Container>
+            </Col>
+            <hr></hr>
+          </Row>
+      </Container>
     )
   }
 }

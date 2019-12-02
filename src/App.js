@@ -70,8 +70,8 @@ class App extends React.Component {
 
   decompress(string) {
     string = string.replace(/-/g, `+`)
-                                .replace(/_/g, '/')
-                                .replace(/~/g, `=`)
+                   .replace(/_/g, '/')
+                   .replace(/~/g, `=`)
     return LZString.decompressFromBase64(string)
                    .split('').map(function(t){return parseInt(t)})
   }
