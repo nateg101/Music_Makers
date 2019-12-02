@@ -1,52 +1,88 @@
-# Music_Makers
+# Music Makers
 
-![alt text](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtckVtEtU3hxQwPBpzysiU7Ut3Dqjn-jn7pHz7H6KlLSH0VIsswg&s)
+[![Build Status](https://travis-ci.com/nateg101/Music_Makers.svg?branch=master)](https://travis-ci.org/nateg101/Music_Makers)
 
-A single page application for creating multi-dimensional audio tracks.
+A single page application for creating multi-dimensional audio tracks. Visit the app, Synethesthesia, [here](https://synesthesia-beatz.herokuapp.com/) and make your own music.
 
-## MVP
+<div align=center>
+<img align=center src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtckVtEtU3hxQwPBpzysiU7Ut3Dqjn-jn7pHz7H6KlLSH0VIsswg&s />
+</div>
 
-1. A single page app for a guest user.
+## Installation Instructions
 
-2. A single instrument.
+`git clone`
 
-3. A set tempo.
+`$ npm install`
 
-4. A set scale.
+## How To Run
 
-5. A grid for note assignment
+`$ npm start`
 
-6. A play / pause button.
+## Run Test Suite
 
-## Possible Techs
+`$ npm test`
 
-* MIDI.js - instrumental library.
+## Tech Stack
 
-* Nexus UI - build music components.
-
-* React - render the components on the page.
-
-* Cypress and Jest testing frameworks.
-
+* React - A Javascript library for building UI.
+* MIDI.js - An instrumental library.
+* Nexus UI - A library to build music components.
+* Cypress - for E2E testing.
+* Jest - for unit testing.
 * Heroku hosted
-
 * Travis CI
 
-* Trello
+* Trello - for project management.
+
+## MVP Requirements
+
+1. A single page app for a guest user.
+2. User can play notes for a single instrument.
+3. User can set their own tempo.
+5. A grid for note assignment.
+6. A play / pause button that when clicked loops the tune through.
 
 
 ## User Stories
 
-``` 1. As a musician, I want to visit a page and see a sequencer to lay down my track.```
+``` 
+1. As a musician,
+so that I can lay down a simple track, 
+I want to visit a page and see a sequencer.
+```
 
-``` 2. As a musician, I would like each section of the sequencer to be mapped to a single note.```
+``` 
+2. As a musician, 
+so that I can intuitively use the sequencer,
+I require each row to be mapped to a single note.
+```
 
-``` 3. As a musician, I would like the default instrument to be a glockenspiel, so I can make a simple melodies first.```
+```
+3. As a musician, 
+so I can make a simple melodies first,
+I would like the default instrument to be a glockenspiel.
+```
 
-``` 4. As a musician, I would the sequencer to be set to a single tempo and scale, so I can concentrate on making simple melodies first.```
+``` 
+4. As a musician,
+so I can concentrate on making simple melodies first,
+I would the sequencer to be set to a 120bpm tempo with a range of three octaves.
+```
 
-``` 5. As a musician, I want to see low range notes appear at the bottom of the grid.```
+``` 
+5. As a musician,
+so that I can use the the sequencer intuitively,
+I want to see low range notes appear at the bottom of the grid.
+```
 
-``` 6. As a musician, so I can see which notes I've selected, I would like the relevant grid field to change colour.```
+``` 
+6. As a musician, 
+so I can see which notes I've selected, 
+I would like the relevant grid field to change colour.
+```
 
-``` 7. As a musician, I would like a play button, so I can play back the music I've made.```
+``` 
+7. As a musician,
+so I can play back the rad tune I've made, 
+I would like a play button to loop through my song.
+```
