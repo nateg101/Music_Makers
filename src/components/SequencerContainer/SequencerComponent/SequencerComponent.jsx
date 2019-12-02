@@ -1,6 +1,6 @@
 import React from 'react'
 import { Sequencer } from 'react-nexusui'
-import { Container, Row, Card } from 'react-bootstrap'
+import { Container, Row, Card, Col } from 'react-bootstrap'
 import './SequencerComponent.css'
 
 export default class SequencerComponent extends React.Component {
@@ -26,49 +26,63 @@ export default class SequencerComponent extends React.Component {
     this.setState({ width: this.myInput.current.offsetWidth });
   }
 
-  playNote(on, note) {
-    if(on.state || on[0] === 1) {
-      this.props.parent.midiSounds.playChordNow(3,[note], 1);
+  playNote(triggers, note) {
+    let key = [
+      this.props.scale[0].value + (this.props.octave * 12),
+      this.props.scale[1].value + (this.props.octave * 12),
+      this.props.scale[2].value + (this.props.octave * 12),
+      this.props.scale[3].value + (this.props.octave * 12),
+      this.props.scale[4].value + (this.props.octave * 12),
+      this.props.scale[5].value + (this.props.octave * 12),
+      this.props.scale[6].value + (this.props.octave * 12),
+    ]
+    let notes = []
+    triggers.forEach((note, i)=>{
+      if (note) {
+        notes.push(key[i])
+      }
+    })
+    console.log(notes)
+    if (notes.length > 0){
+      this.props.parent.midiSounds.playChordNow(3,[notes], 1);
     }
   }
 
+  renderNoteNames = () => {
+    let noteNames = []
+    for(let i = 0; i < 7; i++){
+      noteNames.push(
+        <Card key={i + 15 * this.props.octave} className='note-card justify-content-center border-0'>
+          {"" + this.props.scale[i].letter + this.props.octave}
+        </Card>
+      )
+    }
+    return noteNames
+  }
+
   render() {
-    let colors = [
-      '#ffff00',
-      '#ee82ee',
-      '#ffa500',
-      '#008000',
-      '#0000ff',
-      '#4b0082',
-      '#ff0000'
-    ]
-    let self = this
-    const someOctave = this.props.octave
+    console.log(this.props.scale[0])
     return (
-      <div >
-        <Container className='sequencer-container' id="notes" ref={this.myInput}>
-            {this.props.scale.map(function(note, i) {
-                  return (
-                    <Row key={i + 10 * someOctave}>
-                      <Card key={i + 11 * someOctave} className='note-card justify-content-center border-0'>
-                        {note.letter + someOctave}
-                      </Card>
-                      <Sequencer
-                        key={i + 12 * someOctave}
-                        rows={1}
-                        columns={16}
-                        size={[self.state.width*0.9412,self.state.width*0.07]}
-                        color={colors[i]}
-                        note={(note.value + (someOctave * 12))}
-                        onReady={(sequencer)=>{self.props.storedSequencers.push(sequencer)}}
-                        onChange={self.playNote}
-                        onStep={self.playNote}/>
-                    </Row>
-                  )
-                }
-              )}
-        </Container>
-      </div>
+      <Container>
+        <Row key={this.props.octave + 10}>
+          <Col sm={1} className='no-gutters'>
+              {this.renderNoteNames()}
+          </Col>
+          <Col sm={11} className='no-gutters'>
+            <Container className='sequencer-container' id="notes" ref={this.myInput}>
+              <Sequencer
+                key={this.props.octave + 12}
+                rows={7}
+                columns={16}
+                size={[this.state.width*0.9412, this.state.width*0.27]}
+                onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
+                onChange={function() {}}
+                onStep={this.playNote}/>
+            </Container>
+          </Col>
+          <hr></hr>
+        </Row>
+    </Container>
     )
   }
 }
