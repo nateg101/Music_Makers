@@ -24,8 +24,8 @@ class App extends React.Component {
     this.midiStorage.MIDIPlugin = window.MIDI
     console.log(this.midiStorage.MIDIPlugin)
     this.midiStorage.MIDIPlugin.loadPlugin({
-  		soundfontUrl: "./soundfont/",
-  		instruments: [ "acoustic_grand_piano" ],
+      soundfontUrl: "./soundfont/",
+      instruments: [ "acoustic_grand_piano" ],
     callback: function() {
       self.midiStorage.MIDIPlugin.programChange(0, 0);
       self.setState({loading: false});
@@ -40,7 +40,7 @@ class App extends React.Component {
     })
   }
 
-  toggle = () => () => {
+  toggle = () => {
     this.setState({ instrument1: !this.state.instrument1 });
   }
 
@@ -57,7 +57,7 @@ class App extends React.Component {
           midiStorage={this.midiStorage}
           storedSequencers={this.storedSequencers}
           octaves={this.state.octaves}
-          onClick={this.toggle()}
+          onClick={this.toggle}
           expand={this.state.instrument1}/>
           }
           <OptionsBar
