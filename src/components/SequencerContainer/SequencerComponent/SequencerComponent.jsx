@@ -25,7 +25,10 @@ export default class SequencerComponent extends React.Component {
   updateWindowDimensions = () => {
     this.setState({ width: this.myInput.current.offsetWidth });
     if (this.sequencer){
-      setTimeout(this.sequencer.colorInterface(), 0)
+      let self = this
+      setTimeout(function() {
+        self.sequencer.colorInterface()
+      }, 0)
     }
   }
 
@@ -69,9 +72,9 @@ export default class SequencerComponent extends React.Component {
     this.sequencer = sequencer
     if (this.props.matrix){
       sequencer.matrix.set.all(this.props.matrix)
-      console.log(sequencer)
-      setTimeout(sequencer.colorInterface(), 5)
-      console.log(sequencer.cells.length)
+      setTimeout(function() {
+        sequencer.colorInterface()
+      }, 0)
     }
   }
 
