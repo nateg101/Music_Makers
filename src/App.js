@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavbarMain from './components/navbar/navbar.jsx';
-import OptionsBar from './components/options/optionsBar.jsx';
+import NavbarMain from './components/navbar/navbar';
+import OptionsBar from './components/OptionsBar/OptionsBar';
 import SequencerContainer from './components/SequencerContainer/SequencerContainer';
 import MIDISounds from 'midi-sounds-react'
 
