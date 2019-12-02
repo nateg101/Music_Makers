@@ -38,7 +38,6 @@ class SaveButton extends Component {
      state = state.replaceAll('false', '0')
      state = state.replaceAll('true', '1')
      state = state.replaceAll(',','')
-     console.log(state)
      var compressState = LZString.compressToBase64(state)
                                     .replace(/\+/g, `-`) // Convert '+' to '-'
                                     .replace(/\//g, `_`) // Convert '/' to '_'

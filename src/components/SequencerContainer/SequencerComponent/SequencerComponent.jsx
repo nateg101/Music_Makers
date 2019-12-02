@@ -63,11 +63,14 @@ export default class SequencerComponent extends React.Component {
   }
 
   handleOnReady = (sequencer) => {
-    this.props.storedSequencers.push(sequencer)
+    if (!this.props.storedSequencers.includes(sequencer)) {
+      this.props.storedSequencers.push(sequencer)
+    }
     this.sequencer = sequencer
     if (this.props.matrix){
       sequencer.matrix.set.all(this.props.matrix)
-      sequencer.colorInterface()
+      console.log(sequencer)
+      setTimeout(sequencer.colorInterface(), 5)
       console.log(sequencer.cells.length)
     }
   }

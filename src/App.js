@@ -19,6 +19,13 @@ class App extends React.Component {
     this.setOctaves = this.setOctaves.bind(this)
   }
 
+  componentDidUpdate() {
+    this.storedSequencers = []
+    this.storedSequencers.forEach((sequencer) => {
+      sequencer.colorInterface()
+    })
+  }
+
   componentDidMount() {
     let self = this
     this.midiStorage.MIDIPlugin = window.MIDI
