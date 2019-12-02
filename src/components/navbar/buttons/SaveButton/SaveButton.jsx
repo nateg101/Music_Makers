@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import { Button, Modal } from 'react-bootstrap'
+import Modal, {closeStyle} from 'simple-react-modal'
 import LZString from "lz-string";
 import './SaveButton.css'
 
@@ -7,16 +7,9 @@ import './SaveButton.css'
 class SaveButton extends Component {
   constructor(props) {
     super(props);
-    this.state = { modal: false,name: '',team :'' ,country: ''};
+    this.state = {}
+    };
 
-    this.toggle = this.toggle.bind(this);
-  }
-
-  toggle() {
-    this.setState({
-      modal: !this.state.modal
-    });
-  }
 
 
 
@@ -40,20 +33,6 @@ class SaveButton extends Component {
 
   render() {
     return (
-
-        <div>
-        <Button color="success" onClick={this.toggle}>Save</Button>
-        <Modal isOpen={this.state.modal}>
-          <Modal.Header>Save Your Track</Modal.Header>
-          <Modal.Body>
-          </Modal.Body>
-          <Modal.Footer>
-            <input type="submit" value="Submit" color="primary" className="btn btn-primary" />
-            <Button color="danger" onClick={this.toggle}>Cancel</Button>
-          </Modal.Footer>
-        </Modal>
-        </div>
-
     );
   }
 }
