@@ -38,19 +38,22 @@ class PlayButton extends Component {
         sequencer.stepper.value = -1
       })
     } else {
+      let tempo = this.convertBPM()
       this.props.storedSequencers.forEach((sequencer)=>{
-        let tempo = this.convertBPM()
         sequencer.start(tempo)
+        console.log(sequencer.matrix.pattern)
       })
     }
   }
 
 
+
+
   render() {
     return (
-      <Button 
-        variant="outline-light" 
-        id="playback-button" 
+      <Button
+        variant="outline-light"
+        id="playback-button"
         onClick={this.handleClick}>
         <span className={this.state.isButtonActive ? 'stop-button' : "play-button"}>
           {this.state.buttonText}
