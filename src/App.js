@@ -11,7 +11,6 @@ class App extends React.Component {
     this.state = {
       octaves: 3,
       loading: true,
-      instrument1: true
     }
     this.storedSequencers = []
     this.midiStorage = {}
@@ -38,10 +37,6 @@ class App extends React.Component {
     })
   }
 
-  toggle = () => {
-    this.setState({ instrument1: !this.state.instrument1 });
-  }
-
   render() {
     return (
 
@@ -54,9 +49,7 @@ class App extends React.Component {
           <SequencerContainer
           midiStorage={this.midiStorage}
           storedSequencers={this.storedSequencers}
-          octaves={this.state.octaves}
-          onClick={this.toggle}
-          expand={this.state.instrument1}/>
+          octaves={this.state.octaves}/>
           }
           <OptionsBar
           storedSequencers={this.storedSequencers}

@@ -21,6 +21,7 @@ describe('pianoSequencer', function() {
       cy.get('.piano-sequencer-wrapper').find('.title').should('have.class', 'is-expanded')
       cy.get('.piano-sequencer-wrapper').find('.title').click()
       cy.get('.piano-sequencer-wrapper').find('.title').should('not.have.class', 'is-expanded')
+      cy.get('.drum-sequencer-wrapper').find('.title').should('have.class', 'is-expanded')
     })
   })
 
@@ -30,5 +31,12 @@ describe('pianoSequencer', function() {
     cy.visit('/')
     cy.get('.drum-sequencer-wrapper')
     cy.get('.drum-sequencer-wrapper').get(`#nexus-ui-sequencer-1`)
+  })
+
+  it('collapses correctly', function() {
+    cy.get('.drum-sequencer-wrapper').find('.title').should('have.class', 'is-expanded')
+    cy.get('.drum-sequencer-wrapper').find('.title').click()
+    cy.get('.drum-sequencer-wrapper').find('.title').should('not.have.class', 'is-expanded')
+    cy.get('.piano-sequencer-wrapper').find('.title').should('have.class', 'is-expanded')
   })
 })
