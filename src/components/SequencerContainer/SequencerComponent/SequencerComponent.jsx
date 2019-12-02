@@ -12,6 +12,10 @@ export default class SequencerComponent extends React.Component {
     this.myInput = React.createRef()
     this.playNote = this.playNote.bind(this)
     this.render = this.render.bind(this)
+    this.key = []
+    for(let i = 0; i < this.props.scale.length; i++){
+      this.key.unshift(this.props.scale[i].value + (this.props.octave * 12))
+    }
   }
   componentDidMount() {
     this.updateWindowDimensions()
@@ -26,21 +30,24 @@ export default class SequencerComponent extends React.Component {
     this.setState({ width: this.myInput.current.offsetWidth });
   }
 
-  playNote(triggers, note) {
-    let key = [
-    ]
-    for(let i = 0; i < this.props.scale.length; i++){
-      key.unshift(this.props.scale[i].value + (this.props.octave * 12))
+  handleChange = (change) => {
+    if(change.state) {
+      let triggers = new Array(this.props.scale.length)
+      triggers[triggers.length - change.row - 1] = 1
+      this.playNote(triggers)
     }
+  }
+
+  playNote(triggers) {
     let notes = []
     triggers.forEach((note, i)=>{
       if (note) {
-        notes.push(key[i])
+        notes.push(this.key[i])
       }
     })
     if (notes.length > 0){
       console.log(notes)
-      this.props.midiStorage.MIDIPlugin.chordOn(this.props.instrument, notes, 127, 0);
+      this.props.midiStorage.MIDIPlugin.chordOn(this.props.instrument, notes, 100, 0);
     }
   }
 
@@ -71,7 +78,7 @@ export default class SequencerComponent extends React.Component {
                 columns={16}
                 size={[this.state.width*0.9412, this.state.width*0.27]}
                 onReady={(sequencer)=>{this.props.storedSequencers.push(sequencer)}}
-                onChange={function() {}}
+                onChange={this.handleChange}
                 onStep={this.playNote}/>
             </Container>
           </Col>
