@@ -8,10 +8,10 @@ describe("instrumentSelect", function () {
 
   it("selects another instrument", function () {
       cy.visit('/')
-      cy.get('.option-bar').should('visible')
-      cy.get('.instrument-selector').should('visible')
-      cy.get(".instrument-selector").contains('Piano')
-      cy.get(".instruments").select('Glockenspiel')
-      cy.get(".instrument-selector").contains('Glockenspiel')
+      cy.get('.piano-sequencer-wrapper').should('visible')
+      cy.get('.instrument-select').should('visible')
+      cy.get(".instrument-select").contains('Electric Piano')
+      cy.get(".select-instrument-control").select('Glockenspiel')
+      cy.get(".instrument-select").contains('Glockenspiel')
   })
 })
