@@ -59,7 +59,7 @@ export default class SequencerComponent extends React.Component {
         <Container>
           <Row key={this.props.octave + 10}>
             <Col sm={1} className='no-gutters'>
-              <NoteNames 
+              <NoteNames
                 noteNameClass={this.props.noteNameClass}
                 octave={this.props.octave}
                 scale={this.props.scale}/>
