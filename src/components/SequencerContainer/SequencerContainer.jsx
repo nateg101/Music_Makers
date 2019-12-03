@@ -10,6 +10,18 @@ export default class SequencerContainer extends React.Component {
       instrument0: true,
       instrument1: true
     }
+    this.drumNotes = [
+      {letter: 'crash', value: 57},
+      {letter: 'cowbell', value: 56},
+      {letter: 'ride', value: 59},
+      {letter: 'hi tom', value: 50},
+      {letter: 'mid tom', value: 47},
+      {letter: 'low tom', value: 45},
+      {letter: 'open hh', value: 46},
+      {letter: 'hats', value: 44},
+      {letter: 'snare', value: 38},
+      {letter: 'kick', value: 36},
+    ]
   }
 
   toggle = (index) => {
@@ -48,21 +60,20 @@ export default class SequencerContainer extends React.Component {
       })
     return sequencers
   }
-  
-  render() {
-    let drumNotes = [
-      {letter: 'crash', value: 57},
-      {letter: 'cowbell', value: 56},
-      {letter: 'ride', value: 59},
-      {letter: 'hi tom', value: 50},
-      {letter: 'mid tom', value: 47},
-      {letter: 'low tom', value: 45},
-      {letter: 'open hh', value: 46},
-      {letter: 'hats', value: 44},
-      {letter: 'snare', value: 38},
-      {letter: 'kick', value: 36},
-    ]
 
+  playDrumNote = (triggers, octave, instrument) => {
+    let notes = []
+    triggers.forEach((note, i) => {
+      if (note) {
+        notes.push(this.drumNotes[i].value + (octave * 12))
+      }
+    })
+    if (notes.length > 0){
+      this.props.midiStorage.MIDIPlugin.chordOn(instrument, notes, 100, 0);
+    }
+  }
+
+  render() {
     return (
       <div className='instruments'>
         <div className="piano-sequencer-wrapper card" >
@@ -76,14 +87,14 @@ export default class SequencerContainer extends React.Component {
           <div className={this.state.instrument1 ? 'content is-expanded' : 'content'}>
           <SequencerComponent
             intermittentStorage={{}}
-            playNote={this.props.playNote}
+            playNote={this.playDrumNote}
             key={10 + 1000}
             matrix={this.props.drums}
-            rows={drumNotes.length}
+            rows={this.drumNotes.length}
             midiStorage={this.props.midiStorage}
             instrument={1}
             octave={0}
-            scale={drumNotes}
+            scale={this.drumNotes}
             noteNameClass={'drums'}
             storedSequencers={this.props.storedPercussion}/>
           </div>
