@@ -27,7 +27,7 @@ export default class SequencerContainer extends React.Component {
       if(this.props.piano) {
         matrix = this.props.piano[i]
       }
-      console.log("yaman", this.props.instrument)
+      console.log("yaman", this.props.instrument1)
       sequencers.push(
         <SequencerComponent
           key={i + 100 * octave}
@@ -60,14 +60,15 @@ export default class SequencerContainer extends React.Component {
     return (
       <div className='instruments'>
         <div className="piano-sequencer-wrapper card" >
-          <Card.Header className={this.props.instrument0 ? 'title is-expanded' : 'title'} onClick={()=>{this.props.toggle(0)}}><span className="instrument-name">Instrument 1</span>
+          <Card.Header className={this.props.instrument0 ? 'title is-expanded' : 'title'} onClick={()=>{this.props.toggle(0)}}>
           <Form
           className='instrument-select'>
-            <Form.Group controlId="exampleForm.ControlSelect1">
-              <Form.Control
+            <Form.Group id="instrument-form">
+              <Form.Label className="select-instrument-label">Select Instrument</Form.Label>
+              <Form.Control className='select-instrument-control'
               as="select"
               onChange={this.props.setInstrument}>
-                <option value="" disabled selected>Select instrument...</option>
+                <option value="" disabled selected>Electric Piano</option>
                 <option value="0">Electric Piano</option>
                 <option value="2">Electric Jazz Guitar</option>
                 <option value="3">Synth Pad Halo</option>
