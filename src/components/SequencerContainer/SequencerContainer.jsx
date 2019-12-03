@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import SequencerComponent from './SequencerComponent/SequencerComponent'
-import { Card } from 'react-bootstrap'
+import { Card, Form } from 'react-bootstrap'
 import './SequencerContainer.scss'
 
 export default class SequencerContainer extends React.Component {
@@ -40,7 +40,22 @@ export default class SequencerContainer extends React.Component {
     const { expand, onClick } = this.props;
     return (
       <div className="sequencer-wrapper card" >
-        <Card.Header className={expand ? 'title is-expanded' : 'title'} onClick={onClick}>Instrument 1</Card.Header>
+        <Card.Header className={expand ? 'title is-expanded' : 'title'} onClick={onClick}><span className="instrument-name">Instrument 1</span>
+        <Form
+        className='instrument-select'>
+          <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Control
+            as="select"
+            onChange={this.props.setOctaves}>
+              <option value="" disabled selected>Select instrument...</option>
+              <option>1</option>
+              <option>3</option>
+              <option>5</option>
+              <option>7</option>
+            </Form.Control>
+          </Form.Group>
+        </Form>
+        </Card.Header>
         <div className={expand ? 'content is-expanded' : 'content'}>
         {this.renderSequencers()}
         </div>
