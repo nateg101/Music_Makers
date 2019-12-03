@@ -3,6 +3,7 @@ import { Card, Row, Col } from "react-bootstrap";
 import PlayButton from "./buttons/PlayButton/PlayButton";
 import OctaveSelector from "./inputs/OctaveSelector/OctaveSelector";
 import Tempo from "./inputs/Tempo/Tempo";
+import ScaleSelector from "./ScaleSelector/ScaleSelector"
 import './OptionsBar.css'
 
 class OptionsBar extends Component {
@@ -25,20 +26,23 @@ class OptionsBar extends Component {
       <Card className="option-bar" body>
         <Row>
           <Col sm={1}>
-            <PlayButton 
-              tempo={this.state.tempo} 
+            <PlayButton
+              tempo={this.state.tempo}
               storedPercussion={this.props.storedPercussion}
               storedSequencers={this.props.storedSequencers}/>
           </Col>
           <Col>
-            <Tempo 
-              tempo={this.state.tempo} 
+            <Tempo
+              tempo={this.state.tempo}
               updateTempo={this.updateTempo}/>
           </Col>
           <Col sm={3}>
             <OctaveSelector
             octaves={this.props.octaves}
             setOctaves={this.props.setOctaves}/>
+          </Col>
+          <Col>
+            <ScaleSelector/>  
           </Col>
         </Row>
       </Card>
