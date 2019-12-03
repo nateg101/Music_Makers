@@ -11,26 +11,24 @@ export default class SequencerContainer extends React.Component {
       instrument1: true
     }
     this.drumNotes = [
-      {letter: 'crash', value: 57},
-      {letter: 'cowbell', value: 56},
-      {letter: 'ride', value: 59},
-      {letter: 'hi tom', value: 50},
-      {letter: 'mid tom', value: 47},
-      {letter: 'low tom', value: 45},
-      {letter: 'open hh', value: 46},
-      {letter: 'hats', value: 44},
-      {letter: 'snare', value: 38},
-      {letter: 'kick', value: 36},
-    ]
+     {letter: "kick", value: 36},
+     {letter: "snare", value: 38},
+     {letter: "hats", value: 44},
+     {letter: "open hh", value: 46},
+     {letter: "low tom", value: 45},
+     {letter: "mid tom", value: 47},
+     {letter: "hi tom", value: 50},
+     {letter: "ride", value: 59},
+     {letter: "cowbell", value: 56},
+     {letter: "crash", value: 57}
+   ]
   }
 
   toggle = (index) => {
     this.setState({ ['instrument' + index]: !this.state['instrument' + index] });
   }
 
-  componentDidUpdate(){
-    console.log('zoop')
-  }
+
   renderPianoSequencers = () => {
     let sequencers = []
     let octaveArray = {
@@ -41,6 +39,7 @@ export default class SequencerContainer extends React.Component {
     }
     octaveArray[this.props.octaves].forEach((octave, i) => {
       let matrix
+
       if(this.props.piano) {
         matrix = this.props.piano[i]
       }
@@ -55,7 +54,8 @@ export default class SequencerContainer extends React.Component {
           scale={this.props.scale}
           noteNameClass={'piano'}
           matrix={matrix || null}
-          storedSequencers={this.props.storedSequencers}/>
+          storedSequencers={this.props.storedSequencers}
+          tempStorage={this.props.tempStorage}/>
         )
       })
     return sequencers
@@ -96,7 +96,8 @@ export default class SequencerContainer extends React.Component {
             octave={0}
             scale={this.drumNotes}
             noteNameClass={'drums'}
-            storedSequencers={this.props.storedPercussion}/>
+            storedSequencers={this.props.storedPercussion}
+            tempStorage={this.props.tempStorage}/>
           </div>
         </div>
       </div>

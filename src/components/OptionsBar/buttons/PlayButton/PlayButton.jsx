@@ -54,6 +54,7 @@ class PlayButton extends Component {
     let tempo = this.convertBPM()
     sequencers.forEach((sequencer)=>{
       sequencer.start(tempo)
+      console.log(sequencer.matrix.pattern)
     })
   }
 

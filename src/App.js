@@ -24,6 +24,7 @@ class App extends React.Component {
     this.storedSequencers = []
     this.storedPercussion = []
     this.midiStorage = {}
+    this.tempStorage = new Array(12)
   }
 
   playNote = (triggers, octave, instrument) => {
@@ -70,8 +71,8 @@ class App extends React.Component {
     }
     if (pianoParam) {
       var [piano, octaves] = this.convertPiano(pianoParam)
-    } 
-    return this.setState({ 
+    }
+    return this.setState({
       octaves: octaves || 3,
       piano: piano,
       drums: drums,
@@ -127,7 +128,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <NavbarMain 
+        <NavbarMain
           storedPercussion={this.storedPercussion}
           storedSequencers={this.storedSequencers}/>
         {
@@ -143,7 +144,8 @@ class App extends React.Component {
             octaves={this.state.octaves}
             toggle={this.toggle}
             drums={this.state.drums}
-            piano={this.state.piano}/>
+            piano={this.state.piano}
+            tempStorage={this.tempStorage}/>
         }
         <OptionsBar
           setScale={this.setScale}

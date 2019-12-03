@@ -22,6 +22,12 @@ export default class SequencerComponent extends React.Component {
     window.removeEventListener("resize", this.updateWindowDimensions);
   }
 
+  componentWillUpdate() {
+    if (this.sequencer) {
+      this.props.tempStorage[this.props.octave] = this.sequencer.matrix.pattern
+    }
+  }
+
   updateWindowDimensions = () => {
     this.setState({ width: this.myInput.current.offsetWidth });
     if (this.sequencer){
@@ -50,6 +56,9 @@ export default class SequencerComponent extends React.Component {
         sequencer.colorInterface()
       }, 0)
     }
+    if(this.props.tempStorage[this.props.octave]) {
+      sequencer.matrix.set.all(this.props.tempStorage[this.props.octave])
+    }
     this.sequencer = sequencer
   }
 
@@ -57,7 +66,7 @@ export default class SequencerComponent extends React.Component {
     let noteNames = []
     for(let i = 0; i < this.props.scale.length; i++){
       noteNames.push(
-        <Card 
+        <Card
           key={i + 15 * this.props.octave}
           className={`note-card ${this.props.noteNameClass}-notes justify-content-center border-0`}>
           {"" + this.props.scale[i].letter + (this.props.octave || "") }
