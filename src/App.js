@@ -30,9 +30,9 @@ class App extends React.Component {
     this.midiStorage.MIDIPlugin = window.MIDI
     this.midiStorage.MIDIPlugin.loadPlugin({
       soundfontUrl: "./soundfont/",
-      instruments: [ "acoustic_grand_piano", "gunshot" ],
+      instruments: [ "electric_piano_1", "electric_guitar_jazz", "pad_7_halo", "tinkle_bell", "glockenspiel", "gunshot" ],
     callback: function() {
-      self.midiStorage.MIDIPlugin.programChange(0, 0);
+      self.midiStorage.MIDIPlugin.programChange(0, 121);
       self.midiStorage.MIDIPlugin.programChange(1, 127);
       self.setState({ loading: false });
     }
@@ -49,8 +49,8 @@ class App extends React.Component {
     }
     if (pianoParam) {
       var [piano, octaves] = this.convertPiano(pianoParam)
-    } 
-    return this.setState({ 
+    }
+    return this.setState({
       octaves: octaves || 3,
       piano: piano,
       drums: drums,
@@ -108,7 +108,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <NavbarMain 
+        <NavbarMain
           storedPercussion={this.storedPercussion}
           storedSequencers={this.storedSequencers}/>
         {
