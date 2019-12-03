@@ -27,6 +27,7 @@ class OptionsBar extends Component {
           <Col sm={1}>
             <PlayButton 
               tempo={this.state.tempo} 
+              storedPercussion={this.props.storedPercussion}
               storedSequencers={this.props.storedSequencers}/>
           </Col>
           <Col>

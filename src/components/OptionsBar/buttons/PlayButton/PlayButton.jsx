@@ -30,27 +30,38 @@ class PlayButton extends Component {
   }
 
   toggleSequencer = () => {
+    let sequencers = [
+      this.props.storedSequencers,
+      this.props.storedPercussion
+    ].flat()
     if(this.state.isButtonActive){
-      this.props.storedSequencers.forEach((sequencer)=>{
-        sequencer.stop()
-        sequencer.stepper.value = 0
-        sequencer.render()
-        sequencer.stepper.value = -1
-      })
+      this.sequencersOff(sequencers)
     } else {
-      this.props.storedSequencers.forEach((sequencer)=>{
-        let tempo = this.convertBPM()
-        sequencer.start(tempo)
-      })
+      this.sequencersOn(sequencers)
     }
   }
 
+  sequencersOff(sequencers){
+    sequencers.forEach((sequencer)=>{
+      sequencer.stop()
+      sequencer.stepper.value = 0
+      sequencer.render()
+      sequencer.stepper.value = -1
+    })
+  }
+
+  sequencersOn(sequencers) {
+    let tempo = this.convertBPM()
+    sequencers.forEach((sequencer)=>{
+      sequencer.start(tempo)
+    })
+  }
 
   render() {
     return (
-      <Button 
-        variant="outline-light" 
-        id="playback-button" 
+      <Button
+        variant="outline-light"
+        id="playback-button"
         onClick={this.handleClick}>
         <span className={this.state.isButtonActive ? 'stop-button' : "play-button"}>
           {this.state.buttonText}

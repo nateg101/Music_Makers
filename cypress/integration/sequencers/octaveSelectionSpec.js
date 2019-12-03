@@ -15,12 +15,12 @@ describe('octaveSelector', function() {
   })
 
   it('Page defaults to 3 sequencers', function() {
-    cy.get('.sequencer-container').should('have.length', 3)
+    cy.get('.piano-sequencer-wrapper').find('.sequencer-component').should('have.length', 3)
   })
 
   it('changes the number of sequencers', function() {
     cy.get('select').select('1')
 
-    cy.get('.sequencer-container').should('have.length', 1)
+    cy.get('.piano-sequencer-wrapper').find('.sequencer-component').should('have.length', 1)
   })
 })
