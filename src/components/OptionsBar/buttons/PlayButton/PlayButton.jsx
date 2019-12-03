@@ -35,13 +35,13 @@ class PlayButton extends Component {
       this.props.storedPercussion
     ].flat()
     if(this.state.isButtonActive){
-      this.sequencersOn(sequencers)
-    } else {
       this.sequencersOff(sequencers)
+    } else {
+      this.sequencersOn(sequencers)
     }
   }
 
-  sequencersOn(sequencers){
+  sequencersOff(sequencers){
     sequencers.forEach((sequencer)=>{
       sequencer.stop()
       sequencer.stepper.value = 0
@@ -50,12 +50,10 @@ class PlayButton extends Component {
     })
   }
 
-  sequencersOff(sequencers) {
+  sequencersOn(sequencers) {
     let tempo = this.convertBPM()
     sequencers.forEach((sequencer)=>{
-      setTimeout(function() {
-        sequencer.start(tempo)
-      }, 1)
+      sequencer.start(tempo)
     })
   }
 

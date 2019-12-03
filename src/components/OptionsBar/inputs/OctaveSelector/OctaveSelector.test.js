@@ -8,8 +8,4 @@ describe('app component testing', function() {
 
     expect(wrapper.find('form').length).toEqual(1)
   });
-
-  it('updates the octaves', function() {
-    
-  })
 });

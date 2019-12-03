@@ -70,6 +70,7 @@ class SaveButton extends Component {
           closeOnOuterClick={true}
           show={this.state.show}>
           <a style={closeStyle} onClick={this.close}>X</a>
+          <div>Save your song!</div>
           {this.state.show ? <div className='url'>{self.constructUrl()}</div> : null }
         </Modal>
       </div>
