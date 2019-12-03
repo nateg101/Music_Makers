@@ -43,6 +43,17 @@ export default class SequencerContainer extends React.Component {
     return sequencers
   }
 
+  renderInstrumentName = (instrument) => {
+    let instrumenthash = {
+      0: 'Electric Piano',
+      2: 'Electric Jazz Guitar',
+      3: 'Synth Pad Halo',
+      4: 'Tubular Bells',
+      5: 'Glockenspiel'
+      }
+    return instrumenthash[instrument]
+  }
+
   render() {
     let drumNotes = [
       {letter: 'crash', value: 57},
@@ -68,12 +79,12 @@ export default class SequencerContainer extends React.Component {
               <Form.Control className='select-instrument-control'
               as="select"
               onChange={this.props.setInstrument}>
-                <option value="" disabled selected>Electric Piano</option>
-                <option value="0">Electric Piano</option>
-                <option value="2">Electric Jazz Guitar</option>
-                <option value="3">Synth Pad Halo</option>
-                <option value="4">Tubular Bells</option>
-                <option value="5">Glockenspiel</option>
+                <option value="" disabled selected>{this.renderInstrumentName(this.props.instrument)}</option>
+                <option value="0">{this.renderInstrumentName(0)}</option>
+                <option value="2">{this.renderInstrumentName(2)}</option>
+                <option value="3">{this.renderInstrumentName(3)}</option>
+                <option value="4">{this.renderInstrumentName(4)}</option>
+                <option value="5">{this.renderInstrumentName(5)}</option>
 
               </Form.Control>
             </Form.Group>
