@@ -3,10 +3,6 @@ import { Form } from "react-bootstrap";
 import './OctaveSelector.css'
 
 class OctaveSelector extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <div className='octaves-container'>
