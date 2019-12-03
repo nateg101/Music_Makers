@@ -52,9 +52,11 @@ class App extends React.Component {
     let percussionParam = params.get(1)
     let instrumentParam = params.get(2)
     if (percussionParam) {
+      console.log(percussionParam)
       var drums = this.convertDrums(percussionParam)
     }
     if (pianoParam) {
+      console.log(pianoParam)
       var [piano, octaves] = this.convertPiano(pianoParam)
     }
 
