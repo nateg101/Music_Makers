@@ -1,5 +1,5 @@
-{
-' maj': {
+const KEYS = {
+'maj': {
     'C': [
       {letter: 'B', value: 23},
       {letter: 'A', value: 21},
@@ -220,3 +220,5 @@
     ]
   }
 }
+
+export default KEYS;
