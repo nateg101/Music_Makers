@@ -1,0 +1,18 @@
+.option-bar {
+  width: 85%;
+  height: 90px;
+  vertical-align: baseline;
+  background-color: #343A40;
+  border-radius: 15px;
+  opacity: 0.75;
+  position: absolute;
+  margin-top: 40px;
+}
+
+.options {
+  align: auto;
+  position: relative;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

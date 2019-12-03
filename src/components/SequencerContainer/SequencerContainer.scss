@@ -1,0 +1,36 @@
+.sequencer-wrapper {
+  margin: 0 auto;
+  overflow-y: scroll;
+  width: 90%;
+}
+
+.title {
+  cursor: pointer;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  transform: translate3d(0, 0, 0);
+
+  &::after {
+    content: "+";
+    transition: transform .5s ease-in-out;
+    position: absolute;
+    right: 30px;
+  }
+  &.is-expanded {
+    &::after {
+      content: "-";
+      transform: rotate(-360deg);
+    }
+  }
+}
+
+.content {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .5s;
+
+  &.is-expanded {
+    overflow-y: scroll;
+    max-height: 70vh;
+  }
+}

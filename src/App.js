@@ -1,23 +1,66 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavbarMain from './components/navbar/navbar.jsx';
-import OptionsBar from './components/options/optionsBar.jsx';
+import NavbarMain from './components/navbar/navbar';
+import OptionsBar from './components/OptionsBar/OptionsBar';
 import SequencerContainer from './components/SequencerContainer/SequencerContainer';
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      octaves: 3,
+      loading: true,
+      instrument1: true
     }
     this.storedSequencers = []
+    this.midiStorage = {}
+    this.setOctaves = this.setOctaves.bind(this)
   }
+
+  componentDidMount() {
+    let self = this
+    this.midiStorage.MIDIPlugin = window.MIDI
+    this.midiStorage.MIDIPlugin.loadPlugin({
+      soundfontUrl: "./soundfont/",
+      instruments: [ "acoustic_grand_piano" ],
+    callback: function() {
+      self.midiStorage.MIDIPlugin.programChange(0, 0);
+      self.setState({loading: false});
+      }
+    })
+  }
+
+  setOctaves(event) {
+    this.setState({
+      octaves: event.target.value
+    })
+  }
+
+  toggle = () => {
+    this.setState({ instrument1: !this.state.instrument1 });
+  }
+
   render() {
     return (
+
       <div className="App">
         <NavbarMain/>
-        <SequencerContainer storedSequencers={this.storedSequencers}/>
-        <OptionsBar storedSequencers={this.storedSequencers}/>
+        {
+          this.state.loading ?
+          <div>Loading....</div>
+          :
+          <SequencerContainer
+          midiStorage={this.midiStorage}
+          storedSequencers={this.storedSequencers}
+          octaves={this.state.octaves}
+          onClick={this.toggle}
+          expand={this.state.instrument1}/>
+          }
+          <OptionsBar
+          storedSequencers={this.storedSequencers}
+          octaves={this.state.octaves}
+          setOctaves={this.setOctaves}/>
       </div>
     );
   }

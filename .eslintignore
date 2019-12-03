@@ -2,3 +2,8 @@
 
 /src/serviceWorker.js
 /src/index.js
+/public/build
+/public/inc
+/public/js
+/public/soundfont
+/src/__mocks__
