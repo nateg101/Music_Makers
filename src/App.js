@@ -53,7 +53,9 @@ class App extends React.Component {
     return this.setState({ 
       octaves: octaves || 3,
       piano: piano,
-      drums: drums
+      drums: drums,
+      instrument0: true,
+      instrument1: true
     })
   }
 
@@ -98,6 +100,11 @@ class App extends React.Component {
     })
   }
 
+  toggle = (index) => {
+    this.setState({ ['instrument' + index]: !this.state['instrument' + index] });
+  }
+
+
   render() {
     return (
       <div className="App">
@@ -113,8 +120,9 @@ class App extends React.Component {
             storedSequencers={this.storedSequencers}
             storedPercussion={this.storedPercussion}
             octaves={this.state.octaves}
-            onClick={this.toggle}
-            expand={this.state.instrument1}
+            toggle={this.toggle}
+            instrument0={this.state.instrument0}
+            instrument1={this.state.instrument1}
             drums={this.state.drums}
             piano={this.state.piano}/>
         }

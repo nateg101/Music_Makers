@@ -103,7 +103,7 @@ export default class SequencerComponent extends React.Component {
                   columns={16}
                   size={[this.state.width*0.9412, this.state.width*0.27]}
                   onReady={this.handleOnReady}
-                  onChange={function() {}}
+                  onChange={this.handleChange}
                   onStep={this.playNote}/> : <div>Loading....</div>}
               </Container>
             </Col>

@@ -4,17 +4,6 @@ import { Card } from 'react-bootstrap'
 import './SequencerContainer.scss'
 
 export default class SequencerContainer extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      instrument0: true,
-      instrument1: true
-    }
-  }
-
-  toggle = (index) => {
-    this.setState({ ['instrument' + index]: !this.state['instrument' + index] });
-  }
 
   renderPianoSequencers = () => {
     let scale = [
@@ -66,17 +55,18 @@ export default class SequencerContainer extends React.Component {
       {letter: 'snare', value: 38},
       {letter: 'kick', value: 36},
     ]
+
     return (
       <div className='instruments'>
         <div className="piano-sequencer-wrapper card" >
-          <Card.Header className={this.state.instrument0 ? 'title is-expanded' : 'title'} onClick={()=>{this.toggle(0)}}>Instrument 1</Card.Header>
-          <div className={this.state.instrument0 ? 'content is-expanded' : 'content'}>
+          <Card.Header className={this.props.instrument0 ? 'title is-expanded' : 'title'} onClick={()=>{this.props.toggle(0)}}>Instrument 1</Card.Header>
+          <div className={this.props.instrument0 ? 'content is-expanded' : 'content'}>
           {this.renderPianoSequencers()}
           </div>
         </div>
         <div className="drum-sequencer-wrapper card" >
-          <Card.Header className={this.state.instrument1 ? 'title is-expanded' : 'title'} onClick={()=>{this.toggle(1)}}>Percussion</Card.Header>
-          <div className={this.state.instrument1 ? 'content is-expanded' : 'content'}>
+          <Card.Header className={this.props.instrument1 ? 'title is-expanded' : 'title'} onClick={()=>{this.props.toggle(1)}}>Percussion</Card.Header>
+          <div className={this.props.instrument1 ? 'content is-expanded' : 'content'}>
           <SequencerComponent
             key={10 + 1000}
             matrix={this.props.drums}
