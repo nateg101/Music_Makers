@@ -1,6 +1,6 @@
 import React from 'react'
 import SequencerComponent from './SequencerComponent/SequencerComponent'
-import { Card } from 'react-bootstrap'
+import { Card, Form } from 'react-bootstrap'
 import './SequencerContainer.scss'
 
 export default class SequencerContainer extends React.Component {
@@ -43,12 +43,13 @@ export default class SequencerContainer extends React.Component {
       if(this.props.piano) {
         matrix = this.props.piano[i]
       }
+      console.log("yaman", this.props.instrument1)
       sequencers.push(
         <SequencerComponent
           playNote={this.props.playNote}
           key={i + 100 * octave}
           midiStorage={this.props.midiStorage}
-          instrument={0}
+          instrument={this.props.instrument}
           octave={octave}
           intermittentStorage={{}}
           scale={this.props.scale}
@@ -59,6 +60,17 @@ export default class SequencerContainer extends React.Component {
         )
       })
     return sequencers
+  }
+
+  renderInstrumentName = (instrument) => {
+    let instrumenthash = {
+      0: 'Electric Piano',
+      2: 'Electric Jazz Guitar',
+      3: 'Synth Pad Halo',
+      4: 'Tubular Bells',
+      5: 'Glockenspiel'
+      }
+    return instrumenthash[instrument]
   }
 
   playDrumNote = (triggers, octave, instrument) => {
@@ -77,7 +89,25 @@ export default class SequencerContainer extends React.Component {
     return (
       <div className='instruments'>
         <div className="piano-sequencer-wrapper card" >
-          <Card.Header className={this.state.instrument0 ? 'title is-expanded' : 'title'} onClick={()=>{this.toggle(0)}}>Instrument 1</Card.Header>
+          <Card.Header className={this.state.instrument0 ? 'title is-expanded' : 'title'} onClick={()=>{this.toggle(0)}}>
+            <Form
+            className='instrument-select'>
+              <Form.Group id="instrument-form">
+                <Form.Label className="select-instrument-label">Select Instrument</Form.Label>
+                <Form.Control className='select-instrument-control'
+                as="select"
+                onChange={this.props.setInstrument}>
+                  <option value="" disabled selected>{this.renderInstrumentName(this.props.instrument)}</option>
+                  <option value="0">{this.renderInstrumentName(0)}</option>
+                  <option value="2">{this.renderInstrumentName(2)}</option>
+                  <option value="3">{this.renderInstrumentName(3)}</option>
+                  <option value="4">{this.renderInstrumentName(4)}</option>
+                  <option value="5">{this.renderInstrumentName(5)}</option>
+
+                </Form.Control>
+              </Form.Group>
+            </Form>
+          </Card.Header>
           <div className={this.state.instrument0 ? 'content is-expanded' : 'content'}>
           {this.renderPianoSequencers()}
           </div>

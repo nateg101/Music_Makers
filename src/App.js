@@ -19,7 +19,8 @@ class App extends React.Component {
         {letter: 'G', value: 19},
         {letter: 'A', value: 21},
         {letter: 'B', value: 23},
-      ]
+      ],
+      instrument: 0
     }
     this.storedSequencers = []
     this.storedPercussion = []
@@ -52,10 +53,15 @@ class App extends React.Component {
     this.midiStorage.MIDIPlugin = window.MIDI
     this.midiStorage.MIDIPlugin.loadPlugin({
       soundfontUrl: "./soundfont/",
-      instruments: [ "acoustic_grand_piano", "gunshot" ],
+      instruments: [ "electric_piano_1", "electric_guitar_jazz", "pad_7_halo", "tubular_bells", "glockenspiel", "gunshot" ],
     callback: function() {
-      self.midiStorage.MIDIPlugin.programChange(0, 0);
-      self.midiStorage.MIDIPlugin.programChange(1, 127);
+      self.midiStorage.MIDIPlugin.programChange(0, 4);
+      self.midiStorage.MIDIPlugin.programChange(1, 127)
+      self.midiStorage.MIDIPlugin.programChange(2, 26)
+      self.midiStorage.MIDIPlugin.programChange(3, 94)
+      self.midiStorage.MIDIPlugin.programChange(4, 112)
+      self.midiStorage.MIDIPlugin.programChange(5, 121)
+
       self.setState({ loading: false });
     }
     })
@@ -66,16 +72,24 @@ class App extends React.Component {
     let params = new URLSearchParams(window.location.search)
     let pianoParam = params.get(0)
     let percussionParam = params.get(1)
+    let instrumentParam = params.get(2)
     if (percussionParam) {
+      console.log(percussionParam)
       var drums = this.convertDrums(percussionParam)
     }
     if (pianoParam) {
+      console.log(pianoParam)
       var [piano, octaves] = this.convertPiano(pianoParam)
+    }
+
+    if (instrumentParam) {
+      var instrument = this.decompress(instrumentParam)
     }
     return this.setState({
       octaves: octaves || 3,
       piano: piano,
       drums: drums,
+      instrument: instrument || 0
     })
   }
 
@@ -83,22 +97,22 @@ class App extends React.Component {
     let drumString = this.decompress(compString)
     let drums = []
     for(let i = 0; i < 10; i++) {
-      let startIndex = i * 16
-      drums.push(drumString.slice(startIndex, startIndex + 16))
+      let startIndex = i * 32
+      drums.push(drumString.slice(startIndex, startIndex + 32))
     }
     return drums
   }
 
   convertPiano(compString) {
     let pianoString = this.decompress(compString)
-    let matrixSize = 112
+    let matrixSize = 224
     let octaves = pianoString.length / matrixSize
     let piano = []
     for (let i = 0; i < octaves; i++) {
       let octave = []
       for (let j = 0; j < 7; j++) {
-        let startIndex = (j * 16) + (i * matrixSize)
-        octave.push(pianoString.slice(startIndex, startIndex + 16))
+        let startIndex = (j * 32) + (i * matrixSize)
+        octave.push(pianoString.slice(startIndex, startIndex + 32))
       }
       piano.push(octave)
     }
@@ -124,12 +138,19 @@ class App extends React.Component {
       scale: scale
     })
   }
+  
+  setInstrument = (event) => {
+    this.setState({
+      instrument: parseInt(event.target.value)
+    })
+  }
 
   render() {
     return (
       <div className="App">
         <NavbarMain
           storedPercussion={this.storedPercussion}
+          storedInstrument={this.state.instrument}
           storedSequencers={this.storedSequencers}/>
         {
           this.state.loading ?
@@ -143,6 +164,8 @@ class App extends React.Component {
             storedPercussion={this.storedPercussion}
             octaves={this.state.octaves}
             toggle={this.toggle}
+            setInstrument={this.setInstrument}
+            instrument={this.state.instrument}
             drums={this.state.drums}
             piano={this.state.piano}
             tempStorage={this.tempStorage}/>

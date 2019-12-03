@@ -12,7 +12,7 @@ class PlayButton extends Component {
   }
 
   convertBPM = () => {
-    return 60000/this.props.tempo
+    return 30000/this.props.tempo
   }
 
   handleClick = () => {
