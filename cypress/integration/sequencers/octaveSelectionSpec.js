@@ -8,10 +8,10 @@ describe('octaveSelector', function() {
   })
 
   it('has 4 options', function() {
-    cy.get('select').select('1')
-    cy.get('select').select('3')
-    cy.get('select').select('5')
-    cy.get('select').select('7')
+    cy.get('.octaves').find('select').select('1')
+    cy.get('.octaves').find('select').select('3')
+    cy.get('.octaves').find('select').select('5')
+    cy.get('.octaves').find('select').select('7')
   })
 
   it('Page defaults to 3 sequencers', function() {
@@ -19,7 +19,7 @@ describe('octaveSelector', function() {
   })
 
   it('changes the number of sequencers', function() {
-    cy.get('select').select('1')
+    cy.get('.octaves').find('select').select('1')
 
     cy.get('.piano-sequencer-wrapper').find('.sequencer-component').should('have.length', 1)
   })
