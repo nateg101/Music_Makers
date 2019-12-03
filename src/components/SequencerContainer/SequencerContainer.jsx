@@ -16,6 +16,9 @@ export default class SequencerContainer extends React.Component {
     this.setState({ ['instrument' + index]: !this.state['instrument' + index] });
   }
 
+  componentDidUpdate(){
+    console.log('zoop')
+  }
   renderPianoSequencers = () => {
     let sequencers = []
     let octaveArray = {
@@ -36,6 +39,7 @@ export default class SequencerContainer extends React.Component {
           midiStorage={this.props.midiStorage}
           instrument={0}
           octave={octave}
+          intermittentStorage={{}}
           scale={this.props.scale}
           noteNameClass={'piano'}
           matrix={matrix || null}
@@ -71,6 +75,7 @@ export default class SequencerContainer extends React.Component {
           <Card.Header className={this.state.instrument1 ? 'title is-expanded' : 'title'} onClick={()=>{this.toggle(1)}}>Percussion</Card.Header>
           <div className={this.state.instrument1 ? 'content is-expanded' : 'content'}>
           <SequencerComponent
+            intermittentStorage={{}}
             playNote={this.props.playNote}
             key={10 + 1000}
             matrix={this.props.drums}

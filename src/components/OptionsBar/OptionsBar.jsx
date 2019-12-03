@@ -3,7 +3,7 @@ import { Card, Row, Col } from "react-bootstrap";
 import PlayButton from "./buttons/PlayButton/PlayButton";
 import OctaveSelector from "./inputs/OctaveSelector/OctaveSelector";
 import Tempo from "./inputs/Tempo/Tempo";
-import ScaleSelector from "./ScaleSelector/ScaleSelector"
+import ScaleSelector from "./inputs/ScaleSelector/ScaleSelector"
 import './OptionsBar.css'
 
 class OptionsBar extends Component {

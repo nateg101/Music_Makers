@@ -11,27 +11,26 @@ class App extends React.Component {
     super(props)
     this.state = {
       loading: true,
+      scale: [
+        {letter: 'C', value: 12},
+        {letter: 'D', value: 14},
+        {letter: 'E', value: 16},
+        {letter: 'F', value: 17},
+        {letter: 'G', value: 19},
+        {letter: 'A', value: 21},
+        {letter: 'B', value: 23},
+      ]
     }
     this.storedSequencers = []
     this.storedPercussion = []
     this.midiStorage = {}
-    this.scale = [
-      {letter: 'C', value: 12},
-      {letter: 'D', value: 14},
-      {letter: 'E', value: 16},
-      {letter: 'F', value: 17},
-      {letter: 'G', value: 19},
-      {letter: 'A', value: 21},
-      {letter: 'B', value: 23},
-    ]
   }
 
   playNote = (triggers, octave, instrument) => {
     let notes = []
-    let self = this
     triggers.forEach((note, i) => {
       if (note) {
-        notes.push(self.scale[i].value + (octave * 12))
+        notes.push(this.state.scale[i].value + (octave * 12))
       }
     })
     if (notes.length > 0){
@@ -76,14 +75,11 @@ class App extends React.Component {
       octaves: octaves || 3,
       piano: piano,
       drums: drums,
-      instrument0: true,
-      instrument1: true
     })
   }
 
   convertDrums = (compString) => {
     let drumString = this.decompress(compString)
-    console.log(drumString.length)
     let drums = []
     for(let i = 0; i < 10; i++) {
       let startIndex = i * 16
@@ -123,7 +119,9 @@ class App extends React.Component {
   }
 
   setScale = (scale) => {
-    this.scale = scale
+    this.setState({
+      scale: scale
+    })
   }
 
   render() {
@@ -138,14 +136,12 @@ class App extends React.Component {
           :
           <SequencerContainer
             playNote={this.playNote}
-            scale={this.scale}
+            scale={this.state.scale}
             midiStorage={this.midiStorage}
             storedSequencers={this.storedSequencers}
             storedPercussion={this.storedPercussion}
             octaves={this.state.octaves}
             toggle={this.toggle}
-            instrument0={this.state.instrument0}
-            instrument1={this.state.instrument1}
             drums={this.state.drums}
             piano={this.state.piano}/>
         }

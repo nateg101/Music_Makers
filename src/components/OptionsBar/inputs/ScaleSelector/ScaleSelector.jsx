@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import $ from 'jquery';
 import { Form, ButtonToolbar, ToggleButton, ToggleButtonGroup, InputGroup, Radio } from "react-bootstrap";
 import './ScaleSelector.css'
-import KEYS from '../../../music_scales/scales.js'
+import KEYS from "../../../../music_scales/scales"
 
 class ScaleSelector extends Component {
   constructor(props) {

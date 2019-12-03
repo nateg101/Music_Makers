@@ -1,7 +1,6 @@
 import React from 'react'
 import { Sequencer } from 'react-nexusui'
 import { Container, Row, Card, Col } from 'react-bootstrap'
-import NoteNames from './NoteNames/NoteNames'
 import './SequencerComponent.css'
 
 export default class SequencerComponent extends React.Component {
@@ -54,15 +53,26 @@ export default class SequencerComponent extends React.Component {
     this.sequencer = sequencer
   }
 
+  renderNoteNames = () => {
+    let noteNames = []
+    for(let i = 0; i < this.props.scale.length; i++){
+      noteNames.push(
+        <Card 
+          key={i + 15 * this.props.octave}
+          className={`note-card ${this.props.noteNameClass}-notes justify-content-center border-0`}>
+          {"" + this.props.scale[i].letter + (this.props.octave || "") }
+        </Card>
+      )
+    }
+    return noteNames
+  }
+
   render() {
       return (
         <Container>
           <Row key={this.props.octave + 10}>
             <Col sm={1} className='no-gutters'>
-              <NoteNames
-                noteNameClass={this.props.noteNameClass}
-                octave={this.props.octave}
-                scale={this.props.scale}/>
+              {this.renderNoteNames()}
             </Col>
             <Col sm={11} className='no-gutters'>
               <Container className='sequencer-component' id="notes" ref={this.myInput}>
