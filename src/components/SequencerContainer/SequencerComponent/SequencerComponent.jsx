@@ -65,7 +65,7 @@ export default class SequencerComponent extends React.Component {
   renderNoteNames = () => {
     let noteNames = []
     for(let i = 0; i < this.props.scale.length; i++){
-      noteNames.push(
+      noteNames.unshift(
         <Card
           key={i + 15 * this.props.octave}
           className={`note-card ${this.props.noteNameClass}-notes justify-content-center border-0`}>
