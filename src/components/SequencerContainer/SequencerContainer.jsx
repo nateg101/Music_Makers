@@ -27,11 +27,12 @@ export default class SequencerContainer extends React.Component {
       if(this.props.piano) {
         matrix = this.props.piano[i]
       }
+      console.log("yaman", this.props.instrument)
       sequencers.push(
         <SequencerComponent
           key={i + 100 * octave}
           midiStorage={this.props.midiStorage}
-          instrument={0}
+          instrument={this.props.instrument}
           octave={octave}
           scale={scale}
           noteNameClass={'piano'}
@@ -65,12 +66,14 @@ export default class SequencerContainer extends React.Component {
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Control
               as="select"
-              onChange={this.props.setOctaves}>
+              onChange={this.props.setInstrument}>
                 <option value="" disabled selected>Select instrument...</option>
-                <option>1</option>
-                <option>3</option>
-                <option>5</option>
-                <option>7</option>
+                <option value="0">Electric Piano</option>
+                <option value="2">Electric Jazz Guitar</option>
+                <option value="3">Synth Pad Halo</option>
+                <option value="4">Tubular Bells</option>
+                <option value="5">Glockenspiel</option>
+
               </Form.Control>
             </Form.Group>
           </Form>

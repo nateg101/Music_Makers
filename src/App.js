@@ -11,6 +11,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       loading: true,
+      instrument: 0
     }
     this.storedSequencers = []
     this.storedPercussion = []
@@ -105,6 +106,12 @@ class App extends React.Component {
     })
   }
 
+  setInstrument = (event) => {
+    this.setState({
+      instrument: event.target.value
+    })
+  }
+
   toggle = (index) => {
     this.setState({ ['instrument' + index]: !this.state['instrument' + index] });
   }
@@ -126,6 +133,8 @@ class App extends React.Component {
             storedPercussion={this.storedPercussion}
             octaves={this.state.octaves}
             toggle={this.toggle}
+            setInstrument={this.setInstrument}
+            instrument={this.state.instrument}
             instrument0={this.state.instrument0}
             instrument1={this.state.instrument1}
             drums={this.state.drums}
