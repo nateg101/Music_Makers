@@ -50,16 +50,22 @@ class App extends React.Component {
     let params = new URLSearchParams(window.location.search)
     let pianoParam = params.get(0)
     let percussionParam = params.get(1)
+    let instrumentParam = params.get(2)
     if (percussionParam) {
       var drums = this.convertDrums(percussionParam)
     }
     if (pianoParam) {
       var [piano, octaves] = this.convertPiano(pianoParam)
     }
+
+    if (instrumentParam) {
+      var instrument = this.decompress(instrumentParam)
+    }
     return this.setState({
       octaves: octaves || 3,
       piano: piano,
       drums: drums,
+      instrument: instrument || 0,
       instrument0: true,
       instrument1: true
     })
@@ -122,6 +128,7 @@ class App extends React.Component {
       <div className="App">
         <NavbarMain
           storedPercussion={this.storedPercussion}
+          storedInstrument={this.state.instrument}
           storedSequencers={this.storedSequencers}/>
         {
           this.state.loading ?

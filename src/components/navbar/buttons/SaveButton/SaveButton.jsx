@@ -14,7 +14,7 @@ class SaveButton extends Component {
     }
     this.show.bind(this)
     this.close.bind(this)
-    
+
     String.prototype.replaceAll = function(search, replacement) {
       var target = this;
       return target.replace(new RegExp(search, 'g'), replacement);
@@ -39,9 +39,9 @@ class SaveButton extends Component {
   }
 
   stringify(array) {
-    return array.flat()  
+    return array.flat()
                 .join('')
-                .replaceAll('false', '0')  
+                .replaceAll('false', '0')
                 .replaceAll('true', '1')
                 .replaceAll(',','')
   }
@@ -54,9 +54,11 @@ class SaveButton extends Component {
   }
 
   constructUrl = () => {
+    let instrumentState = this.compress(this.props.storedInstrument.toString())
+    console.log("stored it is", this.props.storedInstrument, instrumentState)
     let pianoState = this.seqState(this.props.storedSequencers)
     let drumState = this.seqState(this.props.storedPercussion)
-    return window.location.href + `?0=${pianoState}&1=${drumState}`
+    return window.location.href + `?0=${pianoState}&1=${drumState}&2=${instrumentState}`
   }
 
   render() {
