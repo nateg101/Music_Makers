@@ -1,0 +1,222 @@
+{
+' maj': {
+    'C': [
+      {letter: 'B', value: 23},
+      {letter: 'A', value: 21},
+      {letter: 'G', value: 19},
+      {letter: 'F', value: 17},
+      {letter: 'E', value: 16},
+      {letter: 'D', value: 14},
+      {letter: 'C', value: 12}
+    ],
+    'C#': [
+      {letter: 'C', value: 23},
+      {letter: 'A', value: 21},
+      {letter: 'G#', value: 20},
+      {letter: 'F#', value: 18},
+      {letter: 'F', value: 17},
+      {letter: 'D#', value: 15},
+      {letter: 'C#', value: 13}
+    ],
+    'D': [
+      {letter: 'C#', value: 25},
+      {letter: 'B', value: 23},
+      {letter: 'A', value: 21},
+      {letter: 'G', value: 19},
+      {letter: 'F#', value: 18},
+      {letter: 'E', value: 16},
+      {letter: 'D', value: 14}
+    ],
+    'D#': [
+      {letter: 'D', value: 26},
+      {letter: 'C', value: 24},
+      {letter: 'A#', value: 22},
+      {letter: 'G#', value: 20},
+      {letter: 'G', value: 19},
+      {letter: 'F', value: 17},
+      {letter: 'D#', value: 15}
+    ],
+    'E': [
+      {letter: 'D#', value: 27},
+      {letter: 'C#', value: 25},
+      {letter: 'B', value: 23},
+      {letter: 'A', value: 21},
+      {letter: 'G#', value: 20},
+      {letter: 'F#', value: 18},
+      {letter: 'E', value: 16}
+    ],
+    'F': [
+      {letter: 'E', value: 28},
+      {letter: 'D', value: 26},
+      {letter: 'C', value: 24},
+      {letter: 'A#', value: 22},
+      {letter: 'A', value: 21},
+      {letter: 'G', value: 19},
+      {letter: 'F', value: 17}
+    ],
+    'F#': [
+      {letter: 'F', value: 29},
+      {letter: 'D#', value: 27},
+      {letter: 'C#', value: 25},
+      {letter: 'B', value: 23},
+      {letter: 'A#', value: 22},
+      {letter: 'G#', value: 20},
+      {letter: 'F#', value: 18}
+    ],
+    'G': [
+      {letter: 'F#', value: 30},
+      {letter: 'E', value: 28},
+      {letter: 'D', value: 26},
+      {letter: 'C', value: 24},
+      {letter: 'B', value: 23},
+      {letter: 'A', value: 21},
+      {letter: 'G', value: 19}
+    ],
+    'G#': [
+      {letter: 'G', value: 31},
+      {letter: 'F', value: 29},
+      {letter: 'D#', value: 27},
+      {letter: 'C#', value: 25},
+      {letter: 'C', value: 24},
+      {letter: 'A#', value: 22},
+      {letter: 'G#', value: 20}
+    ],
+    'A': [
+      {letter: 'G#', value: 32},
+      {letter: 'F#', value: 30},
+      {letter: 'E', value: 28},
+      {letter: 'D', value: 26},
+      {letter: 'C#', value: 25},
+      {letter: 'B', value: 23},
+      {letter: 'A', value: 21}
+    ],
+    'A#': [
+      {letter: 'A', value: 32},
+      {letter: 'G', value: 31},
+      {letter: 'F', value: 29},
+      {letter: 'D#', value: 27},
+      {letter: 'D', value: 26},
+      {letter: 'C', value: 24},
+      {letter: 'A#', value: 22}
+    ],
+    'B': [
+      {letter: 'A#', value: 34},
+      {letter: 'G#', value: 32},
+      {letter: 'F#', value: 30},
+      {letter: 'E', value: 28},
+      {letter: 'D#', value: 27},
+      {letter: 'C#', value: 25},
+      {letter: 'B', value: 23}
+    ]
+  },
+  'min':{
+    'C': [
+      {letter: 'Bb', value: 22},
+      {letter: 'Ab', value: 20},
+      {letter: 'G', value: 19},
+      {letter: 'F', value: 17},
+      {letter: 'Eb', value: 15},
+      {letter: 'D', value: 14},
+      {letter: 'C', value: 12}
+    ],
+    'C#': [
+      {letter: 'B', value: 23},
+      {letter: 'A', value: 21},
+      {letter: 'G#', value: 20},
+      {letter: 'F#', value: 18},
+      {letter: 'E', value: 16},
+      {letter: 'D#', value: 15},
+      {letter: 'C#', value: 13}
+    ],
+    'D': [
+      {letter: 'C', value: 24},
+      {letter: 'Bb', value: 22},
+      {letter: 'A', value: 21},
+      {letter: 'G', value: 19},
+      {letter: 'F', value: 17},
+      {letter: 'E', value: 16},
+      {letter: 'D', value: 14}
+    ],
+    'D#': [
+      {letter: 'Db', value: 25},
+      {letter: 'B', value: 23},
+      {letter: 'A#', value: 22},
+      {letter: 'G#', value: 20},
+      {letter: 'Gb', value: 18},
+      {letter: 'F', value: 17},
+      {letter: 'D#', value: 15}
+    ],
+    'E': [
+      {letter: 'D', value: 25},
+      {letter: 'C', value: 24},
+      {letter: 'B', value: 23},
+      {letter: 'A', value: 21},
+      {letter: 'G', value: 19},
+      {letter: 'F#', value: 18},
+      {letter: 'E', value: 16}
+    ],
+    'F': [
+      {letter: 'Eb', value: 27},
+      {letter: 'Db', value: 25},
+      {letter: 'C', value: 24},
+      {letter: 'A#', value: 22},
+      {letter: 'Ab', value: 20},
+      {letter: 'G', value: 19},
+      {letter: 'F', value: 17}
+    ],
+    'F#': [
+      {letter: 'E', value: 28},
+      {letter: 'D', value: 26},
+      {letter: 'C#', value: 25},
+      {letter: 'B', value: 23},
+      {letter: 'A', value: 21},
+      {letter: 'G#', value: 20},
+      {letter: 'F#', value: 18}
+    ],
+    'G': [
+      {letter: 'F', value: 29},
+      {letter: 'Eb', value: 27},
+      {letter: 'D', value: 26},
+      {letter: 'C', value: 24},
+      {letter: 'Bb', value: 22},
+      {letter: 'A', value: 21},
+      {letter: 'G', value: 19}
+    ],
+    'G#': [
+      {letter: 'Gb', value: 30},
+      {letter: 'E', value: 28},
+      {letter: 'D#', value: 27},
+      {letter: 'C#', value: 25},
+      {letter: 'B', value: 23},
+      {letter: 'A#', value: 22},
+      {letter: 'G#', value: 20}
+    ],
+    'A': [
+      {letter: 'G', value: 31},
+      {letter: 'F', value: 29},
+      {letter: 'E', value: 28},
+      {letter: 'D', value: 26},
+      {letter: 'C', value: 24},
+      {letter: 'B', value: 23},
+      {letter: 'A', value: 21}
+    ],
+    'A#': [
+      {letter: 'Ab', value: 32},
+      {letter: 'Gb', value: 30},
+      {letter: 'F', value: 29},
+      {letter: 'D#', value: 27},
+      {letter: 'Db', value: 25},
+      {letter: 'C', value: 24},
+      {letter: 'A#', value: 22}
+    ],
+    'B': [
+      {letter: 'A', value: 33},
+      {letter: 'G', value: 31},
+      {letter: 'F#', value: 30},
+      {letter: 'E', value: 28},
+      {letter: 'D', value: 26},
+      {letter: 'C#', value: 25},
+      {letter: 'B', value: 23}
+    ]
+  }
+}
