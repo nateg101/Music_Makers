@@ -19,8 +19,8 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    this.storedSequencers = []
-    this.storedPercussion = []
+    // this.storedSequencers = []  //commemted out to resolve sequencer restart issue
+    // this.storedPercussion = []  //commemted out to resolve sequencer restart issue
     this.storedSequencers.forEach((sequencer) => {
       sequencer.colorInterface()
     })
@@ -108,7 +108,7 @@ class App extends React.Component {
 
   setInstrument = (event) => {
     this.setState({
-      instrument: event.target.value
+      instrument: parseInt(event.target.value)
     })
   }
 

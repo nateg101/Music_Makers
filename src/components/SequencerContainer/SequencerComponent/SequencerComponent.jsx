@@ -57,6 +57,7 @@ export default class SequencerComponent extends React.Component {
       }
     })
     if (notes.length > 0){
+      console.log('inside play note', this.props.instrument)
       this.props.midiStorage.MIDIPlugin.chordOn(this.props.instrument, notes, 100, 0);
     }
   }
