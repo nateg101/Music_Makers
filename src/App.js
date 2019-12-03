@@ -78,22 +78,22 @@ class App extends React.Component {
     console.log(drumString.length)
     let drums = []
     for(let i = 0; i < 10; i++) {
-      let startIndex = i * 16
-      drums.push(drumString.slice(startIndex, startIndex + 16))
+      let startIndex = i * 32
+      drums.push(drumString.slice(startIndex, startIndex + 32))
     }
     return drums
   }
 
   convertPiano(compString) {
     let pianoString = this.decompress(compString)
-    let matrixSize = 112
+    let matrixSize = 224
     let octaves = pianoString.length / matrixSize
     let piano = []
     for (let i = 0; i < octaves; i++) {
       let octave = []
       for (let j = 0; j < 7; j++) {
-        let startIndex = (j * 16) + (i * matrixSize)
-        octave.push(pianoString.slice(startIndex, startIndex + 16))
+        let startIndex = (j * 32) + (i * matrixSize)
+        octave.push(pianoString.slice(startIndex, startIndex + 32))
       }
       piano.push(octave)
     }
