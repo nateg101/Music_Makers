@@ -1,6 +1,7 @@
 import React from 'react'
 import { Sequencer } from 'react-nexusui'
 import { Container, Row, Card, Col } from 'react-bootstrap'
+import NoteNames from './NoteNames/NoteNames'
 import './SequencerComponent.css'
 
 export default class SequencerComponent extends React.Component {
@@ -10,16 +11,7 @@ export default class SequencerComponent extends React.Component {
       width: 0
     }
     this.myInput = React.createRef()
-    this.playNote = this.playNote.bind(this)
     this.render = this.render.bind(this)
-    this.setKey()
-  }
-
-  setKey() {
-    this.key = []
-    for(let i = 0; i < this.props.scale.length; i++){
-      this.key.unshift(this.props.scale[i].value + (this.props.octave * 12))
-    }
   }
 
   componentDidMount() {
@@ -45,34 +37,8 @@ export default class SequencerComponent extends React.Component {
     if(change.state) {
       let triggers = new Array(this.props.scale.length)
       triggers[triggers.length - change.row - 1] = 1
-      this.playNote(triggers)
+      this.props.playNote(triggers, this.props.octave, this.props.instrument)
     }
-  }
-
-  playNote(triggers) {
-    let notes = []
-    triggers.forEach((note, i)=>{
-      if (note) {
-        notes.push(this.key[i])
-      }
-    })
-    if (notes.length > 0){
-      this.props.midiStorage.MIDIPlugin.chordOn(this.props.instrument, notes, 100, 0);
-    }
-  }
-
-  renderNoteNames = () => {
-    let noteNames = []
-    for(let i = 0; i < this.props.scale.length; i++){
-      noteNames.push(
-        <Card 
-          key={i + 15 * this.props.octave}
-          className={`note-card ${this.props.noteNameClass}-notes justify-content-center border-0`}>
-          {"" + this.props.scale[i].letter + (this.props.octave || "") }
-        </Card>
-      )
-    }
-    return noteNames
   }
 
   handleOnReady = (sequencer) => {
@@ -93,7 +59,10 @@ export default class SequencerComponent extends React.Component {
         <Container>
           <Row key={this.props.octave + 10}>
             <Col sm={1} className='no-gutters'>
-              {this.renderNoteNames()}
+              <NoteNames 
+                noteNameClass={this.props.noteNameClass}
+                octave={this.props.octave}
+                scale={this.props.scale}/>
             </Col>
             <Col sm={11} className='no-gutters'>
               <Container className='sequencer-component' id="notes" ref={this.myInput}>
@@ -104,7 +73,7 @@ export default class SequencerComponent extends React.Component {
                   size={[this.state.width*0.9412, this.state.width*0.27]}
                   onReady={this.handleOnReady}
                   onChange={this.handleChange}
-                  onStep={this.playNote}/> : <div>Loading....</div>}
+                  onStep={(state)=>{this.props.playNote(state, this.props.octave, this.props.instrument)}}/> : <div>Loading....</div>}
               </Container>
             </Col>
             <hr></hr>

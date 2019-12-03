@@ -15,6 +15,28 @@ class App extends React.Component {
     this.storedSequencers = []
     this.storedPercussion = []
     this.midiStorage = {}
+    this.scale = [
+      {letter: 'C', value: 12},
+      {letter: 'D', value: 14},
+      {letter: 'E', value: 16},
+      {letter: 'F', value: 17},
+      {letter: 'G', value: 19},
+      {letter: 'A', value: 21},
+      {letter: 'B', value: 23},
+    ]
+  }
+
+  playNote = (triggers, octave, instrument) => {
+    let notes = []
+    let self = this
+    triggers.forEach((note, i) => {
+      if (note) {
+        notes.push(self.scale[i].value + (octave * 12))
+      }
+    })
+    if (notes.length > 0){
+      this.midiStorage.MIDIPlugin.chordOn(instrument, notes, 100, 0);
+    }
   }
 
   componentDidUpdate() {
@@ -100,10 +122,9 @@ class App extends React.Component {
     })
   }
 
-  toggle = (index) => {
-    this.setState({ ['instrument' + index]: !this.state['instrument' + index] });
+  setScale = (scale) => {
+    this.scale = scale
   }
-
 
   render() {
     return (
@@ -116,6 +137,8 @@ class App extends React.Component {
           <div>Loading....</div>
           :
           <SequencerContainer
+            playNote={this.playNote}
+            scale={this.scale}
             midiStorage={this.midiStorage}
             storedSequencers={this.storedSequencers}
             storedPercussion={this.storedPercussion}
@@ -127,6 +150,7 @@ class App extends React.Component {
             piano={this.state.piano}/>
         }
         <OptionsBar
+          setScale={this.setScale}
           storedPercussion={this.storedPercussion}
           storedSequencers={this.storedSequencers}
           octaves={this.state.octaves}

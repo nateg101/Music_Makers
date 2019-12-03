@@ -13,8 +13,8 @@ class ScaleSelector extends Component {
 
   renderKeyOptions() {
     let keyArray = []
-    Object.keys(KEYS.maj).forEach((key) => {
-      keyArray.push(<option>{key}</option>)
+    Object.keys(KEYS.maj).forEach((key, i) => {
+      keyArray.push(<option key={i * 5000}>{key}</option>)
     })
     return keyArray
   }
@@ -22,12 +22,12 @@ class ScaleSelector extends Component {
   handleChange = () => {
     let keyMode = $("input[name=Key]:checked").val()
     let scale = this.keyForm.current.value
-    console.log(KEYS[keyMode][scale])
+    this.props.setScale(KEYS[keyMode][scale])
   }
 
   render() {
     return (
-      <div>
+      <div className='scale-selector'>
         <div className='key-selector'>
           <Form
           onChange={this.handleChange}

@@ -42,7 +42,8 @@ class OptionsBar extends Component {
             setOctaves={this.props.setOctaves}/>
           </Col>
           <Col>
-            <ScaleSelector/>  
+            <ScaleSelector
+            setScale={this.props.setScale}/>  
           </Col>
         </Row>
       </Card>

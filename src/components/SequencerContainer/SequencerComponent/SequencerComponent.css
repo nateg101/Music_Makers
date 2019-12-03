@@ -14,17 +14,6 @@ hr {
   border-width: 1px;
   width: 100%;
 }
-.piano-notes {
-  font-size: 1.5em;
-  height: 14.29%;
-  text-align: right;
-}
-
-.drums-notes {
-  font-size: 1.2em;
-  height: 10%;
-  text-align: right;
-}
 
 .no-gutters {
 }
