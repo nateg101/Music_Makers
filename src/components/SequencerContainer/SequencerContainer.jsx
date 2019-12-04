@@ -17,14 +17,14 @@ export default class SequencerContainer extends React.Component {
           tempStorage={this.props.tempStorage.lead}
           midiStorage={this.props.midiStorage}
           setInstrument={this.props.setInstrument}/>
-        {/* <Lead
+        <Lead
           keySeed={6}
           storedLead={this.props.storedLead2}
           octaves={this.props.octaves}
           scale={this.props.scale}
-          tempStorage={this.props.tempStorage}
+          tempStorage={this.props.tempStorage.lead2}
           midiStorage={this.props.midiStorage}
-          setInstrument={this.props.setInstrument}/> */}
+          setInstrument={this.props.setInstrument}/>
         <Drums
           storedPercussion={this.props.storedPercussion}
           tempStorage={this.props.tempStorage.drums}
