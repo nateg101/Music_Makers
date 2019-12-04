@@ -1,4 +1,4 @@
-describe('pianoSequencer', function() {
+describe('SequencerContainer', function() {
   describe('render piano sequencer', function() {
     it('renders the piano sequencer', function() {
       cy.visit('/')
@@ -29,6 +29,7 @@ describe('pianoSequencer', function() {
 
   it('renders the drum sequencer components', function() {
     cy.visit('/')
+    cty.wait(4000)
     cy.get('.drum-sequencer-wrapper')
     cy.get('.drum-sequencer-wrapper').get(`#nexus-ui-sequencer-1`)
   })
