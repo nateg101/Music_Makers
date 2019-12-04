@@ -57,7 +57,7 @@ export default class Lead extends React.Component {
           tempStorage={this.props.tempStorage}/>
         )
       })
-    return sequencersgit add 
+    return sequencers
   }
 
   render() {
