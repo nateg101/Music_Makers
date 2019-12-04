@@ -1,6 +1,7 @@
 import React from 'react'
-import SequencerComponent from './SequencerComponent/SequencerComponent'
+// import SequencerComponent from './SequencerComponent/SequencerComponent'
 import { Card, Form } from 'react-bootstrap'
+import Drums from './Instruments/Drums'
 import './SequencerContainer.scss'
 
 export default class SequencerContainer extends React.Component {
@@ -29,38 +30,38 @@ export default class SequencerContainer extends React.Component {
   }
 
 
-  renderPianoSequencers = () => {
-    let sequencers = []
-    let octaveArray = {
-      1: [4],
-      3: [5,4,3],
-      5: [6,5,4,3,2],
-      7: [7,6,5,4,3,2,1]
-    }
-    octaveArray[this.props.octaves].forEach((octave, i) => {
-      let matrix
-
-      if(this.props.piano) {
-        matrix = this.props.piano[i]
-      }
-      console.log("yaman", this.props.instrument1)
-      sequencers.push(
-        <SequencerComponent
-          playNote={this.props.playNote}
-          key={i + 100 * octave}
-          midiStorage={this.props.midiStorage}
-          instrument={this.props.instrument}
-          octave={octave}
-          intermittentStorage={{}}
-          scale={this.props.scale}
-          noteNameClass={'piano'}
-          matrix={matrix || null}
-          storedSequencers={this.props.storedSequencers}
-          tempStorage={this.props.tempStorage}/>
-        )
-      })
-    return sequencers
-  }
+  // renderPianoSequencers = () => {
+  //   let sequencers = []
+  //   let octaveArray = {
+  //     1: [4],
+  //     3: [5,4,3],
+  //     5: [6,5,4,3,2],
+  //     7: [7,6,5,4,3,2,1]
+  //   }
+  //   octaveArray[this.props.octaves].forEach((octave, i) => {
+  //     let matrix
+  //
+  //     if(this.props.piano) {
+  //       matrix = this.props.piano[i]
+  //     }
+  //     console.log("yaman", this.props.instrument1)
+  //     sequencers.push(
+  //       <SequencerComponent
+  //         playNote={this.props.playNote}
+  //         key={i + 100 * octave}
+  //         midiStorage={this.props.midiStorage}
+  //         instrument={this.props.instrument}
+  //         octave={octave}
+  //         intermittentStorage={{}}
+  //         scale={this.props.scale}
+  //         noteNameClass={'piano'}
+  //         matrix={matrix || null}
+  //         storedSequencers={this.props.storedSequencers}
+  //         tempStorage={this.props.tempStorage}/>
+  //       )
+  //     })
+  //   return sequencers
+  // }
 
   renderInstrumentName = (instrument) => {
     let instrumenthash = {
@@ -88,48 +89,36 @@ export default class SequencerContainer extends React.Component {
   render() {
     return (
       <div className='instruments'>
-        <div className="piano-sequencer-wrapper card" >
-          <Card.Header className={this.state.instrument0 ? 'title is-expanded' : 'title'} onClick={()=>{this.toggle(0)}}>
-            <Form
-            className='instrument-select'>
-              <Form.Group id="instrument-form">
-                <Form.Label className="select-instrument-label">Select Instrument</Form.Label>
-                <Form.Control className='select-instrument-control'
-                as="select"
-                onChange={this.props.setInstrument}>
-                  <option value="" disabled selected>{this.renderInstrumentName(this.props.instrument)}</option>
-                  <option value="0">{this.renderInstrumentName(0)}</option>
-                  <option value="2">{this.renderInstrumentName(2)}</option>
-                  <option value="3">{this.renderInstrumentName(3)}</option>
-                  <option value="4">{this.renderInstrumentName(4)}</option>
-                  <option value="5">{this.renderInstrumentName(5)}</option>
-
-                </Form.Control>
-              </Form.Group>
-            </Form>
-          </Card.Header>
-          <div className={this.state.instrument0 ? 'content is-expanded' : 'content'}>
-          {this.renderPianoSequencers()}
-          </div>
-        </div>
-        <div className="drum-sequencer-wrapper card" >
-          <Card.Header className={this.state.instrument1 ? 'title is-expanded' : 'title'} onClick={()=>{this.toggle(1)}}>Percussion</Card.Header>
-          <div className={this.state.instrument1 ? 'content is-expanded' : 'content'}>
-          <SequencerComponent
-            intermittentStorage={{}}
-            playNote={this.playDrumNote}
-            key={10 + 1000}
-            matrix={this.props.drums}
-            rows={this.drumNotes.length}
-            midiStorage={this.props.midiStorage}
-            instrument={1}
-            octave={0}
-            scale={this.drumNotes}
-            noteNameClass={'drums'}
-            storedSequencers={this.props.storedPercussion}
-            tempStorage={this.props.tempStorage}/>
-          </div>
-        </div>
+        {// <div className="piano-sequencer-wrapper card" >
+        //   <Card.Header className={this.state.instrument0 ? 'title is-expanded' : 'title'} onClick={()=>{this.toggle(0)}}>
+        //     <Form
+        //     className='instrument-select'>
+        //       <Form.Group id="instrument-form">
+        //         <Form.Label className="select-instrument-label">Select Instrument</Form.Label>
+        //         <Form.Control className='select-instrument-control'
+        //         as="select"
+        //         onChange={this.props.setInstrument}>
+        //           <option value="" disabled selected>{this.renderInstrumentName(this.props.instrument)}</option>
+        //           <option value="0">{this.renderInstrumentName(0)}</option>
+        //           <option value="2">{this.renderInstrumentName(2)}</option>
+        //           <option value="3">{this.renderInstrumentName(3)}</option>
+        //           <option value="4">{this.renderInstrumentName(4)}</option>
+        //           <option value="5">{this.renderInstrumentName(5)}</option>
+        //
+        //         </Form.Control>
+        //       </Form.Group>
+        //     </Form>
+        //   </Card.Header>
+        //   <div className={this.state.instrument0 ? 'content is-expanded' : 'content'}>
+        //   {this.renderPianoSequencers()}
+        //   </div>
+        // </div>
+        }
+        <Drums
+          storedPercussion={this.props.storedPercussion}
+          matrix={this.props.drums}
+          tempStorage={this.props.tempStorage}
+          midiStorage={this.props.midiStorage}/>
       </div>
     )
   }
