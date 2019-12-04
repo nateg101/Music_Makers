@@ -1,6 +1,6 @@
 import React from 'react'
 import SequencerComponent from './SequencerComponent/SequencerComponent'
-import { Card, Form } from 'react-bootstrap'
+import { Card, Form, Accordion, Button } from 'react-bootstrap'
 import './SequencerContainer.scss'
 
 export default class SequencerContainer extends React.Component {
@@ -88,48 +88,67 @@ export default class SequencerContainer extends React.Component {
   render() {
     return (
       <div className='instruments'>
-        <div className="piano-sequencer-wrapper card" >
-          <Card.Header className={this.state.instrument0 ? 'title is-expanded' : 'title'} onClick={()=>{this.toggle(0)}}>
-            <Form
-            className='instrument-select'>
-              <Form.Group id="instrument-form">
-                <Form.Label className="select-instrument-label">Select Instrument</Form.Label>
-                <Form.Control className='select-instrument-control'
-                as="select"
-                onChange={this.props.setInstrument}>
-                  <option value="" disabled selected>{this.renderInstrumentName(this.props.instrument)}</option>
-                  <option value="0">{this.renderInstrumentName(0)}</option>
-                  <option value="2">{this.renderInstrumentName(2)}</option>
-                  <option value="3">{this.renderInstrumentName(3)}</option>
-                  <option value="4">{this.renderInstrumentName(4)}</option>
-                  <option value="5">{this.renderInstrumentName(5)}</option>
-
-                </Form.Control>
-              </Form.Group>
-            </Form>
-          </Card.Header>
-          <div className={this.state.instrument0 ? 'content is-expanded' : 'content'}>
-          {this.renderPianoSequencers()}
-          </div>
-        </div>
-        <div className="drum-sequencer-wrapper card" >
-          <Card.Header className={this.state.instrument1 ? 'title is-expanded' : 'title'} onClick={()=>{this.toggle(1)}}>Percussion</Card.Header>
-          <div className={this.state.instrument1 ? 'content is-expanded' : 'content'}>
-          <SequencerComponent
-            intermittentStorage={{}}
-            playNote={this.playDrumNote}
-            key={10 + 1000}
-            matrix={this.props.drums}
-            rows={this.drumNotes.length}
-            midiStorage={this.props.midiStorage}
-            instrument={1}
-            octave={0}
-            scale={this.drumNotes}
-            noteNameClass={'drums'}
-            storedSequencers={this.props.storedPercussion}
-            tempStorage={this.props.tempStorage}/>
-          </div>
-        </div>
+        <Accordion defaultActiveKey="0">
+          <Card>
+            <Card.Header>
+              <Form
+                className='instrument-select'>
+                  <Form.Group id="instrument-form">
+                    <Form.Label className="select-instrument-label">Select Instrument</Form.Label>
+                    <Form.Control className='select-instrument-control'
+                    as="select"
+                    onChange={this.props.setInstrument}>
+                      <option value="" disabled selected>{this.renderInstrumentName(this.props.instrument)}</option>
+                      <option value="0">{this.renderInstrumentName(0)}</option>
+                      <option value="2">{this.renderInstrumentName(2)}</option>
+                      <option value="3">{this.renderInstrumentName(3)}</option>
+                      <option value="4">{this.renderInstrumentName(4)}</option>
+                      <option value="5">{this.renderInstrumentName(5)}</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Form>
+              <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                Click me!
+              </Accordion.Toggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey="0">
+              <Card.Body>
+                {this.renderPianoSequencers()}
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        </Accordion>
+        <Accordion defaultActiveKey="0">
+          <Card>
+            <Card.Header>
+              Percussion
+              <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                Click me!
+              </Accordion.Toggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey="0">
+              <Card.Body>
+                <div className="drum-sequencer-wrapper card" >
+                  <div className={this.state.instrument1 ? 'content is-expanded' : 'content'}>
+                    <SequencerComponent
+                      intermittentStorage={{}}
+                      playNote={this.playDrumNote}
+                      key={10 + 1000}
+                      matrix={this.props.drums}
+                      rows={this.drumNotes.length}
+                      midiStorage={this.props.midiStorage}
+                      instrument={1}
+                      octave={0}
+                      scale={this.drumNotes}
+                      noteNameClass={'drums'}
+                      storedSequencers={this.props.storedPercussion}
+                      tempStorage={this.props.tempStorage}/>
+                  </div>
+                </div>
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        </Accordion>
       </div>
     )
   }
