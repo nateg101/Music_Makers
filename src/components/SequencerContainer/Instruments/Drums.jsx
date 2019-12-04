@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 import SequencerComponent from './SequencerComponent/SequencerComponent'
-import './instrument.css'
+import './Instrument.css'
 
 
 export default class Drums extends React.Component {
