@@ -20,7 +20,7 @@ export default class Lead extends React.Component {
   }
 
   playNote = (triggers, octave) => {
-    if (this.ready) {
+    if (!this.ready || !this.props.midiStorage.MIDIPlugin) {
       return
     }
     let notes = []
@@ -41,7 +41,7 @@ export default class Lead extends React.Component {
       3: 'Electric Bass',
       4: 'Tubular Bells',
       5: 'Glockenspiel'
-      }
+    }
     return instrumenthash[instrument]
   }
 
@@ -80,6 +80,9 @@ export default class Lead extends React.Component {
 
   appendToSequencers = (sequencer) => {
     this.props.storedLead.sequencers.push(sequencer)
+    if (this.props.storedLead.sequencers.length === this.props.octaves) {
+      this.ready = true
+    }
   }
 
   render() {

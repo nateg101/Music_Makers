@@ -15,7 +15,6 @@ export default class SequencerComponent extends React.Component {
   }
 
   componentDidMount() {
-    console.log('sequencers mounting')
     this.updateWindowDimensions()
     window.addEventListener("resize", this.updateWindowDimensions);
   }
@@ -25,7 +24,6 @@ export default class SequencerComponent extends React.Component {
   }
 
   componentWillUpdate() {
-    console.log('sequencers updating')
     if (this.sequencer) {
       this.saveToTemp(this.sequencer.matrix.pattern)
     }
