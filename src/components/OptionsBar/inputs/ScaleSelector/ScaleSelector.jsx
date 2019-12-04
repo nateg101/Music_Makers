@@ -21,7 +21,7 @@ class ScaleSelector extends Component {
 
   handleChange = () => {
     let keyMode = $("input[name=Key]:checked").val()
-    let scale = this.keyForm.current.value
+    let scale = this.keyForm.current.value || 'C'
     this.props.setScale(KEYS[keyMode][scale])
   }
 
@@ -38,7 +38,7 @@ class ScaleSelector extends Component {
               className='key-selector-control'
               as="select"
               >
-                <option value="" disabled selected>Key</option>
+                <option value="" disabled selected>Key - C</option>
                 {this.renderKeyOptions()}
               </Form.Control>
             </Form.Group>
