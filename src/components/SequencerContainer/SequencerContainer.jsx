@@ -88,66 +88,70 @@ export default class SequencerContainer extends React.Component {
   render() {
     return (
       <div className='instruments'>
-        <Accordion defaultActiveKey="0" className='lead-accordion'>
-          <Card>
-            <Card.Header>
-              <Form
-                className='instrument-select'>
-                  <Form.Group id="instrument-form">
-                    <Form.Label className="select-instrument-label">Select Instrument</Form.Label>
-                    <Form.Control className='select-instrument-control'
-                    as="select"
-                    onChange={this.props.setInstrument}>
-                      <option value="" disabled selected>{this.renderInstrumentName(this.props.instrument)}</option>
-                      <option value="0">{this.renderInstrumentName(0)}</option>
-                      <option value="2">{this.renderInstrumentName(2)}</option>
-                      <option value="3">{this.renderInstrumentName(3)}</option>
-                      <option value="4">{this.renderInstrumentName(4)}</option>
-                      <option value="5">{this.renderInstrumentName(5)}</option>
-                    </Form.Control>
-                  </Form.Group>
-                </Form>
-              <Accordion.Toggle as={Button} className="expander" variant="link" eventKey="0">
-                Expand / Collapse
-              </Accordion.Toggle>
-            </Card.Header>
-            <Accordion.Collapse eventKey="0">
-              <Card.Body className="piano-sequencer-wrapper">
-                {this.renderPianoSequencers()}
-              </Card.Body>
-            </Accordion.Collapse>
-          </Card>
-        </Accordion>
-        <div className="drum-sequencer-wrapper">
-        <Accordion defaultActiveKey="0">
-          <Card>
-            <Card.Header>
-              Percussion
-              <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                Expand / Collapse
-              </Accordion.Toggle>
-            </Card.Header>
-            <Accordion.Collapse eventKey="0">
-              <Card.Body className="drum-sequencer-wrapper">
-                  <div className={this.state.instrument1 ? 'content is-expanded' : 'content'}>
-                    <SequencerComponent
-                      intermittentStorage={{}}
-                      playNote={this.playDrumNote}
-                      key={10 + 1000}
-                      matrix={this.props.drums}
-                      rows={this.drumNotes.length}
-                      midiStorage={this.props.midiStorage}
-                      instrument={1}
-                      octave={0}
-                      scale={this.drumNotes}
-                      noteNameClass={'drums'}
-                      storedSequencers={this.props.storedPercussion}
-                      tempStorage={this.props.tempStorage}/>
-                  </div>
-              </Card.Body>
-            </Accordion.Collapse>
-          </Card>
-        </Accordion>
+        <div className="piano-sequencer-wrapper">
+          <Accordion defaultActiveKey="0" className='lead-accordion'>
+            <Card>
+              <Card.Header>
+                <Form
+                  className='instrument-select'>
+                    <Form.Group id="instrument-form">
+                      <Form.Label className="select-instrument-label">Select Instrument</Form.Label>
+                      <Form.Control className='select-instrument-control'
+                      as="select"
+                      onChange={this.props.setInstrument}>
+                        <option value="" disabled selected>{this.renderInstrumentName(this.props.instrument)}</option>
+                        <option value="0">{this.renderInstrumentName(0)}</option>
+                        <option value="2">{this.renderInstrumentName(2)}</option>
+                        <option value="3">{this.renderInstrumentName(3)}</option>
+                        <option value="4">{this.renderInstrumentName(4)}</option>
+                        <option value="5">{this.renderInstrumentName(5)}</option>
+                      </Form.Control>
+                    </Form.Group>
+                  </Form>
+                <Accordion.Toggle as={Button} className="expander" variant="link" eventKey="0">
+                  Expand / Collapse
+                </Accordion.Toggle>
+              </Card.Header>
+              <Accordion.Collapse eventKey="0">
+                <Card.Body>
+                  {this.renderPianoSequencers()}
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
+          </Accordion>
+        </div>
+        <div className="drum-sequencer-wrapper-container">
+          <div className="drum-sequencer-wrapper">
+          <Accordion defaultActiveKey="0">
+            <Card>
+              <Card.Header>
+                Percussion
+                <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                  Expand / Collapse
+                </Accordion.Toggle>
+              </Card.Header>
+              <Accordion.Collapse eventKey="0">
+                <Card.Body className="drum-sequencer-wrapper">
+                    <div className={this.state.instrument1 ? 'content is-expanded' : 'content'}>
+                      <SequencerComponent
+                        intermittentStorage={{}}
+                        playNote={this.playDrumNote}
+                        key={10 + 1000}
+                        matrix={this.props.drums}
+                        rows={this.drumNotes.length}
+                        midiStorage={this.props.midiStorage}
+                        instrument={1}
+                        octave={0}
+                        scale={this.drumNotes}
+                        noteNameClass={'drums'}
+                        storedSequencers={this.props.storedPercussion}
+                        tempStorage={this.props.tempStorage}/>
+                    </div>
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
+          </Accordion>
+          </div>
         </div>
       </div>
     )
