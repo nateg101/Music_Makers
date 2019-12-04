@@ -12,7 +12,7 @@ describe('instrument component testing', function() {
     storedPercussion = []
     wrapper = mount(<Drums
       storedSequencers={storedPercussion}
-      matrix={[]}
+      drums={[]}
       tempStorage={[]}
     />);
   })

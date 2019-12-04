@@ -4,23 +4,35 @@ import { shallow, mount } from 'enzyme'
 import sinon from 'sinon'
 
 describe('instrument component testing', function() {
-  // let wrapper
-  // let storedSequencerss
-  // let playNote
-  // beforeEach(function() {
-  //   playNote = sinon.spy()
-  //   storedPercussion = []
-  //   wrapper = mount(<Drums
-  //     storedSequencers={storedPercussion}
-  //     matrix={[]}
-  //     tempStorage={[]}
-  //   />);
-  // })
+  let wrapper
+  let storedSequencers
+  let playNote
+  let octaves = 3
+  let scale
+  beforeEach(function() {
+    playNote = sinon.spy()
+    storedSequencers = []
+    scale = []
+    wrapper = mount(<Lead
+      scale={scale}
+      storedSequencers={storedSequencers}
+      matrix={[]}
+      tempStorage={[]}
+      playNote={playNote}
+      octaves={octaves}/>);
+  })
 
 
   it('renders successfully', function() {
-    const wrapper = shallow(<Lead/>);
-
-    expect(wrapper.find('.lead-container').length).toEqual(1)
+    console.log('first test')
+    const shallowWrapper = shallow(<Lead octaves={octaves}/>);
+    
+    expect(shallowWrapper.find('.lead-container').length).toEqual(1)
   });
+  
+  it('renders child components', function(){
+    console.log('secondtest')
+    expect(wrapper.find('.lead-container').length).toEqual(1)
+    expect(wrapper.find('.sequencer-component')).toBeTruthy()
+  })
 });
