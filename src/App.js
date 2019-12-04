@@ -21,7 +21,7 @@ class App extends React.Component {
         {letter: 'B', value: 23},
       ],
     }
-    this.storedSequencers = []
+    this.storedLead = []
     this.storedPercussion = []
     this.midiStorage = {}
     this.tempStorage = new Array(12)
@@ -40,9 +40,9 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    this.storedSequencers = []
+    this.storedLead = []
     this.storedPercussion = []
-    this.storedSequencers.forEach((sequencer) => {
+    this.storedLead.forEach((sequencer) => {
       sequencer.colorInterface()
     })
   }
@@ -147,7 +147,7 @@ class App extends React.Component {
         <NavbarMain
           storedPercussion={this.storedPercussion}
           storedInstrument={this.state.instrument}
-          storedSequencers={this.storedSequencers}/>
+          storedLead={this.storedLead}/>
         {
           this.state.loading ?
           <div>Loading....</div>
@@ -156,7 +156,7 @@ class App extends React.Component {
             playNote={this.playNote}
             scale={this.state.scale}
             midiStorage={this.midiStorage}
-            storedSequencers={this.storedSequencers}
+            storedLead={this.storedLead}
             storedPercussion={this.storedPercussion}
             octaves={this.state.octaves}
             drums={this.state.drums}
@@ -166,7 +166,7 @@ class App extends React.Component {
         <OptionsBar
           setScale={this.setScale}
           storedPercussion={this.storedPercussion}
-          storedSequencers={this.storedSequencers}
+          storedLead={this.storedLead}
           octaves={this.state.octaves}
           setOctaves={this.setOctaves}/>
       </div>

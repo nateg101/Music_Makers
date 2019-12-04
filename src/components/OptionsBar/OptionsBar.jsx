@@ -29,7 +29,7 @@ class OptionsBar extends Component {
             <PlayButton
               tempo={this.state.tempo}
               storedPercussion={this.props.storedPercussion}
-              storedSequencers={this.props.storedSequencers}/>
+              storedLead={this.props.storedLead}/>
           </Col>
           <Col>
             <Tempo
@@ -43,7 +43,7 @@ class OptionsBar extends Component {
           </Col>
           <Col>
             <ScaleSelector
-            setScale={this.props.setScale}/>  
+            setScale={this.props.setScale}/>
           </Col>
         </Row>
       </Card>

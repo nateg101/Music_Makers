@@ -56,7 +56,7 @@ export default class Lead extends React.Component {
           scale={this.props.scale}
           noteNameClass={'piano'}
           matrix={matrix || null}
-          storedSequencers={this.props.storedSequencers}
+          storedSequencers={this.props.storedLead}
           tempStorage={this.props.tempStorage}/>
         )
       })
