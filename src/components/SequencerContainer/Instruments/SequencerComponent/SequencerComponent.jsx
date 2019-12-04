@@ -52,8 +52,9 @@ export default class SequencerComponent extends React.Component {
       console.log('adding')
     }
     if (this.props.matrix) {
-      sequencer.matrix.set.all(this.props.matrix)
+      var self = this
       setTimeout(function() {
+        sequencer.matrix.set.all(self.props.matrix)
         sequencer.colorInterface()
       }, 0)
     }
