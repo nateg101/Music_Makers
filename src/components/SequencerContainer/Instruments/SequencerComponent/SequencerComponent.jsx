@@ -9,6 +9,7 @@ export default class SequencerComponent extends React.Component {
     this.state = {
       width: 0
     }
+    this.ready = false
     this.myInput = React.createRef()
     this.render = this.render.bind(this)
   }
@@ -28,10 +29,6 @@ export default class SequencerComponent extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    console.log('sequencer updated')
-  }
-
   updateWindowDimensions = () => {
     this.setState({ width: this.myInput.current.offsetWidth });
     if (this.sequencer){
@@ -43,7 +40,7 @@ export default class SequencerComponent extends React.Component {
   }
 
   handleChange = (change) => {
-    if(change.state) {
+    if(change.state && this.ready) {
       let triggers = new Array(this.props.scale.length)
       triggers[triggers.length - change.row - 1] = 1
       this.props.playNote(triggers, this.props.octave, this.props.instrument)
@@ -51,16 +48,24 @@ export default class SequencerComponent extends React.Component {
   }
 
   handleOnReady = (sequencer) => {
+    this.ready = false
     this.props.onReady(sequencer)
-    if (this.props.matrix) {
-      var self = this
+    var self = this
+    if (this.props.tempStorage[this.props.octave]) {
+      setTimeout(function() {
+        console.log(self.props.tempStorage[self.props.octave])
+        sequencer.matrix.set.all(self.props.tempStorage[self.props.octave])
+        sequencer.colorInterface()
+        self.ready = true
+      }, 0)
+    } else if (this.props.matrix) {
       setTimeout(function() {
         sequencer.matrix.set.all(self.props.matrix)
         sequencer.colorInterface()
+        self.ready = true
       }, 0)
-    }
-    if(this.props.tempStorage[this.props.octave]) {
-      sequencer.matrix.set.all(this.props.tempStorage[this.props.octave])
+    } else {
+      this.ready = true
     }
     this.sequencer = sequencer
   }

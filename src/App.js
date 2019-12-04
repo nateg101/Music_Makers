@@ -47,9 +47,16 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    this.storedLead.sequencers.forEach((sequencer) => {
-      sequencer.colorInterface()
-    })
+    console.log('app did update')
+    console.log(this.tempStorage)
+    this.storedLead.sequencers = []
+    this.storedLead2.sequencers = []
+    this.storedPercussion = []
+  }
+  
+  componentWillUpdate(){
+    console.log('app will update')
+    console.log(this.tempStorage)
   }
 
   componentDidMount() {
