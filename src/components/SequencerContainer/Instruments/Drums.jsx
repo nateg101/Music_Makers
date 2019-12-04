@@ -7,9 +7,6 @@ import './Instrument.css'
 export default class Drums extends React.Component {
   constructor(props){
     super(props)
-    this.state = {
-      visible: true,
-    }
     this.drumNotes = [
      {letter: "kick", value: 36},
      {letter: "snare", value: 38},
@@ -24,11 +21,10 @@ export default class Drums extends React.Component {
    ]
   }
 
-  toggle = (index) => {
-    this.setState({ visible: !this.state.visible });
-  }
-
   playDrumNote = (triggers, octave, instrument) => {
+    if (!this.ready || !this.props.midiStorage.MIDIPlugin) {
+      return
+    }
     let notes = []
     triggers.forEach((note, i) => {
       if (note) {
@@ -42,6 +38,7 @@ export default class Drums extends React.Component {
 
   appendToSequencers = (sequencer) => {
     this.props.storedPercussion.push(sequencer)
+    this.ready = true
   }
 
   render() {
@@ -58,21 +55,19 @@ export default class Drums extends React.Component {
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body className="drum-sequencer-wrapper">
-                      <div className={this.state.visible ? 'content is-expanded' : 'content'}>
-                        <SequencerComponent
-                          onReady={this.appendToSequencers}
-                          intermittentStorage={{}}
-                          playNote={this.playDrumNote}
-                          key={10 + 1000}
-                          matrix={this.props.drums}
-                          rows={this.drumNotes.length}
-                          midiStorage={this.props.midiStorage}
-                          instrument={1}
-                          octave={0}
-                          scale={this.drumNotes}
-                          noteNameClass={'drums'}
-                          tempStorage={this.props.tempStorage}/>
-                      </div>
+                    <SequencerComponent
+                      onReady={this.appendToSequencers}
+                      intermittentStorage={{}}
+                      playNote={this.playDrumNote}
+                      key={10 + 1000}
+                      matrix={this.props.drums}
+                      rows={this.drumNotes.length}
+                      midiStorage={this.props.midiStorage}
+                      instrument={1}
+                      octave={0}
+                      scale={this.drumNotes}
+                      noteNameClass={'drums'}
+                      tempStorage={this.props.tempStorage}/>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
