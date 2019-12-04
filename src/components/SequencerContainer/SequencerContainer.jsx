@@ -107,28 +107,28 @@ export default class SequencerContainer extends React.Component {
                     </Form.Control>
                   </Form.Group>
                 </Form>
-              <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                Click me!
+              <Accordion.Toggle as={Button} className="expander" variant="link" eventKey="0">
+                Expand / Collapse
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="0">
-              <Card.Body>
+              <Card.Body className="piano-sequencer-wrapper">
                 {this.renderPianoSequencers()}
               </Card.Body>
             </Accordion.Collapse>
           </Card>
         </Accordion>
+        <div className="drum-sequencer-wrapper">
         <Accordion defaultActiveKey="0">
           <Card>
             <Card.Header>
               Percussion
               <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                Click me!
+                Expand / Collapse
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="0">
-              <Card.Body>
-                <div className="drum-sequencer-wrapper card" >
+              <Card.Body className="drum-sequencer-wrapper">
                   <div className={this.state.instrument1 ? 'content is-expanded' : 'content'}>
                     <SequencerComponent
                       intermittentStorage={{}}
@@ -144,11 +144,11 @@ export default class SequencerContainer extends React.Component {
                       storedSequencers={this.props.storedPercussion}
                       tempStorage={this.props.tempStorage}/>
                   </div>
-                </div>
               </Card.Body>
             </Accordion.Collapse>
           </Card>
         </Accordion>
+        </div>
       </div>
     )
   }
