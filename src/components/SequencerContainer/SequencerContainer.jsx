@@ -16,7 +16,6 @@ export default class SequencerContainer extends React.Component {
           scale={this.props.scale}
           tempStorage={this.props.tempStorage}
           midiStorage={this.props.midiStorage}
-          instrument={this.props.instrument}
           playNote={this.props.playNote}
           setInstrument={this.props.setInstrument}/>
         <Drums

@@ -20,7 +20,6 @@ class App extends React.Component {
         {letter: 'A', value: 21},
         {letter: 'B', value: 23},
       ],
-      instrument: 0
     }
     this.storedSequencers = []
     this.storedPercussion = []
@@ -77,17 +76,20 @@ class App extends React.Component {
     }
     if (pianoParam) {
       console.log(pianoParam)
-      var [piano, octaves] = this.convertPiano(pianoParam)
+      var [pianoMatrix, octaves] = this.convertPiano(pianoParam)
     }
 
     if (instrumentParam) {
       var instrument = this.decompress(instrumentParam)
     }
+    var piano = {
+      instrument: instrument || 0,
+      matrix: pianoMatrix || null
+    }
     return this.setState({
       octaves: octaves || 3,
       piano: piano,
       drums: drums,
-      instrument: instrument || 0,
       loading: false
     })
   }
@@ -139,12 +141,6 @@ class App extends React.Component {
     })
   }
 
-  setInstrument = (event) => {
-    this.setState({
-      instrument: parseInt(event.target.value)
-    })
-  }
-
   render() {
     return (
       <div className="App">
@@ -163,9 +159,6 @@ class App extends React.Component {
             storedSequencers={this.storedSequencers}
             storedPercussion={this.storedPercussion}
             octaves={this.state.octaves}
-            toggle={this.toggle}
-            setInstrument={this.setInstrument}
-            instrument={this.state.instrument}
             drums={this.state.drums}
             piano={this.state.piano}
             tempStorage={this.tempStorage}/>

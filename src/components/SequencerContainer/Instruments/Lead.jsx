@@ -9,7 +9,7 @@ export default class Lead extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      visible: true
+      visible: true,
     }
     this.octaveArray = {
       1: [4],
@@ -31,24 +31,27 @@ export default class Lead extends React.Component {
   }
 
 
-    toggle = (index) => {
-      this.setState({ ['instrument' + index]: !this.state['instrument' + index] });
-    }
+  setInstrument = (event) => {
+    this.setState({
+      instrument: parseInt(event.target.value)
+    })
+  }
+
 
     renderPianoSequencers = () => {
     let sequencers = []
     this.octaveArray[this.props.octaves].forEach((octave, i) => {
       let matrix
 
-      if(this.props.piano) {
-        matrix = this.props.piano[i]
+      if(this.props.piano.matrix) {
+        matrix = this.props.piano.matrix[i]
       }
       sequencers.push(
         <SequencerComponent
           playNote={this.props.playNote}
           key={i + 100 * octave}
           midiStorage={this.props.midiStorage}
-          instrument={this.props.instrument}
+          instrument={this.props.piano.instrument}
           octave={octave}
           scale={this.props.scale}
           noteNameClass={'piano'}
@@ -72,7 +75,7 @@ export default class Lead extends React.Component {
                     <Form.Label className="select-instrument-label">Select Instrument</Form.Label>
                     <Form.Control className='select-instrument-control'
                     as="select"
-                    onChange={this.props.setInstrument}>
+                    onChange={this.setInstrument}>
                       <option value="" disabled selected>{this.renderInstrumentName(this.props.instrument)}</option>
                       <option value="0">{this.renderInstrumentName(0)}</option>
                       <option value="2">{this.renderInstrumentName(2)}</option>
