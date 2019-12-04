@@ -61,11 +61,9 @@ class App extends React.Component {
       self.midiStorage.MIDIPlugin.programChange(3, 94)
       self.midiStorage.MIDIPlugin.programChange(4, 112)
       self.midiStorage.MIDIPlugin.programChange(5, 121)
-
-      self.setState({ loading: false });
+      self.extractUrl()
     }
     })
-    self.extractUrl()
   }
 
   extractUrl() {
@@ -89,7 +87,8 @@ class App extends React.Component {
       octaves: octaves || 3,
       piano: piano,
       drums: drums,
-      instrument: instrument || 0
+      instrument: instrument || 0,
+      loading: false
     })
   }
 
