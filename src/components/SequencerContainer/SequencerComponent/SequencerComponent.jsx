@@ -10,16 +10,7 @@ export default class SequencerComponent extends React.Component {
       width: 0
     }
     this.myInput = React.createRef()
-    this.playNote = this.playNote.bind(this)
     this.render = this.render.bind(this)
-    this.setKey()
-  }
-
-  setKey() {
-    this.key = []
-    for(let i = 0; i < this.props.scale.length; i++){
-      this.key.unshift(this.props.scale[i].value + (this.props.octave * 12))
-    }
   }
 
   componentDidMount() {
@@ -29,6 +20,12 @@ export default class SequencerComponent extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateWindowDimensions);
+  }
+
+  componentWillUpdate() {
+    if (this.sequencer) {
+      this.props.tempStorage[this.props.octave] = this.sequencer.matrix.pattern
+    }
   }
 
   updateWindowDimensions = () => {
@@ -45,34 +42,8 @@ export default class SequencerComponent extends React.Component {
     if(change.state) {
       let triggers = new Array(this.props.scale.length)
       triggers[triggers.length - change.row - 1] = 1
-      this.playNote(triggers)
+      this.props.playNote(triggers, this.props.octave, this.props.instrument)
     }
-  }
-
-  playNote(triggers) {
-    let notes = []
-    triggers.forEach((note, i)=>{
-      if (note) {
-        notes.push(this.key[i])
-      }
-    })
-    if (notes.length > 0){
-      this.props.midiStorage.MIDIPlugin.chordOn(this.props.instrument, notes, 100, 0);
-    }
-  }
-
-  renderNoteNames = () => {
-    let noteNames = []
-    for(let i = 0; i < this.props.scale.length; i++){
-      noteNames.push(
-        <Card 
-          key={i + 15 * this.props.octave}
-          className={`note-card ${this.props.noteNameClass}-notes justify-content-center border-0`}>
-          {"" + this.props.scale[i].letter + (this.props.octave || "") }
-        </Card>
-      )
-    }
-    return noteNames
   }
 
   handleOnReady = (sequencer) => {
@@ -85,7 +56,24 @@ export default class SequencerComponent extends React.Component {
         sequencer.colorInterface()
       }, 0)
     }
+    if(this.props.tempStorage[this.props.octave]) {
+      sequencer.matrix.set.all(this.props.tempStorage[this.props.octave])
+    }
     this.sequencer = sequencer
+  }
+
+  renderNoteNames = () => {
+    let noteNames = []
+    for(let i = 0; i < this.props.scale.length; i++){
+      noteNames.unshift(
+        <Card
+          key={i + 15 * this.props.octave}
+          className={`note-card ${this.props.noteNameClass}-notes justify-content-center border-0`}>
+          {"" + this.props.scale[i].letter + (this.props.octave || "") }
+        </Card>
+      )
+    }
+    return noteNames
   }
 
   render() {
@@ -100,11 +88,11 @@ export default class SequencerComponent extends React.Component {
                 {this.state.width ? <Sequencer
                   key={this.props.octave + 12}
                   rows={this.props.rows || 7}
-                  columns={16}
-                  size={[this.state.width*0.9412, this.state.width*0.27]}
+                  columns={32}
+                  size={[this.state.width*0.9412, this.state.width*0.54]}
                   onReady={this.handleOnReady}
                   onChange={this.handleChange}
-                  onStep={this.playNote}/> : <div>Loading....</div>}
+                  onStep={(state)=>{this.props.playNote(state, this.props.octave, this.props.instrument)}}/> : <div>Loading....</div>}
               </Container>
             </Col>
             <hr></hr>
