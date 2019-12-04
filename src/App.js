@@ -9,8 +9,11 @@ import LZString from "lz-string";
 class App extends React.Component {
   constructor(props) {
     super(props)
+    let [instruments, octaves] = this.extractUrl()
+    this.createStoredInstruments(instruments)
     this.state = {
       loading: true,
+      octaves: octaves || 3,
       scale: [
         {letter: 'C', value: 12},
         {letter: 'D', value: 14},
@@ -21,17 +24,7 @@ class App extends React.Component {
         {letter: 'B', value: 23},
       ],
     }
-    this.storedLead = {
-      sequencers: [],
-      instrument: 0
-    }
-    this.storedLead2 = {
-      sequencers: [],
-      instrument: 0
-    }
-    this.storedPercussion = []
     this.midiStorage = {}
-    this.tempStorage = new Array(12)
   }
 
   componentDidUpdate() {
@@ -39,17 +32,20 @@ class App extends React.Component {
     this.storedLead2.sequencers = []
     this.storedPercussion = []
   }
-
-  componentWillMount() {
-    this.extractUrl()
-  }
   
   componentDidMount() {
     let self = this
     this.midiStorage.MIDIPlugin = window.MIDI
     this.midiStorage.MIDIPlugin.loadPlugin({
       soundfontUrl: "./soundfont/",
-      instruments: [ "electric_piano_1", "electric_guitar_jazz", "electric_bass_finger", "tubular_bells", "glockenspiel", "gunshot" ],
+      instruments: [
+         "electric_piano_1",
+        "electric_guitar_jazz",
+        "electric_bass_finger",
+        "tubular_bells",
+        "glockenspiel",
+        "gunshot" 
+      ],
     callback: function() {
       self.midiStorage.MIDIPlugin.programChange(0, 4);
       self.midiStorage.MIDIPlugin.programChange(1, 127)
@@ -57,49 +53,40 @@ class App extends React.Component {
       self.midiStorage.MIDIPlugin.programChange(3, 33)
       self.midiStorage.MIDIPlugin.programChange(4, 112)
       self.midiStorage.MIDIPlugin.programChange(5, 121)
-      self.setState({loading: false})
+      self.setState({ loading: false })
     }
     })
   }
 
-  extractUrl() {
-    let params = new URLSearchParams(window.location.search)
-    let leadParam = params.get(0)
-    let percussionParam = params.get(1)
-    let leadInstrument = params.get(2)
-    let lead2Param = params.get(3)
-    let lead2Instrument = params.get(4)
-    if (percussionParam) {
-      var drums = this.convertDrums(percussionParam)
+  createStoredInstruments([
+    leadMatrix,
+    leadInstrument,
+    lead2Matrix,
+    lead2Instrument,
+    drums,
+  ]) {
+    this.tempStorage = { 
+      lead: leadMatrix || new Array(7),
+      lead2: lead2Matrix || new Array(7),
+      drums: [drums]
     }
-    if (leadParam) {
-      var [leadMatrix, octaves] = this.convertLeads(leadParam)
+    this.storedLead = {
+      sequencers: [],
+      instrument: leadInstrument || 0
     }
-    if (lead2Param) {
-      var [lead2Matrix, octaves2] = this.convertLeads(lead2Param)
+    this.storedLead2 = {
+      sequencers: [],
+      instrument: lead2Instrument || 0
     }
-    if (leadInstrument) {
-      this.storedLead.instrument = this.decompress(leadInstrument)
-    }
-    if (lead2Instrument) {
-      this.storedLead2.instrument = this.decompress(lead2Instrument)
-    }
-    var lead = {
-      matrix: leadMatrix || null
-    }
-    var lead2 = {
-      matrix: lead2Matrix || null
-    }
-    this.setState({
-      octaves: octaves || 3,
-      lead: lead,
-      lead2: lead2,
-      drums: drums,
-    })
+    this.storedPercussion = []
   }
 
   convertDrums = (compString) => {
+    if (!compString) {
+      return null
+    }
     let drumString = this.decompress(compString)
+    if (drumString.length < 320) {return null}
     let drums = []
     for(let i = 0; i < 10; i++) {
       let startIndex = i * 32
@@ -109,27 +96,68 @@ class App extends React.Component {
   }
 
   convertLeads(compString) {
-    let pianoString = this.decompress(compString)
+    if (!compString) {
+      return []
+    }
+    let octaveArray = {
+      1: [4],
+      3: [5,4,3],
+      5: [6,5,4,3,2],
+      7: [7,6,5,4,3,2,1]
+    }
+    let leadString = this.decompress(compString)
     let matrixSize = 224
-    let octaves = pianoString.length / matrixSize
-    let piano = []
-    for (let i = 0; i < octaves; i++) {
-      let octave = []
+    if (leadString.length < matrixSize) {return []}
+    let octaves = leadString.length / matrixSize
+    let lead = []
+    octaveArray[octaves].forEach((octave, i) => {
+      let octaveArray = []
       for (let j = 0; j < 7; j++) {
         let startIndex = (j * 32) + (i * matrixSize)
-        octave.push(pianoString.slice(startIndex, startIndex + 32))
+        octaveArray.push(leadString.slice(startIndex, startIndex + 32))
       }
-      piano.push(octave)
-    }
-    return [piano, octaves]
+      lead[octave] = octaveArray
+    })
+    return [lead, octaves]
   }
 
   decompress(string) {
+    if (!string) {
+      return null
+    }
     string = string.replace(/-/g, `+`)
                    .replace(/_/g, '/')
                    .replace(/~/g, `=`)
     return LZString.decompressFromBase64(string)
                    .split('').map(function(t){return parseInt(t)})
+  }
+
+  extractUrl = () => {
+    let [
+      leadParam,
+      drumsParam,
+      leadInstrumentParam,
+      lead2Param,
+      lead2InstrumentParam
+    ] = this.getUrlParams()
+
+    let [leadMatrix, octaves] = this.convertLeads(leadParam)
+    let [lead2Matrix, ] = this.convertLeads(lead2Param)
+    let leadInstrument = this.decompress(leadInstrumentParam)
+    let lead2Instrument = this.decompress(lead2InstrumentParam)
+    let drums = this.convertDrums(drumsParam)
+    return [[leadMatrix, leadInstrument, lead2Matrix, lead2Instrument, drums], octaves]
+  }
+
+  getUrlParams() {
+    let params = new URLSearchParams(window.location.search)
+    return [
+      params.get(0),
+      params.get(1),
+      params.get(2),
+      params.get(3),
+      params.get(4)
+    ]
   }
 
   setOctaves = (event) => {
@@ -152,7 +180,7 @@ class App extends React.Component {
           storedInstrument={this.state.instrument}
           storedLead={this.storedLead}
           storedLead2={this.storedLead2}/>
-
+      
         <SequencerContainer
           scale={this.state.scale}
           midiStorage={this.midiStorage}

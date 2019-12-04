@@ -57,10 +57,6 @@ export default class Lead extends React.Component {
   renderLeadSequencers = () => {
     let sequencers = []
     this.octaveArray[this.props.octaves].forEach((octave, i) => {
-      let matrix
-      if(this.props.lead.matrix) {
-        matrix = this.props.lead.matrix[i]
-      }
       sequencers.push(
         <SequencerComponent
           onReady={this.appendToSequencers}
@@ -70,8 +66,7 @@ export default class Lead extends React.Component {
           instrument={this.state.instrument}
           octave={octave}
           scale={this.props.scale}
-          noteNameClass={'piano'}
-          matrix={matrix || null}
+          noteNameClass={'lead'}
           tempStorage={this.props.tempStorage}/>
         )
       })

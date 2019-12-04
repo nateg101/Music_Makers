@@ -12,16 +12,14 @@ export default class SequencerContainer extends React.Component {
         <Lead
           keySeed={5}
           storedLead={this.props.storedLead}
-          lead={this.props.lead}
           octaves={this.props.octaves}
           scale={this.props.scale}
-          tempStorage={this.props.tempStorage}
+          tempStorage={this.props.tempStorage.lead}
           midiStorage={this.props.midiStorage}
           setInstrument={this.props.setInstrument}/>
         {/* <Lead
           keySeed={6}
           storedLead={this.props.storedLead2}
-          lead={this.props.lead2}
           octaves={this.props.octaves}
           scale={this.props.scale}
           tempStorage={this.props.tempStorage}
@@ -29,8 +27,7 @@ export default class SequencerContainer extends React.Component {
           setInstrument={this.props.setInstrument}/> */}
         <Drums
           storedPercussion={this.props.storedPercussion}
-          drums={this.props.drums}
-          tempStorage={this.props.tempStorage}
+          tempStorage={this.props.tempStorage.drums}
           midiStorage={this.props.midiStorage}/>
       </div>
     )

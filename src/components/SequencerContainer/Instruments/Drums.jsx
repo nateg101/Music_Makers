@@ -60,7 +60,6 @@ export default class Drums extends React.Component {
                       intermittentStorage={{}}
                       playNote={this.playDrumNote}
                       key={10 + 1000}
-                      matrix={this.props.drums}
                       rows={this.drumNotes.length}
                       midiStorage={this.props.midiStorage}
                       instrument={1}

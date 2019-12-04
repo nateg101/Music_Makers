@@ -51,9 +51,6 @@ export default class SequencerComponent extends React.Component {
     this.ready = false
     if (this.props.tempStorage[this.props.octave]) {
       this.fillMatrix(this.props.tempStorage[this.props.octave])
-    } else if (this.props.matrix) {
-      this.fillMatrix(this.props.matrix)
-      this.saveToTemp(this.props.matrix)
     } else {
       this.ready = true
     }
