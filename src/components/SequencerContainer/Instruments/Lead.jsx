@@ -19,6 +19,21 @@ export default class Lead extends React.Component {
     }
   }
 
+  playNote = (triggers, octave) => {
+    if (this.ready) {
+      return
+    }
+    let notes = []
+    triggers.forEach((note, i) => {
+      if (note) {
+        notes.push(this.props.scale[i].value + (octave * 12))
+      }
+    })
+    if (notes.length > 0) {
+      this.props.midiStorage.MIDIPlugin.chordOn(this.state.instrument, notes, 100, 0);
+    }
+  }
+
   renderInstrumentName = (instrument) => {
     let instrumenthash = {
       0: 'Electric Piano',
@@ -49,7 +64,7 @@ export default class Lead extends React.Component {
       sequencers.push(
         <SequencerComponent
           onReady={this.appendToSequencers}
-          playNote={this.props.playNote}
+          playNote={this.playNote}
           key={i * this.props.keySeed + 100 * octave}
           midiStorage={this.props.midiStorage}
           instrument={this.state.instrument}

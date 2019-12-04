@@ -10,7 +10,7 @@ export default class SequencerComponent extends React.Component {
       width: 0
     }
     this.ready = false
-    this.myInput = React.createRef()
+    this.domElement = React.createRef()
     this.render = this.render.bind(this)
   }
 
@@ -31,18 +31,13 @@ export default class SequencerComponent extends React.Component {
     }
   }
 
-  saveToTemp(matrix) {
-    this.props.tempStorage[this.props.octave] = matrix
-  }
-
-  updateWindowDimensions = () => {
-    this.setState({ width: this.myInput.current.offsetWidth });
-    if (this.sequencer){
-      let self = this
-      setTimeout(function() {
-        self.sequencer.colorInterface()
-      }, 0)
-    }
+  fillMatrix(matrix) {
+    var self = this
+    setTimeout(function() {
+      self.sequencer.matrix.set.all(matrix)
+      self.sequencer.colorInterface()
+      self.ready = true
+    }, 0)
   }
 
   handleChange = (change) => {
@@ -66,16 +61,7 @@ export default class SequencerComponent extends React.Component {
     }
     this.props.onReady(sequencer)
   }
-
-  fillMatrix(matrix) {
-    var self = this
-    setTimeout(function() {
-      self.sequencer.matrix.set.all(matrix)
-      self.sequencer.colorInterface()
-      self.ready = true
-    }, 0)
-  }
-
+  
   renderNoteNames = () => {
     let noteNames = []
     for(let i = 0; i < this.props.scale.length; i++){
@@ -90,6 +76,20 @@ export default class SequencerComponent extends React.Component {
     return noteNames
   }
 
+  saveToTemp(matrix) {
+    this.props.tempStorage[this.props.octave] = matrix
+  }
+
+  updateWindowDimensions = () => {
+    this.setState({ width: this.domElement.current.offsetWidth });
+    if (this.sequencer){
+      let self = this
+      setTimeout(function() {
+        self.sequencer.colorInterface()
+      }, 0)
+    }
+  }
+
   render() {
       return (
         <Container>
@@ -98,7 +98,7 @@ export default class SequencerComponent extends React.Component {
               {this.renderNoteNames()}
             </Col>
             <Col sm={11} className='no-gutters'>
-              <Container className='sequencer-component' id="notes" ref={this.myInput}>
+              <Container className='sequencer-component' id="notes" ref={this.domElement}>
                 {this.state.width ? <Sequencer
                   key={this.props.octave + 12}
                   rows={this.props.rows || 7}

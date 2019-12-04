@@ -34,21 +34,6 @@ class App extends React.Component {
     this.tempStorage = new Array(12)
   }
 
-  playNote = (triggers, octave, instrument) => {
-    if (this.state.loading) {
-      return
-    }
-    let notes = []
-    triggers.forEach((note, i) => {
-      if (note) {
-        notes.push(this.state.scale[i].value + (octave * 12))
-      }
-    })
-    if (notes.length > 0){
-      this.midiStorage.MIDIPlugin.chordOn(instrument, notes, 100, 0);
-    }
-  }
-
   componentDidUpdate() {
     this.storedLead.sequencers = []
     this.storedLead2.sequencers = []
@@ -169,7 +154,6 @@ class App extends React.Component {
           storedLead2={this.storedLead2}/>
 
         <SequencerContainer
-          playNote={this.playNote}
           scale={this.state.scale}
           midiStorage={this.midiStorage}
           storedLead={this.storedLead}
