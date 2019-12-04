@@ -53,12 +53,12 @@ class App extends React.Component {
     this.midiStorage.MIDIPlugin = window.MIDI
     this.midiStorage.MIDIPlugin.loadPlugin({
       soundfontUrl: "./soundfont/",
-      instruments: [ "electric_piano_1", "electric_guitar_jazz", "pad_7_halo", "tubular_bells", "glockenspiel", "gunshot" ],
+      instruments: [ "electric_piano_1", "electric_guitar_jazz", "electric_bass_finger", "tubular_bells", "glockenspiel", "gunshot" ],
     callback: function() {
       self.midiStorage.MIDIPlugin.programChange(0, 4);
       self.midiStorage.MIDIPlugin.programChange(1, 127)
       self.midiStorage.MIDIPlugin.programChange(2, 26)
-      self.midiStorage.MIDIPlugin.programChange(3, 94)
+      self.midiStorage.MIDIPlugin.programChange(3, 33)
       self.midiStorage.MIDIPlugin.programChange(4, 112)
       self.midiStorage.MIDIPlugin.programChange(5, 121)
       self.extractUrl()
@@ -79,10 +79,10 @@ class App extends React.Component {
     }
 
     if (instrumentParam) {
-      var instrument = this.decompress(instrumentParam)
+      this.storedLead.instrument = this.decompress(instrumentParam)
     }
     var piano = {
-      instrument: instrument || 0,
+      instrument: 0,
       matrix: pianoMatrix || null
     }
     return this.setState({

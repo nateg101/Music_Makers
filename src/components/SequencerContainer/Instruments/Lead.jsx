@@ -9,7 +9,7 @@ export default class Lead extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      visible: true,
+      instrument: this.props.storedLead.instrument
     }
     this.octaveArray = {
       1: [4],
@@ -23,7 +23,7 @@ export default class Lead extends React.Component {
     let instrumenthash = {
       0: 'Electric Piano',
       2: 'Electric Jazz Guitar',
-      3: 'Synth Pad Halo',
+      3: 'Electric Bass',
       4: 'Tubular Bells',
       5: 'Glockenspiel'
       }
@@ -32,6 +32,7 @@ export default class Lead extends React.Component {
 
 
   setInstrument = (event) => {
+    console.log('setting instrument')
     this.setState({
       instrument: parseInt(event.target.value)
     })
@@ -44,7 +45,6 @@ export default class Lead extends React.Component {
     let sequencers = []
     this.octaveArray[this.props.octaves].forEach((octave, i) => {
       let matrix
-
       if(this.props.piano.matrix) {
         matrix = this.props.piano.matrix[i]
       }
@@ -54,7 +54,7 @@ export default class Lead extends React.Component {
           playNote={this.props.playNote}
           key={i + 100 * octave}
           midiStorage={this.props.midiStorage}
-          instrument={this.props.piano.instrument}
+          instrument={this.state.instrument}
           octave={octave}
           scale={this.props.scale}
           noteNameClass={'piano'}
@@ -80,9 +80,9 @@ export default class Lead extends React.Component {
                   <Form.Group id="instrument-form">
                     <Form.Label className="select-instrument-label">Select Instrument</Form.Label>
                     <Form.Control className='select-instrument-control'
-                    as="select"
-                    onChange={this.setInstrument}>
-                      <option value="" disabled selected>{this.renderInstrumentName(this.props.instrument)}</option>
+                      as="select"
+                      onChange={this.setInstrument}
+                      defaultValue={this.state.instrument}>
                       <option value="0">{this.renderInstrumentName(0)}</option>
                       <option value="2">{this.renderInstrumentName(2)}</option>
                       <option value="3">{this.renderInstrumentName(3)}</option>

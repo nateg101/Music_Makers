@@ -28,6 +28,10 @@ export default class SequencerComponent extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    console.log('sequencer updated')
+  }
+
   updateWindowDimensions = () => {
     this.setState({ width: this.myInput.current.offsetWidth });
     if (this.sequencer){

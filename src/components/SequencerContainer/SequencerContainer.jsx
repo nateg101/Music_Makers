@@ -6,6 +6,10 @@ import './SequencerContainer.scss'
 
 export default class SequencerContainer extends React.Component {
 
+  componentDidUpdate() {
+    console.log('sequencer updated')
+  }
+
   render() {
     return (
       <div className='instruments'>
