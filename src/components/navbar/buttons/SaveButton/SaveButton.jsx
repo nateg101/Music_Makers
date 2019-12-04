@@ -58,7 +58,7 @@ class SaveButton extends Component {
     console.log("stored it is", this.props.storedInstrument, instrumentState)
     let pianoState = this.seqState(this.props.storedSequencers)
     let drumState = this.seqState(this.props.storedPercussion)
-    return window.location.href + `?0=${pianoState}&1=${drumState}&2=${instrumentState}`
+    return window.location.origin + "/" + `?0=${pianoState}&1=${drumState}&2=${instrumentState}`
   }
 
   render() {
