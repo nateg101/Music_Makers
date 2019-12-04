@@ -9,7 +9,7 @@ describe('SequencerContainer', function() {
         cy.get(`#nexus-ui-sequencer-${i}`)
       }
     })
-  
+
     it('displays the notes of an octave in the correct order', function() {
       cy.visit('/')
       cy.wait(4000)
@@ -26,8 +26,6 @@ describe('SequencerContainer', function() {
       cy.get('.drum-sequencer-wrapper').find('.title').should('have.class', 'is-expanded')
     })
   })
-
-
 
   it('renders the drum sequencer components', function() {
     cy.visit('/')

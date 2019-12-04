@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Form } from 'react-bootstrap'
+import { Card, Form, Accordion, Button } from 'react-bootstrap'
 import SequencerComponent from './SequencerComponent/SequencerComponent'
 import './Instrument.css'
 
@@ -39,7 +39,7 @@ export default class Lead extends React.Component {
     let sequencers = []
     this.octaveArray[this.props.octaves].forEach((octave, i) => {
       let matrix
-  
+
       if(this.props.piano) {
         matrix = this.props.piano[i]
       }
@@ -63,29 +63,36 @@ export default class Lead extends React.Component {
   render() {
     return(
       <div className='lead-container'>
-        <div className="piano-sequencer-wrapper card" >
-          <Card.Header className={this.state.instrument0 ? 'title is-expanded' : 'title'} onClick={()=>{this.toggle(0)}}>
-            <Form
-              className='instrument-select'>
-              <Form.Group id="instrument-form">
-                <Form.Label className="select-instrument-label">Select Instrument</Form.Label>
-                <Form.Control className='select-instrument-control'
-                  as="select"
-                  onChange={this.props.setInstrument}>
-                  <option value="" disabled selected>{this.renderInstrumentName(this.props.instrument)}</option>
-                  <option value="0">{this.renderInstrumentName(0)}</option>
-                  <option value="2">{this.renderInstrumentName(2)}</option>
-                  <option value="3">{this.renderInstrumentName(3)}</option>
-                  <option value="4">{this.renderInstrumentName(4)}</option>
-                  <option value="5">{this.renderInstrumentName(5)}</option>
-                </Form.Control>
-              </Form.Group>
-            </Form>
-          </Card.Header>
-          <div className={this.state.instrument0 ? 'content is-expanded' : 'content'}>
-            {this.renderPianoSequencers()}
-          </div>
-        </div>
+        <Accordion defaultActiveKey="0">
+          <Card>
+            <Card.Header>
+              <Form
+                className='instrument-select'>
+                  <Form.Group id="instrument-form">
+                    <Form.Label className="select-instrument-label">Select Instrument</Form.Label>
+                    <Form.Control className='select-instrument-control'
+                    as="select"
+                    onChange={this.props.setInstrument}>
+                      <option value="" disabled selected>{this.renderInstrumentName(this.props.instrument)}</option>
+                      <option value="0">{this.renderInstrumentName(0)}</option>
+                      <option value="2">{this.renderInstrumentName(2)}</option>
+                      <option value="3">{this.renderInstrumentName(3)}</option>
+                      <option value="4">{this.renderInstrumentName(4)}</option>
+                      <option value="5">{this.renderInstrumentName(5)}</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Form>
+              <Accordion.Toggle as={Button} className="expander" variant="link" eventKey="0">
+                Expand / Collapse
+              </Accordion.Toggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey="0">
+              <Card.Body className="piano-sequencer-wrapper">
+                {this.renderPianoSequencers()}
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        </Accordion>
       </div>
     )
   }

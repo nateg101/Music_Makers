@@ -9,7 +9,7 @@ export default class SequencerContainer extends React.Component {
   render() {
     return (
       <div className='instruments'>
-        <Lead 
+        <Lead
           storedSequencers={this.props.storedSequencers}
           piano={this.props.piano}
           octaves={this.props.octaves}
