@@ -41,12 +41,12 @@ export default class Lead extends React.Component {
   }
 
 
-  renderPianoSequencers = () => {
+  renderLeadSequencers = () => {
     let sequencers = []
     this.octaveArray[this.props.octaves].forEach((octave, i) => {
       let matrix
-      if(this.props.piano.matrix) {
-        matrix = this.props.piano.matrix[i]
+      if(this.props.lead.matrix) {
+        matrix = this.props.lead.matrix[i]
       }
       sequencers.push(
         <SequencerComponent
@@ -96,8 +96,8 @@ export default class Lead extends React.Component {
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="0">
-              <Card.Body className="piano-sequencer-wrapper">
-                {this.renderPianoSequencers()}
+              <Card.Body className="lead-sequencer-wrapper">
+                {this.renderLeadSequencers()}
               </Card.Body>
             </Accordion.Collapse>
           </Card>

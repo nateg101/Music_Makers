@@ -15,7 +15,16 @@ export default class SequencerContainer extends React.Component {
       <div className='instruments'>
         <Lead
           storedLead={this.props.storedLead}
-          piano={this.props.piano}
+          lead={this.props.lead}
+          octaves={this.props.octaves}
+          scale={this.props.scale}
+          tempStorage={this.props.tempStorage}
+          midiStorage={this.props.midiStorage}
+          playNote={this.props.playNote}
+          setInstrument={this.props.setInstrument}/>
+        <Lead
+          storedLead={this.props.storedLead2}
+          lead={this.props.lead2}
           octaves={this.props.octaves}
           scale={this.props.scale}
           tempStorage={this.props.tempStorage}

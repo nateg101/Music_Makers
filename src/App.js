@@ -25,6 +25,10 @@ class App extends React.Component {
       sequencers: [],
       instrument: 0
     }
+    this.storedLead2 = {
+      sequencers: [],
+      instrument: 0
+    }
     this.storedPercussion = []
     this.midiStorage = {}
     this.tempStorage = new Array(12)
@@ -68,26 +72,36 @@ class App extends React.Component {
 
   extractUrl() {
     let params = new URLSearchParams(window.location.search)
-    let pianoParam = params.get(0)
+    let leadParam = params.get(0)
     let percussionParam = params.get(1)
-    let instrumentParam = params.get(2)
+    let leadInstrument = params.get(2)
+    let lead2Param = params.get(3)
+    let lead2Instrument = params.get(4)
     if (percussionParam) {
       var drums = this.convertDrums(percussionParam)
     }
-    if (pianoParam) {
-      var [pianoMatrix, octaves] = this.convertPiano(pianoParam)
+    if (leadParam) {
+      var [leadMatrix, octaves] = this.convertLeads(leadParam)
     }
-
-    if (instrumentParam) {
-      this.storedLead.instrument = this.decompress(instrumentParam)
+    if (lead2Param) {
+      var [lead2Matrix, octaves2] = this.convertLeads(lead2Param)
     }
-    var piano = {
-      instrument: 0,
-      matrix: pianoMatrix || null
+    if (leadInstrument) {
+      this.storedLead.instrument = this.decompress(leadInstrument)
+    }
+    if (lead2Instrument) {
+      this.storedLead2.instrument = this.decompress(lead2Instrument)
+    }
+    var lead = {
+      matrix: leadMatrix || null
+    }
+    var lead2 = {
+      matrix: lead2Matrix || null
     }
     return this.setState({
       octaves: octaves || 3,
-      piano: piano,
+      lead: lead,
+      lead2: lead2,
       drums: drums,
       loading: false
     })
@@ -103,7 +117,7 @@ class App extends React.Component {
     return drums
   }
 
-  convertPiano(compString) {
+  convertLeads(compString) {
     let pianoString = this.decompress(compString)
     let matrixSize = 224
     let octaves = pianoString.length / matrixSize
@@ -145,7 +159,8 @@ class App extends React.Component {
         <NavbarMain
           storedPercussion={this.storedPercussion}
           storedInstrument={this.state.instrument}
-          storedLead={this.storedLead}/>
+          storedLead={this.storedLead}
+          storedLead2={this.storedLead2}/>
         {
           this.state.loading ?
           <div>Loading....</div>
@@ -155,16 +170,19 @@ class App extends React.Component {
             scale={this.state.scale}
             midiStorage={this.midiStorage}
             storedLead={this.storedLead}
+            storedLead2={this.storedLead2}
             storedPercussion={this.storedPercussion}
             octaves={this.state.octaves}
             drums={this.state.drums}
-            piano={this.state.piano}
+            lead={this.state.lead}
+            lead2={this.state.lead2}
             tempStorage={this.tempStorage}/>
         }
         <OptionsBar
           setScale={this.setScale}
           storedPercussion={this.storedPercussion}
           storedLead={this.storedLead}
+          storedLead2={this.storedLead2}
           octaves={this.state.octaves}
           setOctaves={this.setOctaves}/>
       </div>
