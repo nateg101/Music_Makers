@@ -23,6 +23,9 @@ class ScaleSelector extends Component {
     let keyMode = $("input[name=Key]:checked").val()
     let scale = this.keyForm.current.value || 'C'
     this.props.setScale(KEYS[keyMode][scale])
+    if(this.props.buttonText === "◼") {
+      this.props.updateButtonState()
+    }
   }
 
   render() {
