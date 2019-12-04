@@ -23,4 +23,9 @@ describe('instrument component testing', function() {
 
     expect(wrapper.find('.drums-container').length).toEqual(1)
   });
+
+  it('renders child components', function(){
+    expect(wrapper.find('.drums-container').length).toEqual(1)
+    expect(wrapper.find('.sequencer-component')).toBeTruthy()
+  })
 });

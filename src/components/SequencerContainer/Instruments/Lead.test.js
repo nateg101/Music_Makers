@@ -24,14 +24,12 @@ describe('instrument component testing', function() {
 
 
   it('renders successfully', function() {
-    console.log('first test')
     const shallowWrapper = shallow(<Lead octaves={octaves}/>);
     
     expect(shallowWrapper.find('.lead-container').length).toEqual(1)
   });
   
   it('renders child components', function(){
-    console.log('secondtest')
     expect(wrapper.find('.lead-container').length).toEqual(1)
     expect(wrapper.find('.sequencer-component')).toBeTruthy()
   })
