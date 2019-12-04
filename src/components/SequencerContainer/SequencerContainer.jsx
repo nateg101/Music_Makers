@@ -6,7 +6,6 @@ import './SequencerContainer.scss'
 
 export default class SequencerContainer extends React.Component {
   render() {
-    console.log('container loaded')
     return (
       <div className='instruments'>
         <Lead

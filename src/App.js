@@ -10,7 +10,6 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      octaves: 3,
       loading: true,
       scale: [
         {letter: 'C', value: 12},
@@ -21,8 +20,6 @@ class App extends React.Component {
         {letter: 'A', value: 21},
         {letter: 'B', value: 23},
       ],
-      lead: {},
-      percussion: {}
     }
     this.storedLead = {
       sequencers: [],
@@ -57,8 +54,12 @@ class App extends React.Component {
     this.storedLead2.sequencers = []
     this.storedPercussion = []
   }
-  
+
   componentWillMount() {
+    this.extractUrl()
+  }
+  
+  componentDidMount() {
     let self = this
     this.midiStorage.MIDIPlugin = window.MIDI
     this.midiStorage.MIDIPlugin.loadPlugin({
@@ -71,7 +72,7 @@ class App extends React.Component {
       self.midiStorage.MIDIPlugin.programChange(3, 33)
       self.midiStorage.MIDIPlugin.programChange(4, 112)
       self.midiStorage.MIDIPlugin.programChange(5, 121)
-      self.extractUrl()
+      self.setState({loading: false})
     }
     })
   }
@@ -109,7 +110,6 @@ class App extends React.Component {
       lead: lead,
       lead2: lead2,
       drums: drums,
-      loading: false
     })
   }
 
@@ -168,22 +168,19 @@ class App extends React.Component {
           storedLead={this.storedLead}
           storedLead2={this.storedLead2}/>
 
-
-          {/* <div>Loading....</div> */}
-
-          <SequencerContainer
-            playNote={this.playNote}
-            scale={this.state.scale}
-            midiStorage={this.midiStorage}
-            storedLead={this.storedLead}
-            storedLead2={this.storedLead2}
-            storedPercussion={this.storedPercussion}
-            octaves={this.state.octaves}
-            drums={this.state.drums}
-            lead={this.state.lead}
-            lead2={this.state.lead2}
-            tempStorage={this.tempStorage}/>
-
+        <SequencerContainer
+          playNote={this.playNote}
+          scale={this.state.scale}
+          midiStorage={this.midiStorage}
+          storedLead={this.storedLead}
+          storedLead2={this.storedLead2}
+          storedPercussion={this.storedPercussion}
+          octaves={this.state.octaves}
+          drums={this.state.drums}
+          lead={this.state.lead}
+          lead2={this.state.lead2}
+          tempStorage={this.tempStorage}/>
+        
         <OptionsBar
           setScale={this.setScale}
           storedPercussion={this.storedPercussion}

@@ -15,6 +15,7 @@ export default class SequencerComponent extends React.Component {
   }
 
   componentDidMount() {
+    console.log('sequencers mounting')
     this.updateWindowDimensions()
     window.addEventListener("resize", this.updateWindowDimensions);
   }
@@ -24,9 +25,14 @@ export default class SequencerComponent extends React.Component {
   }
 
   componentWillUpdate() {
+    console.log('sequencers updating')
     if (this.sequencer) {
-      this.props.tempStorage[this.props.octave] = this.sequencer.matrix.pattern
+      this.saveToTemp(this.sequencer.matrix.pattern)
     }
+  }
+
+  saveToTemp(matrix) {
+    this.props.tempStorage[this.props.octave] = matrix
   }
 
   updateWindowDimensions = () => {
@@ -48,26 +54,26 @@ export default class SequencerComponent extends React.Component {
   }
 
   handleOnReady = (sequencer) => {
+    this.sequencer = sequencer
     this.ready = false
-    this.props.onReady(sequencer)
-    var self = this
     if (this.props.tempStorage[this.props.octave]) {
-      setTimeout(function() {
-        sequencer.matrix.set.all(self.props.tempStorage[self.props.octave])
-        sequencer.colorInterface()
-        self.ready = true
-      }, 0)
+      this.fillMatrix(this.props.tempStorage[this.props.octave])
     } else if (this.props.matrix) {
-      setTimeout(function() {
-        sequencer.matrix.set.all(self.props.matrix)
-        sequencer.colorInterface()
-        self.props.tempStorage[self.props.octave] = self.props.matrix
-        self.ready = true
-      }, 0)
+      this.fillMatrix(this.props.matrix)
+      this.saveToTemp(this.props.matrix)
     } else {
       this.ready = true
     }
-    this.sequencer = sequencer
+    this.props.onReady(sequencer)
+  }
+
+  fillMatrix(matrix) {
+    var self = this
+    setTimeout(function() {
+      self.sequencer.matrix.set.all(matrix)
+      self.sequencer.colorInterface()
+      self.ready = true
+    }, 0)
   }
 
   renderNoteNames = () => {
