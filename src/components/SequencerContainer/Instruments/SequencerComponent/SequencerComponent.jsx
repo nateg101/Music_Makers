@@ -47,10 +47,7 @@ export default class SequencerComponent extends React.Component {
   }
 
   handleOnReady = (sequencer) => {
-    if (this.props.midiStorage.MIDIPlugin) {
-      this.props.storedSequencers.push(sequencer)
-      console.log('adding', this.props.storedSequencers)
-    }
+    this.props.onReady(sequencer)
     if (this.props.matrix) {
       var self = this
       setTimeout(function() {

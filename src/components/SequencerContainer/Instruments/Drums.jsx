@@ -40,6 +40,10 @@ export default class Drums extends React.Component {
     }
   }
 
+  appendToSequencers = (sequencer) => {
+    this.props.storedPercussion.push(sequencer)
+  }
+
   render() {
       return (
         <div className='drums-container card'>
@@ -55,6 +59,7 @@ export default class Drums extends React.Component {
                 <Card.Body className="drum-sequencer-wrapper">
                     <div className={this.state.visible ? 'content is-expanded' : 'content'}>
                       <SequencerComponent
+                        onReady={this.appendToSequencers}
                         intermittentStorage={{}}
                         playNote={this.playDrumNote}
                         key={10 + 1000}
@@ -65,7 +70,6 @@ export default class Drums extends React.Component {
                         octave={0}
                         scale={this.drumNotes}
                         noteNameClass={'drums'}
-                        storedSequencers={this.props.storedPercussion}
                         tempStorage={this.props.tempStorage}/>
                     </div>
                 </Card.Body>

@@ -35,11 +35,12 @@ export default class Lead extends React.Component {
     this.setState({
       instrument: parseInt(event.target.value)
     })
+    this.props.storedLead.sequencers = []
+    this.props.storedLead.instrument = event.target.value
   }
 
 
-    renderPianoSequencers = () => {
-      console.log(this.props.storedLead)
+  renderPianoSequencers = () => {
     let sequencers = []
     this.octaveArray[this.props.octaves].forEach((octave, i) => {
       let matrix
@@ -49,6 +50,7 @@ export default class Lead extends React.Component {
       }
       sequencers.push(
         <SequencerComponent
+          onReady={this.appendToSequencers}
           playNote={this.props.playNote}
           key={i + 100 * octave}
           midiStorage={this.props.midiStorage}
@@ -57,11 +59,14 @@ export default class Lead extends React.Component {
           scale={this.props.scale}
           noteNameClass={'piano'}
           matrix={matrix || null}
-          storedSequencers={this.props.storedLead.sequencers}
           tempStorage={this.props.tempStorage}/>
         )
       })
     return sequencers
+  }
+
+  appendToSequencers = (sequencer) => {
+    this.props.storedLead.sequencers.push(sequencer)
   }
 
   render() {

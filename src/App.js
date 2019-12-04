@@ -23,7 +23,7 @@ class App extends React.Component {
     }
     this.storedLead = {
       sequencers: [],
-      thing: 'hello'
+      instrument: 0
     }
     this.storedPercussion = []
     this.midiStorage = {}
@@ -43,8 +43,6 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    this.storedLead.sequencers = []
-    this.storedPercussion = []
     this.storedLead.sequencers.forEach((sequencer) => {
       sequencer.colorInterface()
     })
@@ -74,11 +72,9 @@ class App extends React.Component {
     let percussionParam = params.get(1)
     let instrumentParam = params.get(2)
     if (percussionParam) {
-      console.log(percussionParam)
       var drums = this.convertDrums(percussionParam)
     }
     if (pianoParam) {
-      console.log(pianoParam)
       var [pianoMatrix, octaves] = this.convertPiano(pianoParam)
     }
 
@@ -111,7 +107,6 @@ class App extends React.Component {
     let pianoString = this.decompress(compString)
     let matrixSize = 224
     let octaves = pianoString.length / matrixSize
-    console.log('app', octaves)
     let piano = []
     for (let i = 0; i < octaves; i++) {
       let octave = []
