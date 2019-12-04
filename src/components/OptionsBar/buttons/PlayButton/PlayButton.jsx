@@ -6,8 +6,6 @@ class PlayButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      buttonText: '▶',
-      isButtonActive: false,
     }
   }
 
@@ -16,17 +14,8 @@ class PlayButton extends Component {
   }
 
   handleClick = () => {
-    this.toggleSequencer()
-    this.updateButtonState()
-  }
-
-  updateButtonState = () => {
-    let buttonText = this.state.buttonText === "▶" ? "◼" : "▶"
-
-    this.setState({
-      buttonText: buttonText,
-      isButtonActive: !this.state.isButtonActive
-    })
+    this.props.updateButtonState()
+    this.toggleSequencer();
   }
 
   toggleSequencer = () => {
@@ -35,7 +24,7 @@ class PlayButton extends Component {
       this.props.storedLead2.sequencers,
       this.props.storedPercussion
     ].flat()
-    if(this.state.isButtonActive){
+    if(this.props.isButtonActive){
       this.sequencersOff(sequencers)
     } else {
       this.sequencersOn(sequencers)
@@ -64,8 +53,8 @@ class PlayButton extends Component {
         variant="outline-light"
         id="playback-button"
         onClick={this.handleClick}>
-        <span className={this.state.isButtonActive ? 'stop-button' : "play-button"}>
-          {this.state.buttonText}
+        <span className={this.props.isButtonActive ? 'stop-button' : "play-button"}>
+          {this.props.buttonText}
         </span>
       </Button>
     )

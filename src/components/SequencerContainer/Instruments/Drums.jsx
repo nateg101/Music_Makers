@@ -46,36 +46,38 @@ export default class Drums extends React.Component {
 
   render() {
       return (
-        <div className='drums-container card'>
-          <Accordion defaultActiveKey="0">
-            <Card>
-              <Card.Header>
-                Percussion
-                <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                  Expand / Collapse
-                </Accordion.Toggle>
-              </Card.Header>
-              <Accordion.Collapse eventKey="0">
-                <Card.Body className="drum-sequencer-wrapper">
-                    <div className={this.state.visible ? 'content is-expanded' : 'content'}>
-                      <SequencerComponent
-                        onReady={this.appendToSequencers}
-                        intermittentStorage={{}}
-                        playNote={this.playDrumNote}
-                        key={10 + 1000}
-                        matrix={this.props.drums}
-                        rows={this.drumNotes.length}
-                        midiStorage={this.props.midiStorage}
-                        instrument={1}
-                        octave={0}
-                        scale={this.drumNotes}
-                        noteNameClass={'drums'}
-                        tempStorage={this.props.tempStorage}/>
-                    </div>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
-          </Accordion>
+        <div className="drum-sequencer-wrapper-container">
+          <div className='drums-container card'>
+            <Accordion defaultActiveKey="0">
+              <Card>
+                <Card.Header>
+                  Percussion
+                  <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                    Expand / Collapse
+                  </Accordion.Toggle>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body className="drum-sequencer-wrapper">
+                      <div className={this.state.visible ? 'content is-expanded' : 'content'}>
+                        <SequencerComponent
+                          onReady={this.appendToSequencers}
+                          intermittentStorage={{}}
+                          playNote={this.playDrumNote}
+                          key={10 + 1000}
+                          matrix={this.props.drums}
+                          rows={this.drumNotes.length}
+                          midiStorage={this.props.midiStorage}
+                          instrument={1}
+                          octave={0}
+                          scale={this.drumNotes}
+                          noteNameClass={'drums'}
+                          tempStorage={this.props.tempStorage}/>
+                      </div>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+          </div>
         </div>
     )
   }

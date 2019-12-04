@@ -10,6 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      octaves: 3,
       loading: true,
       scale: [
         {letter: 'C', value: 12},
@@ -20,6 +21,8 @@ class App extends React.Component {
         {letter: 'A', value: 21},
         {letter: 'B', value: 23},
       ],
+      lead: {},
+      percussion: {}
     }
     this.storedLead = {
       sequencers: [],
@@ -35,6 +38,9 @@ class App extends React.Component {
   }
 
   playNote = (triggers, octave, instrument) => {
+    if (this.state.loading) {
+      return
+    }
     let notes = []
     triggers.forEach((note, i) => {
       if (note) {
@@ -47,19 +53,12 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('app did update')
-    console.log(this.tempStorage)
     this.storedLead.sequencers = []
     this.storedLead2.sequencers = []
     this.storedPercussion = []
   }
   
-  componentWillUpdate(){
-    console.log('app will update')
-    console.log(this.tempStorage)
-  }
-
-  componentDidMount() {
+  componentWillMount() {
     let self = this
     this.midiStorage.MIDIPlugin = window.MIDI
     this.midiStorage.MIDIPlugin.loadPlugin({
@@ -105,7 +104,7 @@ class App extends React.Component {
     var lead2 = {
       matrix: lead2Matrix || null
     }
-    return this.setState({
+    this.setState({
       octaves: octaves || 3,
       lead: lead,
       lead2: lead2,
@@ -150,7 +149,7 @@ class App extends React.Component {
 
   setOctaves = (event) => {
     this.setState({
-      octaves: event.target.value
+      octaves: parseInt(event.target.value)
     })
   }
 
@@ -168,10 +167,10 @@ class App extends React.Component {
           storedInstrument={this.state.instrument}
           storedLead={this.storedLead}
           storedLead2={this.storedLead2}/>
-        {
-          this.state.loading ?
-          <div>Loading....</div>
-          :
+
+
+          {/* <div>Loading....</div> */}
+
           <SequencerContainer
             playNote={this.playNote}
             scale={this.state.scale}
@@ -184,13 +183,12 @@ class App extends React.Component {
             lead={this.state.lead}
             lead2={this.state.lead2}
             tempStorage={this.tempStorage}/>
-        }
+
         <OptionsBar
           setScale={this.setScale}
           storedPercussion={this.storedPercussion}
           storedLead={this.storedLead}
           storedLead2={this.storedLead2}
-          octaves={this.state.octaves}
           setOctaves={this.setOctaves}/>
       </div>
     )

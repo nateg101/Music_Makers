@@ -5,15 +5,12 @@ import Lead from './Instruments/Lead'
 import './SequencerContainer.scss'
 
 export default class SequencerContainer extends React.Component {
-
-  componentDidUpdate() {
-    console.log('sequencer updated')
-  }
-
   render() {
+    console.log('container loaded')
     return (
       <div className='instruments'>
         <Lead
+          keySeed={5}
           storedLead={this.props.storedLead}
           lead={this.props.lead}
           octaves={this.props.octaves}
@@ -22,7 +19,8 @@ export default class SequencerContainer extends React.Component {
           midiStorage={this.props.midiStorage}
           playNote={this.props.playNote}
           setInstrument={this.props.setInstrument}/>
-        <Lead
+        {/* <Lead
+          keySeed={6}
           storedLead={this.props.storedLead2}
           lead={this.props.lead2}
           octaves={this.props.octaves}
@@ -30,7 +28,7 @@ export default class SequencerContainer extends React.Component {
           tempStorage={this.props.tempStorage}
           midiStorage={this.props.midiStorage}
           playNote={this.props.playNote}
-          setInstrument={this.props.setInstrument}/>
+          setInstrument={this.props.setInstrument}/> */}
         <Drums
           storedPercussion={this.props.storedPercussion}
           drums={this.props.drums}

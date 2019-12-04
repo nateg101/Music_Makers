@@ -11,13 +11,25 @@ class OptionsBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      tempo: 120
+      tempo: 120,
+      buttonText: '▶',
+      isButtonActive: false,
     }
     this.updateTempo = this.updateTempo.bind(this);
+    this.updateButtonState = this.updateButtonState.bind(this);
   }
 
   updateTempo = (tempo) => {
     this.setState({tempo: tempo})
+  }
+
+  updateButtonState = () => {
+    let buttonText = this.state.buttonText === "▶" ? "◼" : "▶"
+
+    this.setState({
+      buttonText: buttonText,
+      isButtonActive: !this.state.isButtonActive
+    })
   }
 
   render() {
@@ -27,19 +39,24 @@ class OptionsBar extends Component {
         <Row>
           <Col sm={1}>
             <PlayButton
+              buttonText={this.state.buttonText}
+              isButtonActive={this.state.isButtonActive}
+              updateButtonState={this.updateButtonState}
               tempo={this.state.tempo}
               storedPercussion={this.props.storedPercussion}
               storedLead={this.props.storedLead}
               storedLead2={this.props.storedLead2}/>
           </Col>
-          <Col>
+          <Col sm={5}>
             <Tempo
               tempo={this.state.tempo}
               updateTempo={this.updateTempo}/>
           </Col>
-          <Col sm={3}>
+          <Col sm={2}>
             <OctaveSelector
-            octaves={this.props.octaves}
+            buttonText={this.state.buttonText}
+            isButtonActive={this.state.isButtonActive}
+            updateButtonState={this.updateButtonState}
             setOctaves={this.props.setOctaves}/>
           </Col>
           <Col>

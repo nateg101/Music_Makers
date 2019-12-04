@@ -53,7 +53,6 @@ export default class SequencerComponent extends React.Component {
     var self = this
     if (this.props.tempStorage[this.props.octave]) {
       setTimeout(function() {
-        console.log(self.props.tempStorage[self.props.octave])
         sequencer.matrix.set.all(self.props.tempStorage[self.props.octave])
         sequencer.colorInterface()
         self.ready = true
@@ -62,6 +61,7 @@ export default class SequencerComponent extends React.Component {
       setTimeout(function() {
         sequencer.matrix.set.all(self.props.matrix)
         sequencer.colorInterface()
+        self.props.tempStorage[self.props.octave] = self.props.matrix
         self.ready = true
       }, 0)
     } else {

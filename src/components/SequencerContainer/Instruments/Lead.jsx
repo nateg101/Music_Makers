@@ -30,9 +30,7 @@ export default class Lead extends React.Component {
     return instrumenthash[instrument]
   }
 
-
   setInstrument = (event) => {
-    console.log('setting instrument')
     this.setState({
       instrument: parseInt(event.target.value)
     })
@@ -52,7 +50,7 @@ export default class Lead extends React.Component {
         <SequencerComponent
           onReady={this.appendToSequencers}
           playNote={this.props.playNote}
-          key={i + 100 * octave}
+          key={i * this.props.keySeed + 100 * octave}
           midiStorage={this.props.midiStorage}
           instrument={this.state.instrument}
           octave={octave}
@@ -72,7 +70,7 @@ export default class Lead extends React.Component {
   render() {
     return(
       <div className='lead-container'>
-        <Accordion defaultActiveKey="0">
+        <Accordion defaultActiveKey="0" className="lead-accordion">
           <Card>
             <Card.Header>
               <Form
