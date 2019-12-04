@@ -30,8 +30,9 @@ class PlayButton extends Component {
   }
 
   toggleSequencer = () => {
+    console.log('play', this.props.storedLead)
     let sequencers = [
-      this.props.storedLead,
+      this.props.storedLead.sequencers,
       this.props.storedPercussion
     ].flat()
     if(this.state.isButtonActive){

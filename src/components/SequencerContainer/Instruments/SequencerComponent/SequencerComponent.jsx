@@ -49,7 +49,7 @@ export default class SequencerComponent extends React.Component {
   handleOnReady = (sequencer) => {
     if (this.props.midiStorage.MIDIPlugin) {
       this.props.storedSequencers.push(sequencer)
-      console.log('adding')
+      console.log('adding', this.props.storedSequencers)
     }
     if (this.props.matrix) {
       var self = this

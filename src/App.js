@@ -21,7 +21,10 @@ class App extends React.Component {
         {letter: 'B', value: 23},
       ],
     }
-    this.storedLead = []
+    this.storedLead = {
+      sequencers: [],
+      thing: 'hello'
+    }
     this.storedPercussion = []
     this.midiStorage = {}
     this.tempStorage = new Array(12)
@@ -40,9 +43,9 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    this.storedLead = []
+    this.storedLead.sequencers = []
     this.storedPercussion = []
-    this.storedLead.forEach((sequencer) => {
+    this.storedLead.sequencers.forEach((sequencer) => {
       sequencer.colorInterface()
     })
   }
