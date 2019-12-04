@@ -5,26 +5,36 @@ import sinon from 'sinon'
 
 describe('instrument component testing', function() {
   let wrapper
-  let storedSequencers
+  let storedLead
+  let tempStorage
   let playNote
   let octaves = 3
   let scale
   beforeEach(function() {
     playNote = sinon.spy()
-    storedSequencers = []
+    storedLead = {
+      instrument: 0
+    }
+    tempStorage = {
+      lead: []
+    }
     scale = []
     wrapper = mount(<Lead
       scale={scale}
-      storedSequencers={storedSequencers}
+      storedLead={storedLead}
       matrix={[]}
-      tempStorage={[]}
+      tempStorage={tempStorage}
       playNote={playNote}
       octaves={octaves}/>);
   })
 
 
   it('renders successfully', function() {
-    const shallowWrapper = shallow(<Lead octaves={octaves}/>);
+    const shallowWrapper = shallow(
+      <Lead 
+      storedLead={{instrument: 0}}
+      octaves={octaves}/>
+    );
     
     expect(shallowWrapper.find('.lead-container').length).toEqual(1)
   });

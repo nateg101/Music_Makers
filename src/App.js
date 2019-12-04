@@ -3,7 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarMain from './components/navbar/navbar';
 import OptionsBar from './components/OptionsBar/OptionsBar';
-import SequencerContainer from './components/SequencerContainer/SequencerContainer';
+import InstrumentContainer from './components/InstrumentContainer/InstrumentContainer';
 import LZString from "lz-string";
 
 class App extends React.Component {
@@ -35,7 +35,7 @@ class App extends React.Component {
   
   componentDidMount() {
     let self = this
-    this.midiStorage.MIDIPlugin = window.MIDI
+    this.midiStorage.MIDIPlugin = this.getWindowMidi()
     this.midiStorage.MIDIPlugin.loadPlugin({
       soundfontUrl: "./soundfont/",
       instruments: [
@@ -160,6 +160,17 @@ class App extends React.Component {
     ]
   }
 
+  getWindowMidi() {
+    if (window.Cypress) {
+      let midi = function() {}
+      midi.programChange = function() {}
+      midi.chordOn = function() {}
+      midi.loadPlugin = function() {}
+      return midi
+    }
+    return window.MIDI
+  }
+
   setOctaves = (event) => {
     this.setState({
       octaves: parseInt(event.target.value)
@@ -181,7 +192,7 @@ class App extends React.Component {
           storedLead={this.storedLead}
           storedLead2={this.storedLead2}/>
       
-        <SequencerContainer
+        <InstrumentContainer
           scale={this.state.scale}
           midiStorage={this.midiStorage}
           storedLead={this.storedLead}
