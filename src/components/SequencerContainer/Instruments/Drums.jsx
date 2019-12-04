@@ -53,7 +53,7 @@ export default class Drums extends React.Component {
               </Card.Header>
               <Accordion.Collapse eventKey="0">
                 <Card.Body className="drum-sequencer-wrapper">
-                    <div className={this.state.instrument1 ? 'content is-expanded' : 'content'}>
+                    <div className={this.state.visible ? 'content is-expanded' : 'content'}>
                       <SequencerComponent
                         intermittentStorage={{}}
                         playNote={this.playDrumNote}

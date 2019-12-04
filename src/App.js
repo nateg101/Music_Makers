@@ -107,6 +107,7 @@ class App extends React.Component {
     let pianoString = this.decompress(compString)
     let matrixSize = 224
     let octaves = pianoString.length / matrixSize
+    console.log('app', octaves)
     let piano = []
     for (let i = 0; i < octaves; i++) {
       let octave = []
@@ -138,7 +139,7 @@ class App extends React.Component {
       scale: scale
     })
   }
-  
+
   setInstrument = (event) => {
     this.setState({
       instrument: parseInt(event.target.value)
