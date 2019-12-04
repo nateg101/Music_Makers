@@ -46,12 +46,12 @@ class OptionsBar extends Component {
               storedPercussion={this.props.storedPercussion}
               storedSequencers={this.props.storedSequencers}/>
           </Col>
-          <Col>
+          <Col sm={5}>
             <Tempo
               tempo={this.state.tempo}
               updateTempo={this.updateTempo}/>
           </Col>
-          <Col sm={3}>
+          <Col sm={2}>
             <OctaveSelector
             buttonText={this.state.buttonText}
             isButtonActive={this.state.isButtonActive}

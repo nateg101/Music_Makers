@@ -6,8 +6,6 @@ class PlayButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      // buttonText: '▶',
-      // isButtonActive: false,
     }
   }
 
@@ -16,22 +14,9 @@ class PlayButton extends Component {
   }
 
   handleClick = () => {
-    console.log("smello", this.props.buttonText)
     this.props.updateButtonState()
     this.toggleSequencer();
-
   }
-
-
-
-  // updateButtonState = () => {
-  //   let buttonText = this.state.buttonText === "▶" ? "◼" : "▶"
-  //
-  //   this.setState({
-  //     buttonText: buttonText,
-  //     isButtonActive: !this.state.isButtonActive
-  //   })
-  // }
 
   toggleSequencer = () => {
     let sequencers = [

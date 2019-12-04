@@ -88,7 +88,7 @@ export default class SequencerContainer extends React.Component {
   render() {
     return (
       <div className='instruments'>
-        <Accordion defaultActiveKey="0">
+        <Accordion defaultActiveKey="0" className='lead-accordion'>
           <Card>
             <Card.Header>
               <Form

@@ -1,0 +1,11 @@
+.key-selector-form {
+  vertical-align: middle;
+  width: 150px;
+}
+
+.maj-min-buttons {
+  vertical-align: middle;
+  float: right;
+  width: 100px;
+  margin-right: 10px;
+}
