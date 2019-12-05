@@ -1,7 +1,6 @@
 import React from "react";
 import Lead from './Lead'
 import { shallow, mount } from 'enzyme'
-import sinon from 'sinon'
 
 describe('instrument component testing', function() {
   let wrapper
@@ -48,14 +47,14 @@ describe('instrument component testing', function() {
   })
 
   it('sends calls the midi plugin', function() {
-    let [triggers, octave, instrument] = [[1],1,1]
+    let [triggers, octave] = [[1],1]
     wrapper.instance().ready = true
     wrapper.instance().playNote(triggers, octave)
     expect(midiStorage.MIDIPlugin.chordOn).toHaveBeenCalledWith(0, [13], 100, 0)
   })
 
   it('waits for sequencers to load before allowing midi to play', function() {
-    let [triggers, octave, instrument] = [[1],1,1]
+    let [triggers, octave] = [[1],1]
     wrapper.instance().playNote(triggers, octave)
 
     expect(midiStorage.MIDIPlugin.chordOn).not.toHaveBeenCalledWith(0, [13], 100, 0)
