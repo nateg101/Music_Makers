@@ -7,9 +7,6 @@ class OctaveSelector extends Component {
 
   handleOnChange = (event) => {
     this.props.setOctaves(event)
-    if(this.props.buttonText === "◼"){
-      this.props.updateButtonState()
-    }
   }
 
   render() {

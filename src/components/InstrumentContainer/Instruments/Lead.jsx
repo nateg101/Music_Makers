@@ -46,6 +46,7 @@ export default class Lead extends React.Component {
   }
 
   setInstrument = (event) => {
+    window.NexusInterval.stop()
     this.setState({
       instrument: parseInt(event.target.value)
     })
