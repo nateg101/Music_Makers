@@ -98,7 +98,7 @@ export default class SequencerComponent extends React.Component {
                   key={this.props.octave + 12}
                   rows={this.props.rows || 7}
                   columns={32}
-                  size={[this.state.width*1.4118, this.state.width*0.4]}
+                  size={[this.state.width*0.9412, this.state.width*0.25]}
                   onReady={this.handleOnReady}
                   onChange={this.handleChange}
                   onStep={(state)=>{this.props.playNote(state, this.props.octave, this.props.instrument)}}/> : <div>Loading....</div>}
