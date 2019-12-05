@@ -43,4 +43,11 @@ describe('app component testing', function() {
     expect(LZString.compressToBase64).toHaveBeenCalledWith("0")
     expect(LZString.compressToBase64).toHaveBeenCalledWith("")
   })
+
+  it('constructs a URL with the compressed strings', function() {
+    wrapper.find('button').simulate('click')
+    let text = wrapper.find('.url').text()
+    console.warn(text)
+    expect(text).toContain("/?0=dummy&1=dummy&2=dummy&3=dummy&4=dummy")
+  })
 });
