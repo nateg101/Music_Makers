@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/nateg101/Music_Makers.svg?branch=master)](https://travis-ci.org/nateg101/Music_Makers)
 
-[![Heroku](https://synesthesia-beatz.herokuapp.com/?app=heroku-badge)]
+[![Heroku](https://heroku-badge.herokuapp.com/?app=synesthesia-beatz)]
 
 A single page application for creating multi-dimensional audio tracks. Visit the app, Synethesthesia, [here](https://synesthesia-beatz.herokuapp.com/) and make your own music.
 
