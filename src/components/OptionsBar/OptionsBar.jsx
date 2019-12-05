@@ -61,6 +61,9 @@ class OptionsBar extends Component {
           </Col>
           <Col>
             <ScaleSelector
+            buttonText={this.state.buttonText}
+            isButtonActive={this.state.isButtonActive}
+            updateButtonState={this.updateButtonState}
             setScale={this.props.setScale}/>
           </Col>
         </Row>
