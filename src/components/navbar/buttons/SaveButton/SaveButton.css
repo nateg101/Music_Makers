@@ -1,6 +1,9 @@
 
 .save-button {
   color: white;
+  width: auto;
+  height: auto;
+  font-size: 27px;
 }
 
 .Modal {
