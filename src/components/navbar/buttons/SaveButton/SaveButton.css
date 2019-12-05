@@ -1,6 +1,9 @@
 
 .save-button {
   color: white;
+  width: auto;
+  height: auto;
+  font-size: 27px;
 }
 
 .Modal {
@@ -8,14 +11,24 @@
   position: absolute;
   top: 200px;
   width: 60%;
-  background-color: #676B70 !important;
-  opacity: 0.7;
+  background-color: rgba(27, 89, 143, 0.7) !important;
+  border-radius: 15px;
 }
 
 .url {
-  width:70%;
+  width:52%;
+  height: auto;
   margin: 200px auto;
   text-align: center;
-  opacity: 1 !important;
   background-color: white;
+  overflow-wrap: break-word;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.link-text {
+  color: white;
+  font-size: 30px;
+  position: relative;
+  top: 22%;
 }

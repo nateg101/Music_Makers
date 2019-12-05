@@ -1,10 +1,9 @@
 .option-bar {
-  width: 85%;
+  width: 65%;
   height: 90px;
   vertical-align: baseline;
-  background-color: #343A40;
+  background-color: rgba(52,58,64, 0.75);
   border-radius: 15px;
-  opacity: 0.75;
   position: fixed;
   bottom: 10px;
   margin-top: 40px;

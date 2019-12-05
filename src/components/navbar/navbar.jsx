@@ -6,7 +6,7 @@ import './navbar.css'
 class NavbarMain extends Component {
   render() {
     return (
-      <Navbar bg="dark" variant="dark">
+      <Navbar className="nav-bar" bg="dark" variant="dark">
         <Navbar.Brand href="/">
           <img
           alt="logo"
