@@ -4,6 +4,24 @@
   width: 90%;
 }
 
+.piano-sequencer-wrapper {
+  overflow: hidden;
+  margin: 0 auto;
+  overflow-y: scroll;
+  width: 90%;
+}
+
+.drum-sequencer-wrapper {
+  overflow: hidden;
+  margin: 0 auto;
+  overflow-y: scroll;
+  width: 90%;
+}
+
+.drum-sequencer-wrapper-container {
+  margin-bottom: 13vh;
+}
+
 .title {
   cursor: pointer;
   padding-bottom: 5px;
@@ -38,6 +56,7 @@
 }
 
 .instrument-select {
+  float: left;
   width: 200px;
   margin-top: 20px;
   margin-left: 100px;
@@ -65,4 +84,9 @@
   position: relative;
   left: 150px;
   bottom: 20px;
+}
+
+.btn-link {
+  padding: 18px;
+  font-size: 20px;
 }

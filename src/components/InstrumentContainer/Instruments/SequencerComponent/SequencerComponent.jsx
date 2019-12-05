@@ -9,7 +9,8 @@ export default class SequencerComponent extends React.Component {
     this.state = {
       width: 0
     }
-    this.myInput = React.createRef()
+    this.ready = false
+    this.domElement = React.createRef()
     this.render = this.render.bind(this)
   }
 
@@ -24,22 +25,21 @@ export default class SequencerComponent extends React.Component {
 
   componentWillUpdate() {
     if (this.sequencer) {
-      this.props.tempStorage[this.props.octave] = this.sequencer.matrix.pattern
+      this.saveToTemp(this.sequencer.matrix.pattern)
     }
   }
 
-  updateWindowDimensions = () => {
-    this.setState({ width: this.myInput.current.offsetWidth });
-    if (this.sequencer){
-      let self = this
-      setTimeout(function() {
-        self.sequencer.colorInterface()
-      }, 0)
-    }
+  fillMatrix(matrix) {
+    var self = this
+    setTimeout(function() {
+      self.sequencer.matrix.set.all(matrix)
+      self.sequencer.colorInterface()
+      self.ready = true
+    }, 0)
   }
 
   handleChange = (change) => {
-    if(change.state) {
+    if(change.state && this.ready) {
       let triggers = new Array(this.props.scale.length)
       triggers[triggers.length - change.row - 1] = 1
       this.props.playNote(triggers, this.props.octave, this.props.instrument)
@@ -47,21 +47,16 @@ export default class SequencerComponent extends React.Component {
   }
 
   handleOnReady = (sequencer) => {
-    if (this.props.midiStorage.MIDIPlugin) {
-      this.props.storedSequencers.push(sequencer)
-    }
-    if (this.props.matrix) {
-      sequencer.matrix.set.all(this.props.matrix)
-      setTimeout(function() {
-        sequencer.colorInterface()
-      }, 0)
-    }
-    if(this.props.tempStorage[this.props.octave]) {
-      sequencer.matrix.set.all(this.props.tempStorage[this.props.octave])
-    }
     this.sequencer = sequencer
+    this.ready = false
+    if (this.props.tempStorage[this.props.octave]) {
+      this.fillMatrix(this.props.tempStorage[this.props.octave])
+    } else {
+      this.ready = true
+    }
+    this.props.onReady(sequencer)
   }
-
+  
   renderNoteNames = () => {
     let noteNames = []
     for(let i = 0; i < this.props.scale.length; i++){
@@ -76,6 +71,20 @@ export default class SequencerComponent extends React.Component {
     return noteNames
   }
 
+  saveToTemp(matrix) {
+    this.props.tempStorage[this.props.octave] = matrix
+  }
+
+  updateWindowDimensions = () => {
+    this.setState({ width: this.domElement.current.offsetWidth });
+    if (this.sequencer){
+      let self = this
+      setTimeout(function() {
+        self.sequencer.colorInterface()
+      }, 0)
+    }
+  }
+
   render() {
       return (
         <Container>
@@ -84,7 +93,7 @@ export default class SequencerComponent extends React.Component {
               {this.renderNoteNames()}
             </Col>
             <Col sm={11} className='no-gutters'>
-              <Container className='sequencer-component' id="notes" ref={this.myInput}>
+              <Container className='sequencer-component' id="notes" ref={this.domElement}>
                 {this.state.width ? <Sequencer
                   key={this.props.octave + 12}
                   rows={this.props.rows || 7}

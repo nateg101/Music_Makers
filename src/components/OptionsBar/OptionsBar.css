@@ -5,7 +5,8 @@
   background-color: #343A40;
   border-radius: 15px;
   opacity: 0.75;
-  position: absolute;
+  position: fixed;
+  bottom: 10px;
   margin-top: 40px;
 }
 

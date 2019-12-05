@@ -54,11 +54,12 @@ class SaveButton extends Component {
   }
 
   constructUrl = () => {
-    let instrumentState = this.compress(this.props.storedInstrument.toString())
-    console.log("stored it is", this.props.storedInstrument, instrumentState)
-    let pianoState = this.seqState(this.props.storedSequencers)
+    let leadInstrument = this.compress(this.props.storedLead.instrument.toString())
+    let lead2Instrument = this.compress(this.props.storedLead2.instrument.toString())
+    let leadState = this.seqState(this.props.storedLead.sequencers)
+    let lead2State = this.seqState(this.props.storedLead2.sequencers)
     let drumState = this.seqState(this.props.storedPercussion)
-    return window.location.href + `?0=${pianoState}&1=${drumState}&2=${instrumentState}`
+    return window.location.origin + "/" + `?0=${leadState}&1=${drumState}&2=${leadInstrument}&3=${lead2State}&4=${lead2Instrument}`
   }
 
   render() {

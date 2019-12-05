@@ -3,14 +3,17 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarMain from './components/navbar/navbar';
 import OptionsBar from './components/OptionsBar/OptionsBar';
-import SequencerContainer from './components/SequencerContainer/SequencerContainer';
+import InstrumentContainer from './components/InstrumentContainer/InstrumentContainer';
 import LZString from "lz-string";
 
 class App extends React.Component {
   constructor(props) {
     super(props)
+    let [instruments, octaves] = this.extractUrl()
+    this.createStoredInstruments(instruments)
     this.state = {
       loading: true,
+      octaves: octaves || 3,
       scale: [
         {letter: 'C', value: 12},
         {letter: 'D', value: 14},
@@ -20,81 +23,70 @@ class App extends React.Component {
         {letter: 'A', value: 21},
         {letter: 'B', value: 23},
       ],
-      instrument: 0
     }
-    this.storedSequencers = []
-    this.storedPercussion = []
     this.midiStorage = {}
-    this.tempStorage = new Array(12)
-  }
-
-  playNote = (triggers, octave, instrument) => {
-    let notes = []
-    triggers.forEach((note, i) => {
-      if (note) {
-        notes.push(this.state.scale[i].value + (octave * 12))
-      }
-    })
-    if (notes.length > 0){
-      this.midiStorage.MIDIPlugin.chordOn(instrument, notes, 100, 0);
-    }
   }
 
   componentDidUpdate() {
-    this.storedSequencers = []
+    this.storedLead.sequencers = []
+    this.storedLead2.sequencers = []
     this.storedPercussion = []
-    this.storedSequencers.forEach((sequencer) => {
-      sequencer.colorInterface()
-    })
   }
-
+  
   componentDidMount() {
     let self = this
-    this.midiStorage.MIDIPlugin = window.MIDI
+    this.midiStorage.MIDIPlugin = this.getWindowMidi()
     this.midiStorage.MIDIPlugin.loadPlugin({
       soundfontUrl: "./soundfont/",
-      instruments: [ "electric_piano_1", "electric_guitar_jazz", "pad_7_halo", "tubular_bells", "glockenspiel", "gunshot" ],
+      instruments: [
+         "electric_piano_1",
+        "electric_guitar_jazz",
+        "electric_bass_finger",
+        "tubular_bells",
+        "glockenspiel",
+        "gunshot" 
+      ],
     callback: function() {
       self.midiStorage.MIDIPlugin.programChange(0, 4);
       self.midiStorage.MIDIPlugin.programChange(1, 127)
       self.midiStorage.MIDIPlugin.programChange(2, 26)
-      self.midiStorage.MIDIPlugin.programChange(3, 94)
+      self.midiStorage.MIDIPlugin.programChange(3, 33)
       self.midiStorage.MIDIPlugin.programChange(4, 112)
       self.midiStorage.MIDIPlugin.programChange(5, 121)
-
-      self.setState({ loading: false });
+      self.setState({ loading: false })
     }
     })
-    self.extractUrl()
   }
 
-  extractUrl() {
-    let params = new URLSearchParams(window.location.search)
-    let pianoParam = params.get(0)
-    let percussionParam = params.get(1)
-    let instrumentParam = params.get(2)
-    if (percussionParam) {
-      console.log(percussionParam)
-      var drums = this.convertDrums(percussionParam)
+  createStoredInstruments([
+    leadMatrix,
+    leadInstrument,
+    lead2Matrix,
+    lead2Instrument,
+    drums,
+  ]) {
+    this.tempStorage = { 
+      lead: leadMatrix || new Array(7),
+      lead2: lead2Matrix || new Array(7),
+      drums: [drums]
     }
-    if (pianoParam) {
-      console.log(pianoParam)
-      var [piano, octaves] = this.convertPiano(pianoParam)
+    this.storedLead = {
+      sequencers: [],
+      instrument: leadInstrument || 0
     }
-
-    if (instrumentParam) {
-      var instrument = this.decompress(instrumentParam)
+    this.storedLead2 = {
+      sequencers: [],
+      instrument: lead2Instrument || 0
     }
-    return this.setState({
-      octaves: octaves || 3,
-      piano: piano,
-      drums: drums,
-      instrument: instrument || 0
-    })
+    this.storedPercussion = []
   }
 
   convertDrums = (compString) => {
+    if (!compString) {
+      return null
+    }
     let drumString = this.decompress(compString)
+    if (drumString.length < 320) {return null}
     let drums = []
     for(let i = 0; i < 10; i++) {
       let startIndex = i * 32
@@ -103,23 +95,36 @@ class App extends React.Component {
     return drums
   }
 
-  convertPiano(compString) {
-    let pianoString = this.decompress(compString)
+  convertLeads(compString) {
+    if (!compString) {
+      return []
+    }
+    let octaveArray = {
+      1: [4],
+      3: [5,4,3],
+      5: [6,5,4,3,2],
+      7: [7,6,5,4,3,2,1]
+    }
+    let leadString = this.decompress(compString)
     let matrixSize = 224
-    let octaves = pianoString.length / matrixSize
-    let piano = []
-    for (let i = 0; i < octaves; i++) {
-      let octave = []
+    if (leadString.length < matrixSize) {return []}
+    let octaves = leadString.length / matrixSize
+    let lead = []
+    octaveArray[octaves].forEach((octave, i) => {
+      let octaveArray = []
       for (let j = 0; j < 7; j++) {
         let startIndex = (j * 32) + (i * matrixSize)
-        octave.push(pianoString.slice(startIndex, startIndex + 32))
+        octaveArray.push(leadString.slice(startIndex, startIndex + 32))
       }
-      piano.push(octave)
-    }
-    return [piano, octaves]
+      lead[octave] = octaveArray
+    })
+    return [lead, octaves]
   }
 
   decompress(string) {
+    if (!string) {
+      return null
+    }
     string = string.replace(/-/g, `+`)
                    .replace(/_/g, '/')
                    .replace(/~/g, `=`)
@@ -127,21 +132,54 @@ class App extends React.Component {
                    .split('').map(function(t){return parseInt(t)})
   }
 
+  extractUrl = () => {
+    let [
+      leadParam,
+      drumsParam,
+      leadInstrumentParam,
+      lead2Param,
+      lead2InstrumentParam
+    ] = this.getUrlParams()
+
+    let [leadMatrix, octaves] = this.convertLeads(leadParam)
+    let [lead2Matrix, ] = this.convertLeads(lead2Param)
+    let leadInstrument = this.decompress(leadInstrumentParam)
+    let lead2Instrument = this.decompress(lead2InstrumentParam)
+    let drums = this.convertDrums(drumsParam)
+    return [[leadMatrix, leadInstrument, lead2Matrix, lead2Instrument, drums], octaves]
+  }
+
+  getUrlParams() {
+    let params = new URLSearchParams(window.location.search)
+    return [
+      params.get(0),
+      params.get(1),
+      params.get(2),
+      params.get(3),
+      params.get(4)
+    ]
+  }
+
+  getWindowMidi() {
+    if (window.Cypress) {
+      let midi = function() {}
+      midi.programChange = function() {}
+      midi.chordOn = function() {}
+      midi.loadPlugin = function() {}
+      return midi
+    }
+    return window.MIDI
+  }
+
   setOctaves = (event) => {
     this.setState({
-      octaves: event.target.value
+      octaves: parseInt(event.target.value)
     })
   }
 
   setScale = (scale) => {
     this.setState({
       scale: scale
-    })
-  }
-  
-  setInstrument = (event) => {
-    this.setState({
-      instrument: parseInt(event.target.value)
     })
   }
 
@@ -151,30 +189,26 @@ class App extends React.Component {
         <NavbarMain
           storedPercussion={this.storedPercussion}
           storedInstrument={this.state.instrument}
-          storedSequencers={this.storedSequencers}/>
-        {
-          this.state.loading ?
-          <div>Loading....</div>
-          :
-          <SequencerContainer
-            playNote={this.playNote}
-            scale={this.state.scale}
-            midiStorage={this.midiStorage}
-            storedSequencers={this.storedSequencers}
-            storedPercussion={this.storedPercussion}
-            octaves={this.state.octaves}
-            toggle={this.toggle}
-            setInstrument={this.setInstrument}
-            instrument={this.state.instrument}
-            drums={this.state.drums}
-            piano={this.state.piano}
-            tempStorage={this.tempStorage}/>
-        }
+          storedLead={this.storedLead}
+          storedLead2={this.storedLead2}/>
+      
+        <InstrumentContainer
+          scale={this.state.scale}
+          midiStorage={this.midiStorage}
+          storedLead={this.storedLead}
+          storedLead2={this.storedLead2}
+          storedPercussion={this.storedPercussion}
+          octaves={this.state.octaves}
+          drums={this.state.drums}
+          lead={this.state.lead}
+          lead2={this.state.lead2}
+          tempStorage={this.tempStorage}/>
+        
         <OptionsBar
           setScale={this.setScale}
           storedPercussion={this.storedPercussion}
-          storedSequencers={this.storedSequencers}
-          octaves={this.state.octaves}
+          storedLead={this.storedLead}
+          storedLead2={this.storedLead2}
           setOctaves={this.setOctaves}/>
       </div>
     )
