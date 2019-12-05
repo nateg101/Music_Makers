@@ -56,7 +56,7 @@ export default class SequencerComponent extends React.Component {
     }
     this.props.onReady(sequencer)
   }
-  
+
   renderNoteNames = () => {
     let noteNames = []
     for(let i = 0; i < this.props.scale.length; i++){
@@ -98,7 +98,7 @@ export default class SequencerComponent extends React.Component {
                   key={this.props.octave + 12}
                   rows={this.props.rows || 7}
                   columns={32}
-                  size={[this.state.width*0.9412, this.state.width*0.54]}
+                  size={[this.state.width*1.4118, this.state.width*0.4]}
                   onReady={this.handleOnReady}
                   onChange={this.handleChange}
                   onStep={(state)=>{this.props.playNote(state, this.props.octave, this.props.instrument)}}/> : <div>Loading....</div>}

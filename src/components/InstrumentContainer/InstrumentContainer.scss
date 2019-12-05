@@ -58,7 +58,7 @@
 .instrument-select {
   float: left;
   width: 200px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-left: 100px;
   z-index: 10;
 }
@@ -89,4 +89,12 @@
 .btn-link {
   padding: 18px;
   font-size: 20px;
+}
+
+.card-header {
+  height: 80px;
+}
+
+.instruments {
+  margin: auto 60px;
 }
