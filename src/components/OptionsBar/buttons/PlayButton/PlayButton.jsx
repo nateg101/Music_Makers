@@ -32,21 +32,18 @@ class PlayButton extends Component {
   }
 
   sequencersOff(sequencers){
+    window.NexusInterval.stop()
     sequencers.forEach((sequencer)=>{
-      if(sequencer.interval.on) {
-        sequencer.stop()
-        sequencer.stepper.value = 0
-        sequencer.render()
-        sequencer.stepper.value = -1
-      }
+      sequencer.stepper.value = 0
+      sequencer.render()
+      sequencer.stepper.value = -1
     })
   }
 
-  sequencersOn(sequencers) {
+  sequencersOn() {
     let tempo = this.convertBPM()
-    sequencers.forEach((sequencer)=>{
-      sequencer.start(tempo)
-    })
+    window.NexusInterval.ms(tempo)
+    window.NexusInterval.start()
   }
 
   render() {

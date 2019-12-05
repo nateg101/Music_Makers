@@ -193,6 +193,8 @@ class App extends React.Component {
           storedLead2={this.storedLead2}/>
       
         <InstrumentContainer
+          resetSequencers={this.resetSequencers}
+          stopPlayback={this.stopPlayback}
           scale={this.state.scale}
           midiStorage={this.midiStorage}
           storedLead={this.storedLead}

@@ -9,12 +9,11 @@ describe('PlayButton component testing', function() {
   let storedLead2 = {}
   let storedPercussion
   let updateButtonState
+  let NexusInterval = {}
   beforeEach(function() {
     function Sequencer() {
       let sequencer = {}
       let stepper = {}
-      sequencer.start = sinon.spy()
-      sequencer.stop = sinon.spy()
       sequencer.render = sinon.spy()
       sequencer.stepper = stepper
       sequencer.interval = {}
@@ -26,6 +25,10 @@ describe('PlayButton component testing', function() {
     storedPercussion = [new Sequencer]
     updateButtonState = sinon.spy()
 
+    NexusInterval.ms = sinon.spy()
+    NexusInterval.start = sinon.spy()
+    NexusInterval.stop = sinon.spy()
+    window.NexusInterval = NexusInterval
     wrapper = mount(<PlayButton
       buttonText="test"
       isButtonActive={false}
@@ -43,9 +46,7 @@ describe('PlayButton component testing', function() {
   it('starts the sequencers', function() {
     wrapper.find('button').simulate('click')
     expect(updateButtonState.called).toBeTruthy()
-    expect(storedLead.sequencers[0].start.calledOnce).toBeTruthy()
-    expect(storedLead2.sequencers[0].start.calledOnce).toBeTruthy()
-    expect(storedPercussion[0].start.calledOnce).toBeTruthy()
+    expect(NexusInterval.start.calledOnce).toBeTruthy()
   })
 
   it('stops and resets the sequencers', function() {
@@ -60,7 +61,7 @@ describe('PlayButton component testing', function() {
     newWrapper.find('button').simulate('click')
     let sequencers = [storedPercussion, storedLead.sequencers, storedLead2.sequencers].flat()
     sequencers.forEach((sequencer)=>{
-      expect(sequencer.stop.calledOnce).toBeTruthy()
+      expect(NexusInterval.stop.calledOnce).toBeTruthy()
       expect(sequencer.render.calledOnce).toBeTruthy()
       expect(sequencer.stepper.value).toEqual(-1)
     })

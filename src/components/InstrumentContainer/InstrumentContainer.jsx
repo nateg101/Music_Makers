@@ -11,6 +11,8 @@ export default class InstrumentContainer extends React.Component {
       <div className='instruments'>
         <div id='lead'>
           <Lead
+            resetSequencers={this.props.resetSequencers}
+            stopPlayback={this.props.stopPlayback}
             keySeed={5}
             storedLead={this.props.storedLead}
             octaves={this.props.octaves}
@@ -21,6 +23,8 @@ export default class InstrumentContainer extends React.Component {
         </div>
         <div id='lead2'>
           <Lead
+            resetSequencers={this.props.resetSequencers}
+            stopPlayback={this.props.stopPlayback}
             keySeed={6}
             storedLead={this.props.storedLead2}
             octaves={this.props.octaves}
