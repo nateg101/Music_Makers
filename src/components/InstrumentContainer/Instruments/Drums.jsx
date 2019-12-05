@@ -12,9 +12,9 @@ export default class Drums extends React.Component {
      {letter: "snare", value: 38},
      {letter: "hats", value: 44},
      {letter: "open hh", value: 46},
-     {letter: "low tom", value: 45},
-     {letter: "mid tom", value: 47},
-     {letter: "hi tom", value: 50},
+     {letter: "low tom", value: 43},
+     {letter: "mid tom", value: 45},
+     {letter: "hi tom", value: 48},
      {letter: "ride", value: 59},
      {letter: "cowbell", value: 56},
      {letter: "crash", value: 57}
