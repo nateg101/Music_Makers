@@ -17,6 +17,8 @@ describe('PlayButton component testing', function() {
       sequencer.stop = sinon.spy()
       sequencer.render = sinon.spy()
       sequencer.stepper = stepper
+      sequencer.interval = {}
+      sequencer.interval.on = sinon.spy()
       return sequencer
     }
     storedLead.sequencers = [new Sequencer]
