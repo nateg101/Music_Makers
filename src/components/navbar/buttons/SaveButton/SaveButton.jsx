@@ -1,6 +1,5 @@
 import React, {Component} from "react"
 import Button from "react-bootstrap/Button";
-// import {CopyToClipboard} from 'react-copy-to-clipboard';
 import './SaveButton.css';
 import Modal, {closeStyle} from 'simple-react-modal';
 import LZString from "lz-string";
