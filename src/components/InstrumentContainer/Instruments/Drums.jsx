@@ -39,7 +39,7 @@ export default class Drums extends React.Component {
 
   appendToSequencers = (sequencer) => {
     this.props.storedPercussion.push(sequencer)
-    if(this.props.storedPercussion.length === this.drumNotes.length) {
+    if(this.props.storedPercussion.length === 1) {
       this.ready = true
     }
   }

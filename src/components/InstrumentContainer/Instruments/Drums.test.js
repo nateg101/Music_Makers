@@ -31,8 +31,9 @@ describe('instrument component testing', function() {
   })
   
   it('sends calls the midi plugin', function() {
+    let [triggers, octave, instrument] = [[1],1,1]
     wrapper.instance().ready = true
-    wrapper.instance().playDrumNote([1],1,1)
+    wrapper.instance().playDrumNote(triggers, octave, instrument)
     expect(midiStorage.MIDIPlugin.chordOn).toHaveBeenCalledWith(1, [48], 100, 0)
   })
   
@@ -42,8 +43,8 @@ describe('instrument component testing', function() {
 
     expect(midiStorage.MIDIPlugin.chordOn).not.toHaveBeenCalledWith(1, [48], 100, 0)
 
-    for(let i = 0; i < 10; i++) {wrapper.instance().appendToSequencers({})}
-    wrapper.instance().playDrumNote([1],1,1)
+    wrapper.instance().appendToSequencers({})
+    wrapper.instance().playDrumNote(triggers, octave, instrument)
 
     expect(midiStorage.MIDIPlugin.chordOn).toHaveBeenCalledWith(1, [48], 100, 0)
   })

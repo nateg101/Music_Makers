@@ -7,24 +7,27 @@ describe('instrument component testing', function() {
   let wrapper
   let storedLead
   let tempStorage
-  let playNote
   let octaves = 3
   let scale
+  let midiStorage = {}
   beforeEach(function() {
-    playNote = sinon.spy()
+    midiStorage.MIDIPlugin = {}
+    midiStorage.MIDIPlugin.chordOn = jest.fn()
     storedLead = {
+      sequencers: [],
       instrument: 0
     }
     tempStorage = {
       lead: []
     }
-    scale = []
+    scale = [{letter: 'C', value: 1}]
     wrapper = mount(<Lead
+      keySeed={1}
+      midiStorage={midiStorage}
       scale={scale}
       storedLead={storedLead}
       matrix={[]}
       tempStorage={tempStorage}
-      playNote={playNote}
       octaves={octaves}/>);
   })
 
@@ -42,5 +45,24 @@ describe('instrument component testing', function() {
   it('renders child components', function(){
     expect(wrapper.find('.lead-container').length).toEqual(1)
     expect(wrapper.find('.sequencer-component')).toBeTruthy()
+  })
+
+  it('sends calls the midi plugin', function() {
+    let [triggers, octave, instrument] = [[1],1,1]
+    wrapper.instance().ready = true
+    wrapper.instance().playNote(triggers, octave)
+    expect(midiStorage.MIDIPlugin.chordOn).toHaveBeenCalledWith(0, [13], 100, 0)
+  })
+
+  it('waits for sequencers to load before allowing midi to play', function() {
+    let [triggers, octave, instrument] = [[1],1,1]
+    wrapper.instance().playNote(triggers, octave)
+
+    expect(midiStorage.MIDIPlugin.chordOn).not.toHaveBeenCalledWith(0, [13], 100, 0)
+
+    for(let i = 0; i < 3; i++) {wrapper.instance().appendToSequencers({})}
+    wrapper.instance().playNote(triggers, octave)
+
+    expect(midiStorage.MIDIPlugin.chordOn).toHaveBeenCalledWith(0, [13], 100, 0)
   })
 });
