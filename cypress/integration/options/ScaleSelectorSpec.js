@@ -14,16 +14,16 @@ describe("scaleSelector", function () {
   })
 
   it("allows you to select key when playing", function () {
-    cy.get('.play-button').click()
+    cy.get('#playback-button').click()
     cy.get('.key-selector-control').select('A')
     cy.get('.instruments').should('contain', 'F#5')
-    cy.get('.play-button').click()
+    cy.get('#playback-button').click()
   })
 
   it("allows you to change from major to minor key when playing", function () {
-    cy.get('.play-button').click()
+    cy.get('.option-bar').find('#playback-button').click()
     cy.get('.min-button').click()
     cy.get('.instruments').should('contain', 'Ab5')
-    cy.get('.play-button').click()
+    cy.get('#playback-button').click()
   })
 })
