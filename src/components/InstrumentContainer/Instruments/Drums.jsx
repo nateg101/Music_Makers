@@ -27,6 +27,7 @@ export default class Drums extends React.Component {
     }
     let notes = []
     triggers.forEach((note, i) => {
+      console.warn('here')
       if (note) {
         notes.push(this.drumNotes[i].value + (octave * 12))
       }
@@ -38,7 +39,9 @@ export default class Drums extends React.Component {
 
   appendToSequencers = (sequencer) => {
     this.props.storedPercussion.push(sequencer)
-    this.ready = true
+    if(this.props.storedPercussion.length === 1) {
+      this.ready = true
+    }
   }
 
   render() {
