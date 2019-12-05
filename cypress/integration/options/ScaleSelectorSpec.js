@@ -19,4 +19,11 @@ describe("scaleSelector", function () {
     cy.get('.instruments').should('contain', 'F#5')
     cy.get('.play-button').click()
   })
+
+  it("allows you to change from major to minor key when playing", function () {
+    cy.get('.play-button').click()
+    cy.get('.min-button').click()
+    cy.get('.instruments').should('contain', 'Ab5')
+    cy.get('.play-button').click()
+  })
 })
