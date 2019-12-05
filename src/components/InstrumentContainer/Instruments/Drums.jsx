@@ -51,8 +51,8 @@ export default class Drums extends React.Component {
             <Accordion defaultActiveKey="0">
               <Card>
                 <Card.Header>
-                  Percussion
-                  <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                  <span className="perc-title pull-left">Percussion</span>
+                  <Accordion.Toggle as={Button} variant="link" eventKey="0" className="pull-right">
                     Expand / Collapse
                   </Accordion.Toggle>
                 </Card.Header>
