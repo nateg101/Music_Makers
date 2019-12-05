@@ -37,13 +37,15 @@ class PlayButton extends Component {
   sequencersOff(sequencers){
     console.warn('sequencers off')
     sequencers.forEach((sequencer)=>{
-      sequencer.stop()
-      sequencer.stepper.value = 0
-      sequencer.render()
-      sequencer.stepper.value = -1
+      if(sequencer.interval.on) {
+        sequencer.stop()
+        sequencer.stepper.value = 0
+        sequencer.render()
+        sequencer.stepper.value = -1
+      }
     })
   }
-  
+
   sequencersOn(sequencers) {
     console.warn('sequencers on')
     let tempo = this.convertBPM()
