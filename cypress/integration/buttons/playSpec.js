@@ -22,6 +22,6 @@ describe("playButton", function () {
     cy.wait(1000)
     cy.get('.stop-button').click()
     cy.get('rect').eq(1).should('have.css','stroke', 'none')
-    cy.get('rect').first().should('have.css', 'stroke', 'rgb(204, 204, 204)')
+    cy.get('rect').eq(0).should('have.css', 'stroke', 'rgb(204, 204, 204)')
   })
 })
