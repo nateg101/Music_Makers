@@ -14,6 +14,7 @@ class PlayButton extends Component {
   }
 
   handleClick = () => {
+    console.warn('handling click')
     this.props.updateButtonState()
     this.toggleSequencer();
   }
@@ -24,6 +25,8 @@ class PlayButton extends Component {
       this.props.storedLead2.sequencers,
       this.props.storedPercussion
     ].flat()
+    console.warn('in toggle sequencer')
+    console.warn(this.props.isButtonActive)
     if(this.props.isButtonActive){
       this.sequencersOff(sequencers)
     } else {
@@ -32,6 +35,7 @@ class PlayButton extends Component {
   }
 
   sequencersOff(sequencers){
+    console.warn('sequencers off')
     sequencers.forEach((sequencer)=>{
       sequencer.stop()
       sequencer.stepper.value = 0
@@ -39,8 +43,9 @@ class PlayButton extends Component {
       sequencer.stepper.value = -1
     })
   }
-
+  
   sequencersOn(sequencers) {
+    console.warn('sequencers on')
     let tempo = this.convertBPM()
     sequencers.forEach((sequencer)=>{
       sequencer.start(tempo)
