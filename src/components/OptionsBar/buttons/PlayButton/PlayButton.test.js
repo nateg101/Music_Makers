@@ -8,6 +8,7 @@ describe('PlayButton component testing', function() {
   let storedLead = {}
   let storedLead2 = {}
   let storedPercussion
+  let updateButtonState
   beforeEach(function() {
     function Sequencer() {
       let sequencer = {}
@@ -21,22 +22,15 @@ describe('PlayButton component testing', function() {
     storedLead.sequencers = [new Sequencer]
     storedLead2.sequencers = [new Sequencer]
     storedPercussion = [new Sequencer]
-    
-    let buttonState = false
-    let updateButtonState = function() {
-      console.warn('Updating button state')
-      buttonState = !buttonState
-      console.warn(buttonState)
-    }
+    updateButtonState = sinon.spy()
 
-    wrapper = mount(<PlayButton 
-      updateButtonState={function(){}}
+    wrapper = mount(<PlayButton
       buttonText="test"
-      isButtonActive={buttonState}
+      isButtonActive={false}
       updateButtonState={updateButtonState}
       storedPercussion={storedPercussion}
-      storedLead={storedLead} 
-      storedLead2={storedLead2}/>); 
+      storedLead={storedLead}
+      storedLead2={storedLead2}/>);
   })
 
   it('renders successfully', function() {
@@ -46,19 +40,28 @@ describe('PlayButton component testing', function() {
 
   it('starts the sequencers', function() {
     wrapper.find('button').simulate('click')
+    expect(updateButtonState.called).toBeTruthy()
     expect(storedLead.sequencers[0].start.calledOnce).toBeTruthy()
     expect(storedLead2.sequencers[0].start.calledOnce).toBeTruthy()
     expect(storedPercussion[0].start.calledOnce).toBeTruthy()
   })
 
-  it.only('stops and resets the sequencers', function() {
-    wrapper.find('button').simulate('click')
-    wrapper.find('button').simulate('click')
-    let sequencers = [storedPercussion].flat()
+  it('stops and resets the sequencers', function() {
+    let newWrapper = mount(<PlayButton
+      buttonText="test"
+      isButtonActive={true}
+      updateButtonState={updateButtonState}
+      storedPercussion={storedPercussion}
+      storedLead={storedLead}
+      storedLead2={storedLead2}/>);
+
+    newWrapper.find('button').simulate('click')
+    let sequencers = [storedPercussion, storedLead.sequencers, storedLead2.sequencers].flat()
     sequencers.forEach((sequencer)=>{
       expect(sequencer.stop.calledOnce).toBeTruthy()
       expect(sequencer.render.calledOnce).toBeTruthy()
       expect(sequencer.stepper.value).toEqual(-1)
     })
+      expect(updateButtonState.called).toBeTruthy()
   })
 });

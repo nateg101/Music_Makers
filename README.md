@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.com/nateg101/Music_Makers.svg?branch=master)](https://travis-ci.org/nateg101/Music_Makers)
 
+[![Heroku](https://synesthesia-beatz.herokuapp.com/?app=heroku-badge)]
+
 A single page application for creating multi-dimensional audio tracks. Visit the app, Synethesthesia, [here](https://synesthesia-beatz.herokuapp.com/) and make your own music.
 
 <div align=center>
@@ -20,7 +22,12 @@ A single page application for creating multi-dimensional audio tracks. Visit the
 
 ## Run Test Suite
 
-`$ npm test`
+`$ npm start`
+
+`$ npm test` - For E2E testing suite
+
+`$ npm run jest` - For unit testing suite
+
 
 ## Tech Stack
 
@@ -45,44 +52,44 @@ A single page application for creating multi-dimensional audio tracks. Visit the
 
 ## User Stories
 
-``` 
+```
 1. As a musician,
-so that I can lay down a simple track, 
+so that I can lay down a simple track,
 I want to visit a page and see a sequencer.
 ```
 
-``` 
-2. As a musician, 
+```
+2. As a musician,
 so that I can intuitively use the sequencer,
 I require each row to be mapped to a single note.
 ```
 
 ```
-3. As a musician, 
+3. As a musician,
 so I can make a simple melodies first,
 I would like the default instrument to be a glockenspiel.
 ```
 
-``` 
+```
 4. As a musician,
 so I can concentrate on making simple melodies first,
 I would the sequencer to be set to a 120bpm tempo with a range of three octaves.
 ```
 
-``` 
+```
 5. As a musician,
 so that I can use the the sequencer intuitively,
 I want to see low range notes appear at the bottom of the grid.
 ```
 
-``` 
-6. As a musician, 
-so I can see which notes I've selected, 
+```
+6. As a musician,
+so I can see which notes I've selected,
 I would like the relevant grid field to change colour.
 ```
 
-``` 
+```
 7. As a musician,
-so I can play back the rad tune I've made, 
+so I can play back the rad tune I've made,
 I would like a play button to loop through my song.
 ```
