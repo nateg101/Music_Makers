@@ -18,6 +18,12 @@ describe('SequencerContainer', function() {
     })
   })
 
+  it('displays three sequencers', function() {
+    cy.visit('/')
+    cy.get('.instruments').find('.lead-container').should('have.length', 2)
+    cy.get('.instruments').get('.drums-container')
+  })
+
   it('renders the drum sequencer components', function() {
     cy.visit('/')
     cy.get('.drum-sequencer-wrapper')
