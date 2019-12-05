@@ -105,7 +105,7 @@ export default class Lead extends React.Component {
                     </Form.Control>
                   </Form.Group>
                 </Form>
-              <Accordion.Toggle as={Button} className="expander" variant="link" eventKey="0">
+              <Accordion.Toggle as={Button} className="expander pull-right" variant="link" eventKey="0">
                 Expand / Collapse
               </Accordion.Toggle>
             </Card.Header>

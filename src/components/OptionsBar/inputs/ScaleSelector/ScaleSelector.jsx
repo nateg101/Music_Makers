@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import $ from 'jquery';
-import { Row, Col, Form, ButtonToolbar, ToggleButton, ToggleButtonGroup, InputGroup, Radio } from "react-bootstrap";
+import { Row, Col, Form, ButtonToolbar, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import './ScaleSelector.css'
 import KEYS from "../../../../music_scales/scales"
 
