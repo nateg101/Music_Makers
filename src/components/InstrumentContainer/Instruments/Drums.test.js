@@ -44,8 +44,7 @@ describe('instrument component testing', function() {
 
     for(let i = 0; i < 10; i++) {wrapper.instance().appendToSequencers({})}
     wrapper.instance().playDrumNote([1],1,1)
-    
+
     expect(midiStorage.MIDIPlugin.chordOn).toHaveBeenCalledWith(1, [48], 100, 0)
   })
-
 });
