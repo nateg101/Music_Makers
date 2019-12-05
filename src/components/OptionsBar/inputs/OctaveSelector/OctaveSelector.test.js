@@ -3,9 +3,19 @@ import OctaveSelector from './OctaveSelector'
 import { mount } from 'enzyme'
 
 describe('app component testing', function() {
+  let wrapper
+  let setOctaves = jest.fn()
+  beforeEach(function() {
+    wrapper = mount(<OctaveSelector setOctaves={setOctaves}/>); 
+  })
+  
   it('renders successfully', function() {
-    const wrapper = mount(<OctaveSelector />); 
-
     expect(wrapper.find('form').length).toEqual(1)
   });
+
+  it('calls setOctaves when changed', function() {
+    wrapper.instance().handleOnChange("event")
+
+    expect(setOctaves).toHaveBeenCalledWith("event")
+  })
 });

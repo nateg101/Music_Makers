@@ -12,15 +12,14 @@ describe('SaveButton', function() {
     cy.contains('Your song has been saved to this link:')
   })
 
-  it('saves the url correctly each time', function() {
-    cy.get('rect').first().click()
-    cy.get('rect').first().should('have.css', 'fill', 'rgb(255, 255, 0)')
-
+  it('saves the url', function() {
     cy.get('.save-button').click()
     cy.get('.Modal-wrapper')
-    cy.get('.url').contains("/?0=IwBj4yunb-GKclq3o5r2e7_gwo4k0s8iyIA~&1=Aw18ZXTt_DFOS1b0c1tQ&2=AxA~")
+    cy.get('.url').contains("http://localhost:3000/?0=Aw18ZXTt_DFOS1b0c17Pd_wYUcSaWREA&1=Aw18ZXTt_DFOS1b0c1tQ&2=AxA~&3=Aw18ZXTt_DFOS1b0c17Pd_wYUcSaWREA&4=AxA~")
+  })
 
-    cy.contains('X').click()
+  it('saves the url correctly each time', function() {
+
     cy.visit('http://localhost:3000/?0=IwBj4yunb-GKclq3o5r2e7_gwo4k0s8iyIA~&1=Aw18ZXTt_DFOS1b0c1tQ&2=AxA~')
     cy.get('rect').first().should('have.css', 'fill', 'rgb(255, 255, 0)')
 
