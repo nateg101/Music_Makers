@@ -7,7 +7,7 @@ class NavbarMain extends Component {
   render() {
     return (
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <img
           alt="logo"
           src= "cat_dj.jpeg"

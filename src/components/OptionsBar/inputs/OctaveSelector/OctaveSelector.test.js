@@ -1,7 +1,6 @@
 import React from "react";
 import OctaveSelector from './OctaveSelector'
 import { mount } from 'enzyme'
-import { jsxEmptyExpression } from "@babel/types";
 
 describe('app component testing', function() {
   let wrapper
