@@ -58,8 +58,10 @@
     "typescript-eslint": "^0.0.1-alpha.0"
   },
   "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
+    "coveragePathIgnorePatterns": [
+      "src/index.js",
+      "src/serviceWorker.js",
+      "src/music_scales/scales.js"
     ]
   }
 }
