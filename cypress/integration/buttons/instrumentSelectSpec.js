@@ -7,10 +7,12 @@ describe("instrumentSelect", function () {
   })
 
   it("selects another instrument", function () {
-      cy.visit('/')
-      cy.get('.lead-container').should('visible')
-      cy.get(".instrument-select").contains('Electric Piano')
-      cy.get("#lead").find(".select-instrument-control").select('Glockenspiel')
-      cy.get(".instrument-select").contains('Glockenspiel')
+    cy.visit('/')
+    window.NexusInterval = {}
+    window.NexusInterval.clear = function() {}
+    cy.get('.lead-container').should('visible')
+    cy.get(".instrument-select").contains('Electric Piano')
+    cy.get("#lead").find(".select-instrument-control").select('Glockenspiel')
+    cy.get(".instrument-select").contains('Glockenspiel')
   })
 })
