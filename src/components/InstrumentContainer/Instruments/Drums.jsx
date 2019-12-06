@@ -32,7 +32,12 @@ export default class Drums extends React.Component {
       }
     })
     if (notes.length > 0){
-      this.props.midiStorage.MIDIPlugin.chordOn(instrument, notes, 100, 0);
+      try {
+        this.props.midiStorage.MIDIPlugin.chordOn(instrument, notes, 100, 0);
+      }
+      catch {
+        console.warn('MIDI not ready!')
+      }
     }
   }
 
