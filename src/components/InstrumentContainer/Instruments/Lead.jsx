@@ -8,15 +8,13 @@ import './Instrument.css'
 export default class Lead extends React.Component {
   constructor(props){
     super(props)
-    this.state = {
-      instrument: this.props.storedLead.instrument
-    }
     this.octaveArray = {
       1: [4],
       3: [5,4,3],
       5: [6,5,4,3,2],
       7: [7,6,5,4,3,2,1]
     }
+    this.instrument = this.props.storedLead.instrument
   }
 
   playNote = (triggers, octave) => {
@@ -30,7 +28,12 @@ export default class Lead extends React.Component {
       }
     })
     if (notes.length > 0) {
-      this.props.midiStorage.MIDIPlugin.chordOn(this.state.instrument, notes, 100, 0);
+      try {
+        this.props.midiStorage.MIDIPlugin.chordOn(this.instrument, notes, 100, 0);
+      }
+      catch {
+        console.warn('MIDI not ready!')
+      }
     }
   }
 
@@ -46,13 +49,7 @@ export default class Lead extends React.Component {
   }
 
   setInstrument = (event) => {
-    if(window.NexusInterval.on) {
-      window.NexusInterval.stop()
-    }
-    this.setState({
-      instrument: parseInt(event.target.value)
-    })
-    this.props.storedLead.sequencers = []
+    this.instrument = event.target.value
     this.props.storedLead.instrument = event.target.value
   }
 
@@ -66,7 +63,6 @@ export default class Lead extends React.Component {
           playNote={this.playNote}
           key={i * this.props.keySeed + 100 * octave}
           midiStorage={this.props.midiStorage}
-          instrument={this.state.instrument}
           octave={octave}
           scale={this.props.scale}
           noteNameClass={'lead'}
@@ -96,7 +92,7 @@ export default class Lead extends React.Component {
                     <Form.Control className='select-instrument-control'
                       as="select"
                       onChange={this.setInstrument}
-                      defaultValue={this.state.instrument}>
+                      defaultValue={this.instrument}>
                       <option value="0">{this.renderInstrumentName(0)}</option>
                       <option value="2">{this.renderInstrumentName(2)}</option>
                       <option value="3">{this.renderInstrumentName(3)}</option>

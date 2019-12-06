@@ -27,13 +27,17 @@ export default class Drums extends React.Component {
     }
     let notes = []
     triggers.forEach((note, i) => {
-      console.warn('here')
       if (note) {
         notes.push(this.drumNotes[i].value + (octave * 12))
       }
     })
     if (notes.length > 0){
-      this.props.midiStorage.MIDIPlugin.chordOn(instrument, notes, 100, 0);
+      try {
+        this.props.midiStorage.MIDIPlugin.chordOn(instrument, notes, 100, 0);
+      }
+      catch {
+        console.warn('MIDI not ready!')
+      }
     }
   }
 
