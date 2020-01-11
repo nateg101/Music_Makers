@@ -23,7 +23,7 @@ export default class SequencerComponent extends React.Component {
     window.removeEventListener("resize", this.updateWindowDimensions);
   }
 
-  componentWillUpdate() {
+  UNSAFE_componentWillUpdate() {
     if (this.sequencer) {
       this.saveToTemp(this.sequencer.matrix.pattern)
     }

@@ -1,43 +1,46 @@
 import React from 'react'
-// import SequencerComponent from './SequencerComponent/SequencerComponent'
+import { connect } from 'react-redux';
 import Drums from './Instruments/Drums'
 import Lead from './Instruments/Lead'
+import { tempStorage, storage } from '../../modules/instrumentStorage'
 import './InstrumentContainer.scss'
 
-export default class InstrumentContainer extends React.Component {
-
-  render() {
-    return (
-      <div className='instruments'>
-        <div id='lead'>
-          <Lead
-            resetSequencers={this.props.resetSequencers}
-            stopPlayback={this.props.stopPlayback}
-            keySeed={5}
-            storedLead={this.props.storedLead}
-            octaves={this.props.octaves}
-            scale={this.props.scale}
-            tempStorage={this.props.tempStorage.lead}
-            midiStorage={this.props.midiStorage}
-            setInstrument={this.props.setInstrument}/>
-        </div>
-        <div id='lead2'>
-          <Lead
-            resetSequencers={this.props.resetSequencers}
-            stopPlayback={this.props.stopPlayback}
-            keySeed={6}
-            storedLead={this.props.storedLead2}
-            octaves={this.props.octaves}
-            scale={this.props.scale}
-            tempStorage={this.props.tempStorage.lead2}
-            midiStorage={this.props.midiStorage}
-            setInstrument={this.props.setInstrument}/>
-        </div>
-        <Drums
-          storedPercussion={this.props.storedPercussion}
-          tempStorage={this.props.tempStorage.drums}
-          midiStorage={this.props.midiStorage}/>
-      </div>
-    )
+const InstrumentContainer = (props) => {
+  const storeSequencers = (name, sequencers) => {
+    name === "storedPercussion" 
+    ? storage[name].push(sequencers)
+    : storage[name].sequencers = sequencers
   }
+
+  const storeInstrument = (name, instrument) => {
+    storage[name].instrument = instrument
+  }
+
+  return (
+    <div className='instruments'>
+      <div id='lead'>
+        <Lead
+          name={"storedLead"}
+          storeSequencers={storeSequencers}
+          storeInstrument={storeInstrument}
+          instrument={storage.storedLead.instrument}
+          tempStorage={tempStorage.lead}/>
+      </div>
+      <div id='lead2'>
+        <Lead
+          name={"storedLead2"}
+          storeSequencers={storeSequencers}
+          storeInstrument={storeInstrument}
+          instrument={storage.storedLead2.instrument}
+          tempStorage={tempStorage.lead2}/>
+      </div>
+        <Drums
+          name={"storedPercussion"}
+          storeSequencers={storeSequencers}
+          storedPercussion={storage.storedPercussion}
+          tempStorage={tempStorage.drums}/>
+    </div>
+  )
 }
+
+export default connect()(InstrumentContainer)

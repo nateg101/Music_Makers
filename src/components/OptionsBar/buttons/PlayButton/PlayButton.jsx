@@ -1,30 +1,25 @@
 import React, {Component} from "react";
+import { connect } from 'react-redux';
 import {Button} from "react-bootstrap";
+import { tempStorage, storage } from '../../../../modules/instrumentStorage'
 import './PlayButton.css'
 
 class PlayButton extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
-  }
-
-  convertBPM = () => {
-    return 30000/this.props.tempo
-  }
 
   handleClick = () => {
-    this.props.updateButtonState()
-    this.toggleSequencer();
+    this.toggleSequencers();
+    this.props.dispatch({
+      type: "TOGGLE_PLAY"
+    })
   }
 
-  toggleSequencer = () => {
+  toggleSequencers = () => {
     let sequencers = [
-      this.props.storedLead.sequencers,
-      this.props.storedLead2.sequencers,
-      this.props.storedPercussion
+      storage.storedLead.sequencers,
+      storage.storedLead2.sequencers,
+      storage.storedPercussion
     ].flat()
-    if(this.props.isButtonActive){
+    if(this.props.playing){
       this.sequencersOff(sequencers)
     } else {
       this.sequencersOn(sequencers)
@@ -41,8 +36,7 @@ class PlayButton extends Component {
   }
 
   sequencersOn() {
-    let tempo = this.convertBPM()
-    window.NexusInterval.ms(tempo)
+    window.NexusInterval.ms(30000/this.props.tempo)
     window.NexusInterval.start()
   }
 
@@ -52,11 +46,18 @@ class PlayButton extends Component {
         variant="outline-light"
         id="playback-button"
         onClick={this.handleClick}>
-        <span className={this.props.isButtonActive ? 'stop-button' : "play-button"}>
-          {this.props.buttonText}
+        <span className={this.props.playing ? 'stop-button' : "play-button"}>
+          {this.props.playing ? "◼" : "▶"}
         </span>
       </Button>
     )
   }
 }
-export default PlayButton;
+
+const mapStateToProps = (state) => {
+  return {
+    tempo: state.tempo,
+    playing: state.playing
+  }
+}
+export default connect(mapStateToProps)(PlayButton);

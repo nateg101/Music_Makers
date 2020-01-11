@@ -22,3 +22,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+cypress/screenshots/buttons/playSpec.js/playButton -- changes to a stop button when clicked (failed).png
+cypress/screenshots/buttons/playSpec.js/playButton -- returns the stepper to the start of the sequencer on click (failed).png
+cypress/screenshots/navbar/saveButtonSpec.js/SaveButton -- saves the url (failed).png
+cypress/screenshots/navbar/saveButtonSpec.js/SaveButton -- saves the url correctly each time (failed).png
+cypress/screenshots/options/ScaleSelectorSpec.js/scaleSelector -- allows you to change from major to minor key when playing (failed).png
+cypress/screenshots/options/ScaleSelectorSpec.js/scaleSelector -- allows you to select key when playing (failed).png
+cypress/screenshots/sequencers/InstrumentContainerSpec.js/SequencerContainer -- render lead sequencer -- displays the notes of an octave in the correct order (failed).png
+cypress/screenshots/sequencers/InstrumentContainerSpec.js/SequencerContainer -- render lead sequencer -- renders the lead sequencer (failed).png
+cypress/screenshots/sequencers/InstrumentContainerSpec.js/SequencerContainer -- renders the drum sequencer components (failed).png
+cypress/screenshots/sequencers/octaveSelectionSpec.js/octaveSelector -- changes the number of sequencers (failed).png
+cypress/screenshots/sequencers/octaveSelectionSpec.js/octaveSelector -- Page defaults to 3 sequencers (failed).png
